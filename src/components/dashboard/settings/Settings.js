@@ -9,6 +9,7 @@ import Users from "./Users";
 import Roles from "./Roles";
 import GPA from "./GPA";
 import Grade from "./Grade";
+import AssignSubject from "./AssignSubject";
 export {
   Religion,
   Session,
@@ -21,4 +22,5 @@ export {
   Roles,
   GPA,
   Grade,
+  AssignSubject,
 };

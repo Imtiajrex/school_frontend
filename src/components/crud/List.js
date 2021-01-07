@@ -30,14 +30,22 @@ export default function List(props) {
         </tr>
       </thead>
       <tbody>
-        {list.length > 0 ? (
+        {loading ? (
+          <tr>
+            <td colSpan={list_head.length + 3} className="text-center">
+              <Spinner color="primary" />
+            </td>
+          </tr>
+        ) : typeof list == "object" && list.length > 0 ? (
           list.map((element, index) => (
             <tr key={uuid()}>
               <th scope="row" key={index}>
                 {index + 1}
               </th>
               {list_head.map((item, index) => (
-                <th key={uuid()}>{element[item.identifier]}</th>
+                <th key={uuid()} style={{ whiteSpace: "normal" }}>
+                  {element[item.identifier]}
+                </th>
               ))}
 
               <DeleteButton
@@ -57,7 +65,7 @@ export default function List(props) {
         ) : (
           <tr>
             <td colSpan={list_head.length + 3} className="text-center">
-              {loading ? <Spinner color="primary" /> : "Found Nothing"}
+              Found Nothing
             </td>
           </tr>
         )}

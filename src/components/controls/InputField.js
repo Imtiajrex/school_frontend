@@ -14,8 +14,11 @@ export default function InputField(props) {
     placeholder,
     handleChange,
     value,
+    options = [],
     error,
     disabled,
+    setState = null,
+    ...other
   } = props;
   if (["text", "number", "password", "email"].includes(type))
     return (
@@ -29,6 +32,7 @@ export default function InputField(props) {
         value={value}
         error={error}
         disabled={disabled}
+        {...other}
       />
     );
   else if (["file"].includes(type))
@@ -43,6 +47,7 @@ export default function InputField(props) {
         value={value}
         error={error}
         disabled={disabled}
+        {...other}
       />
     );
   else if (["date"].includes(type))
@@ -57,6 +62,7 @@ export default function InputField(props) {
         value={value}
         error={error}
         disabled={disabled}
+        {...other}
       />
     );
   else if (["select"].includes(type))
@@ -69,8 +75,11 @@ export default function InputField(props) {
         handleChange={handleChange}
         invalid_msg={`Select Valid ${placeholder}!`}
         value={value}
+        options={options}
         error={error}
         disabled={disabled}
+        setState={setState}
+        {...other}
       />
     );
   else if (["checkboxarr"].includes(type))
@@ -84,7 +93,9 @@ export default function InputField(props) {
         invalid_msg={`Choose Valid ${placeholder}!`}
         value={value}
         error={error}
+        options={options}
         disabled={disabled}
+        {...other}
       />
     );
   else if (["checkbox"].includes(type))
@@ -99,6 +110,7 @@ export default function InputField(props) {
         value={value}
         error={error}
         disabled={disabled}
+        {...other}
       />
     );
 }

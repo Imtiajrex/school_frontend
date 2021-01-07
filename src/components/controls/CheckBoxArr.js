@@ -1,46 +1,56 @@
-import React from "react";
-import FormFeedback from "reactstrap/lib/FormFeedback";
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState } from "react";
 
 export default function CheckBoxArr(props) {
   const {
     name,
-    value,
     placeholder,
     handleChange,
     invalid_msg = "",
     valid_msg = "",
     options = [],
+    value = {},
     error,
-    ...other
   } = props;
-  const checked_value = [];
+  const [checked_value, setCheckedValue] = useState([]);
   const check = (id) => {
     const index = checked_value.indexOf(id);
-    if (index !== -1) checked_value.splice(index, 1);
-    else checked_value.push(id);
-
-    let event = { target: { value: checked_value, name: name } };
-    handleChange(event);
+    if (index !== -1) {
+      let new_val = [...checked_value];
+      new_val.splice(index, 1);
+      setCheckedValue(new_val);
+    } else setCheckedValue([...checked_value, id]);
   };
+  React.useEffect(() => {
+    let event = {
+      target: { value: JSON.stringify(checked_value), name: name },
+    };
+    handleChange(event);
+  }, [checked_value]);
+  React.useEffect(() => {
+    setCheckedValue(JSON.parse(value));
+  }, []);
   return (
     <>
       <div className="text-dark">{placeholder}:</div>
-      {options.map((element, index) => (
-        <div className="custom-control custom-checkbox mb-3" key={index}>
-          <input
-            className="custom-control-input"
-            id={index}
-            type="checkbox"
-            onChange={() => check(element.id)}
-            {...other}
-          />
-          <label className="custom-control-label" htmlFor={index}>
-            {element.name}
-          </label>
-        </div>
-      ))}
+      <div className="d-flex" style={{ flexWrap: "wrap" }}>
+        {options.map((element, index) => (
+          <div className="custom-control custom-checkbox mb-3 mr-3" key={index}>
+            <input
+              className="custom-control-input"
+              id={index}
+              type="checkbox"
+              onChange={() => check(element.id)}
+              checked={JSON.parse(value).indexOf(element.id) !== -1}
+            />
+            <label className="custom-control-label" htmlFor={index}>
+              {element.name}
+            </label>
+          </div>
+        ))}
+      </div>
 
-      <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
+      <small className="text-danger">{error ? invalid_msg : valid_msg}</small>
     </>
   );
 }

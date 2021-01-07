@@ -1,4 +1,3 @@
-import { TextInput } from "components/controls/Controls";
 import { useForm } from "components/useForm";
 import React, { useState } from "react";
 import Alert from "reactstrap/lib/Alert";
@@ -11,6 +10,7 @@ import Modal from "reactstrap/lib/Modal";
 import Spinner from "reactstrap/lib/Spinner";
 import { Call } from "services/API/Call";
 import InputField from "../controls/InputField";
+import { ValidateInput } from "./ValidateInput";
 
 export default function Edit(props) {
   const {
@@ -22,19 +22,23 @@ export default function Edit(props) {
     setUpdate,
     setEditInfo,
     edit_data,
+    modal_size,
   } = props;
   const [failMessage, setFailMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [calling, setCalling] = useState(false);
   const id = edit_values.id;
   const { values, handleInputChange, errors, setErrors } = useForm(edit_values);
+
   const validate = (fieldValues = values) => {
     let temp = { ...errors };
     // eslint-disable-next-line array-callback-return
     Object.values(edit_data).map((element, index) => {
-      if (!element.required) return false;
-      if (element.name in fieldValues)
-        temp[element.name] = fieldValues[element.name].length === 0;
+      if (!element.required) {
+        temp[element.name] = false;
+      } else if (element.name in fieldValues) {
+        temp[element.name] = ValidateInput(element, fieldValues);
+      }
     });
 
     setErrors({
@@ -55,6 +59,7 @@ export default function Edit(props) {
       const request = { method: "put", url: url + "/" + id, data: data };
       Call(request)
         .then((res) => {
+          console.log(res);
           setUpdate(!update);
           setSuccessMessage(res.message);
 
@@ -76,7 +81,7 @@ export default function Edit(props) {
     <div>
       <Modal
         className="modal-dialog-centered"
-        size="sm"
+        size={modal_size}
         isOpen={open}
         toggle={() => {
           if (open) setEditInfo({});
@@ -132,10 +137,12 @@ export default function Edit(props) {
                     handleChange={handleInputChange}
                     error={errors[element.name]}
                     disabled={calling}
+                    options={element.options}
+                    setState={element.setState}
                   />
                 ))}
 
-                <div className="text-center">
+                <div className="text-center" style={{ clear: "left" }}>
                   <Button
                     className="my-4"
                     color="primary"
