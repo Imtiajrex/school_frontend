@@ -1,3 +1,4 @@
+import ClassDeptSessionProvider from "contexts/ClassDeptSessionContext";
 import React from "react";
 import Container from "reactstrap/lib/Container";
 import AdminRouter from "routers/AdminRouter";
@@ -17,7 +18,9 @@ export default function Dashboard() {
       />
       <div className="main-content">
         <Container fluid>
-          <AdminRouter />
+          <ClassDeptSessionProvider>
+            <AdminRouter />
+          </ClassDeptSessionProvider>
         </Container>
       </div>
     </div>

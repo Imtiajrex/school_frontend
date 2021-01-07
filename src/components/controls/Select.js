@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from "react";
 import { FormGroup, FormFeedback, Input } from "reactstrap";
 
-export default function TextInput(props) {
+export default function Select(props) {
   const {
     name,
     value,
@@ -11,22 +12,32 @@ export default function TextInput(props) {
     handleChange,
     options = [],
     error,
+    setState,
     ...other
   } = props;
+  React.useEffect(() => {
+    if (typeof setState === "function") setState(value);
+  }, []);
   return (
     <FormGroup>
       <Input
         type="select"
         name={name}
         id="select"
-        onChange={handleChange}
+        onChange={(e) => {
+          if (typeof setState === "function") setState(e.target.value);
+          handleChange(e);
+        }}
         invalid={error}
         valid={!error}
+        value={value}
         {...other}
       >
         <option value="-1">{placeholder}</option>
         {options.map((element, index) => (
-          <option value={element.value}>{element.text}</option>
+          <option key={index} value={element.value}>
+            {element.text}
+          </option>
         ))}
       </Input>
       <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>

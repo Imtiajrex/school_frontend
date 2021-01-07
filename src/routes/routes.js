@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React from "react";
 import { Redirect } from "react-router-dom";
 import Index from "components/dashboard/settings/Religion";
@@ -15,11 +16,14 @@ import {
   GPA,
   Grade,
   InstituteInfo,
+  AssignSubject,
 } from "components/dashboard/settings/Settings";
 
 import { BooksCrud } from "components/dashboard/library/Library";
 import { ProductCrud } from "components/dashboard/products/Products";
 import { AccountsCrud } from "components/dashboard/accounts/Accounts";
+import { ExamCrud } from "components/dashboard/exams/Exams";
+import { ResultCrud } from "components/dashboard/results/Results";
 
 const routes = [
   {
@@ -119,14 +123,14 @@ const routes = [
   },
   {
     name: "Exam",
-    path: "/exam",
+    path: "/exams",
     children: [
       {
         name: "Exam CRUD",
-        path: "/crud",
+        path: "/exam",
         icon: "fas fa-link",
         layout: "/admin/exams",
-        component: <Index />,
+        component: <ExamCrud />,
       },
       {
         name: "Marks CRUD",
@@ -156,7 +160,7 @@ const routes = [
         path: "/crud",
         icon: "fas fa-link",
         layout: "/admin/results",
-        component: <Index />,
+        component: <ResultCrud />,
       },
       {
         name: "Result Card",
@@ -402,13 +406,6 @@ const routes = [
         component: <Department />,
       },
       {
-        name: "Assign Department",
-        path: "/assign_department",
-        icon: "fas fa-link",
-        layout: "/admin/settings",
-        component: <Index />,
-      },
-      {
         name: "Subject CRUD",
         path: "/subject",
         icon: "fas fa-link",
@@ -420,7 +417,7 @@ const routes = [
         path: "/assign_subject",
         icon: "fas fa-link",
         layout: "/admin/settings",
-        component: <Index />,
+        component: <AssignSubject />,
       },
       {
         name: "GPA CRUD",

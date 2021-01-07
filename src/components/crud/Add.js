@@ -10,6 +10,7 @@ import Modal from "reactstrap/lib/Modal";
 import Spinner from "reactstrap/lib/Spinner";
 import { Call } from "services/API/Call";
 import InputField from "../controls/InputField";
+import { ValidateInput } from "./ValidateInput";
 export default function Add(props) {
   const {
     url,
@@ -19,6 +20,7 @@ export default function Add(props) {
     initial_values,
     update,
     setUpdate,
+    modal_size,
   } = props;
 
   const [failMessage, setFailMessage] = useState("");
@@ -33,12 +35,10 @@ export default function Add(props) {
     let temp = { ...errors };
     // eslint-disable-next-line array-callback-return
     Object.values(add_data).map((element, index) => {
-      if (!element.required) return false;
-      if (element.name in fieldValues) {
-        console.log(fieldValues[element.name]);
-        temp[element.name] =
-          fieldValues[element.name].length === 0 ||
-          (element.type === "select" && fieldValues[element.name] === -1);
+      if (!element.required) {
+        temp[element.name] = false;
+      } else if (element.name in fieldValues) {
+        temp[element.name] = ValidateInput(element, fieldValues);
       }
     });
 
@@ -47,7 +47,8 @@ export default function Add(props) {
     });
 
     if (fieldValues === values)
-      return Object.values(temp).every((x) => x === false);
+      // eslint-disable-next-line eqeqeq
+      return Object.values(temp).every((x) => x == false);
   };
   const alert_message_time = 2500;
   const handleSubmit = (event) => {
@@ -66,7 +67,7 @@ export default function Add(props) {
         })
         .catch((err) => {
           setFailMessage(err);
-          setTimeout(() => setFailMessage(""), alert_message_time);
+          setTimeout(() => setFailMessage(""), alert_message_time * 2);
           setCalling(false);
         });
     } else setCalling(false);
@@ -75,7 +76,7 @@ export default function Add(props) {
     <div>
       <Modal
         className="modal-dialog-centered"
-        size="sm"
+        size={modal_size}
         isOpen={open}
         toggle={() => setOpenAdd(false)}
         modalTransition={{ timeout: 50 }}
@@ -125,10 +126,12 @@ export default function Add(props) {
                     value={values[element.name]}
                     error={errors[element.name]}
                     disabled={calling}
+                    options={element.options}
+                    setState={element.setState}
                   />
                 ))}
 
-                <div className="text-center">
+                <div className="text-center" style={{ clear: "left" }}>
                   <Button
                     className="my-4"
                     color="primary"

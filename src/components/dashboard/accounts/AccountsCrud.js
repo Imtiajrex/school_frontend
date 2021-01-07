@@ -16,12 +16,12 @@ export default function AccountsCrud() {
 
       options: [
         {
-          name: "credit",
-          id: 1,
+          text: "credit",
+          value: 0,
         },
         {
-          name: "debit",
-          id: 2,
+          text: "debit",
+          value: 1,
         },
       ],
       required: true,
@@ -51,7 +51,7 @@ export default function AccountsCrud() {
           },
           {
             title: "Entry Type",
-            identifier: "entry_type",
+            identifier: "entry_type_name",
           },
           {
             title: "Entry Info",
