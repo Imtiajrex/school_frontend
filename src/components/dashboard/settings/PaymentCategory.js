@@ -2,6 +2,7 @@ import Index from "components/crud/Index";
 import React from "react";
 
 export default function PaymentCategory() {
+  const [info_type, setInfoType] = React.useState("");
   return (
     <div>
       <Index
@@ -30,21 +31,22 @@ export default function PaymentCategory() {
             name: "info_type",
             options: [
               {
-                name: "Selection",
-                id: 1,
+                text: "Selection",
+                value: "select",
               },
               {
-                name: "Text",
-                id: 2,
+                text: "Text",
+                value: "text",
               },
             ],
+            setState: setInfoType,
             required: true,
           },
           {
             placeholder: "Info Options",
             type: "text",
             name: "info_options",
-            required: true,
+            required: info_type == "select",
           },
           {
             placeholder: "Default Amount",
@@ -54,8 +56,18 @@ export default function PaymentCategory() {
           },
           {
             placeholder: "Recurring Type",
-            type: "number",
+            type: "select",
             name: "recurring_type",
+            options: [
+              {
+                text: "Monthly",
+                value: "Monthly",
+              },
+              {
+                text: "Occasion Based",
+                value: "Ocassion Based",
+              },
+            ],
             required: true,
           },
         ]}

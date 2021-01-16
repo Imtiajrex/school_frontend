@@ -10,27 +10,50 @@ export default function AccountsCrud() {
       required: true,
     },
     {
+      placeholder: "Account Type",
+      type: "select",
+      name: "balance_form",
+
+      options: [
+        {
+          text: "Cash",
+          value: "Cash",
+        },
+        {
+          text: "Bank",
+          value: "Bank",
+        },
+      ],
+      required: true,
+    },
+    {
       placeholder: "Entry Type",
       type: "select",
       name: "entry_type",
 
       options: [
         {
-          text: "credit",
-          value: 0,
+          text: "Credit",
+          value: "Credit",
         },
         {
-          text: "debit",
-          value: 1,
+          text: "Debit",
+          value: "Debit",
         },
       ],
+      required: true,
+    },
+    {
+      placeholder: "Entry Category",
+      type: "text",
+      name: "entry_category",
       required: true,
     },
     {
       placeholder: "Entry Info",
       type: "text",
       name: "entry_info",
-      required: true,
+      required: false,
     },
     {
       placeholder: "Amount",
@@ -50,8 +73,16 @@ export default function AccountsCrud() {
             identifier: "date",
           },
           {
+            title: "Account Type",
+            identifier: "balance_form",
+          },
+          {
             title: "Entry Type",
-            identifier: "entry_type_name",
+            identifier: "entry_type",
+          },
+          {
+            title: "Entry Category",
+            identifier: "entry_category",
           },
           {
             title: "Entry Info",
@@ -69,8 +100,10 @@ export default function AccountsCrud() {
         edit_data={send_data}
         add_initial_values={{
           date: "",
-          entry_type: "",
+          balance_form: -1,
+          entry_type: -1,
           entry_info: "",
+          entry_category: "",
           amount: "",
         }}
       />

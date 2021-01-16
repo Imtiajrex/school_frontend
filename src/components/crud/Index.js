@@ -15,6 +15,7 @@ function Index(props) {
     title,
     add_data = [],
     add_initial_values = [],
+    CustomListComponent = undefined,
     custom_list = undefined,
     custom_update = undefined,
     setCustomUpdate = undefined,
@@ -40,23 +41,25 @@ function Index(props) {
   const [loading, setloading] = useState(false);
   const [query, setquery] = useState("");
   const [query_tags, setQueryTags] = useState([]);
+  const [querying, setQuerying] = useState(false);
 
   React.useEffect(() => {
     if (custom_list === undefined) {
       if (typeof query_list == "object") {
         if (query.length > 0) {
           setloading(true);
+          setQuerying(true);
           Call({
             method: "get",
             url: list_url + query,
           })
             .then((res) => {
               setList(res);
-              setquery("");
+              setQuerying(false);
               setloading(false);
             })
             .catch((error) => {
-              console.log(error);
+              setQuerying(false);
               setloading(false);
             });
         }
@@ -71,7 +74,7 @@ function Index(props) {
             setloading(false);
           })
           .catch((error) => {
-            console.log(error);
+            setQuerying(false);
             setloading(false);
           });
       }
@@ -107,6 +110,7 @@ function Index(props) {
                     update={update}
                     setUpdate={setUpdate}
                     setQueryTags={setQueryTags}
+                    querying={querying}
                   />
                 </CardBody>
               </Card>
@@ -159,19 +163,36 @@ function Index(props) {
                     : null}
                 </div>
               </CardHeader>
-              <List
-                setOpenDelete={setOpenDelete}
-                setOpenEdit={setOpenEdit}
-                setDeleteInfo={setDeleteInfo}
-                setEditInfo={setEditInfo}
-                list={custom_list === undefined ? list : custom_list}
-                list_head={list_head}
-                edit={edit}
-                remove={remove}
-                loading={
-                  custom_loading !== undefined ? custom_loading : loading
-                }
-              />
+              {CustomListComponent == undefined ? (
+                <List
+                  setOpenDelete={setOpenDelete}
+                  setOpenEdit={setOpenEdit}
+                  setDeleteInfo={setDeleteInfo}
+                  setEditInfo={setEditInfo}
+                  list={custom_list === undefined ? list : custom_list}
+                  list_head={list_head}
+                  edit={edit}
+                  remove={remove}
+                  loading={
+                    custom_loading !== undefined ? custom_loading : loading
+                  }
+                />
+              ) : (
+                <CustomListComponent
+                  list={list}
+                  list_head={list_head}
+                  loading={loading}
+                  url={list_url}
+                  setOpenDelete={setOpenDelete}
+                  setOpenEdit={setOpenEdit}
+                  setDeleteInfo={setDeleteInfo}
+                  setEditInfo={setEditInfo}
+                  update={update}
+                  setupdate={setUpdate}
+                  edit={edit}
+                  remove={remove}
+                />
+              )}
             </Card>
           </div>
         </Row>

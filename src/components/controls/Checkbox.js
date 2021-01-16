@@ -14,22 +14,17 @@ export default function Checkbox(props) {
   } = props;
   return (
     <>
-      <div className="custom-control custom-checkbox mb-3">
-        <input
-          className="custom-control-input"
-          id={name}
-          type="checkbox"
-          name={name}
-          value={value}
-          onChange={handleChange}
-          {...other}
-        />
-        <label className="custom-control-label" htmlFor={name}>
-          {placeholder}
-        </label>
+      <input
+        id={name}
+        type="checkbox"
+        name={name}
+        value={value}
+        onChange={handleChange}
+        {...other}
+      />
+      <label htmlFor={name}>{placeholder}</label>
 
-        <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
-      </div>
+      <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
     </>
   );
 }

@@ -127,20 +127,36 @@ export default function Edit(props) {
                 </Alert>
               ) : null}
               <Form role="form" onSubmit={handleSubmit}>
-                {edit_data.map((element, index) => (
-                  <InputField
-                    key={index}
-                    type={element.type}
-                    placeholder={element.placeholder}
-                    name={element.name}
-                    value={values[element.name]}
-                    handleChange={handleInputChange}
-                    error={errors[element.name]}
-                    disabled={calling}
-                    options={element.options}
-                    setState={element.setState}
-                  />
-                ))}
+                {edit_data.map((element, index) => {
+                  return element.customInput == undefined ? (
+                    <InputField
+                      key={index}
+                      type={element.type}
+                      placeholder={element.placeholder}
+                      name={element.name}
+                      handleChange={handleInputChange}
+                      value={values[element.name]}
+                      error={errors[element.name]}
+                      disabled={
+                        element.disabled != undefined
+                          ? element.disabled
+                          : calling
+                      }
+                      options={element.options}
+                      setState={element.setState}
+                    />
+                  ) : (
+                    <element.customInput
+                      key={index}
+                      title={element.title}
+                      children={element.children}
+                      this_value={values[element.name]}
+                      this_name={element.name}
+                      handleChange={handleInputChange}
+                      disabled={calling}
+                    />
+                  );
+                })}
 
                 <div className="text-center" style={{ clear: "left" }}>
                   <Button

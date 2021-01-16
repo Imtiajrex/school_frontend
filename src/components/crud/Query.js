@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 import InputField from "components/controls/InputField";
 import { useForm } from "components/useForm";
 import React, { useState } from "react";
@@ -8,9 +9,9 @@ import { ValidateInput } from "./ValidateInput";
 
 export default function Query(props) {
   const {
-    query,
     setquery,
     query_list,
+    querying,
     initial_values,
     update,
     setUpdate,
@@ -47,9 +48,8 @@ export default function Query(props) {
       let query_to_set = "?";
       let query_tag_to_set = [];
       query_list.map((element, index) => {
-        if (values[element.name] !== -1 || values[element.name] !== "") {
+        if (values[element.name] != -1 && values[element.name] != "") {
           query_to_set += element.name + "=" + values[element.name] + "&";
-          console.log(values[element.name]);
           let value =
             element.type == "select" && values[element.name] != -1
               ? element.options.filter(
@@ -67,9 +67,6 @@ export default function Query(props) {
       setUpdate(!update);
     } else setCalling(false);
   };
-  React.useEffect(() => {
-    if (query.length == 0) setCalling(false);
-  }, [query]);
   return (
     <>
       <Form role="form" onSubmit={handleSubmit}>
@@ -85,7 +82,7 @@ export default function Query(props) {
                 error={errors[element.name]}
                 handleChange={handleInputChange}
                 setState={element.setState}
-                disabled={calling}
+                disabled={querying}
               />
             ))
           : null}
@@ -94,9 +91,13 @@ export default function Query(props) {
             className="my-4"
             color="primary"
             type="submit"
-            disabled={calling}
+            disabled={querying}
           >
-            {calling ? <Spinner animation="border" variant="dark" /> : "Submit"}
+            {querying ? (
+              <Spinner animation="border" variant="dark" />
+            ) : (
+              "Submit"
+            )}
           </Button>
         </div>
       </Form>

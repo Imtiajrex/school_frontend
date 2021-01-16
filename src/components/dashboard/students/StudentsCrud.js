@@ -1,0 +1,276 @@
+import Index from "components/crud/Index";
+import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
+import React, { useContext, useState } from "react";
+import { Call } from "services/API/Call";
+import ExtendedInput from "./ExtendedInput";
+
+export default function AccountsCrud() {
+  const { class_list, department_list, session_list } = useContext(
+    ClassDeptSessionContext
+  );
+  const [selected_class, setSelectedClass] = useState("");
+  const [selected_session, setSelectedSession] = useState("");
+  const [religion_list, setreligion_list] = useState([]);
+  const [extended_info, setextended_info] = useState([]);
+  React.useEffect(() => {
+    Call({ method: "get", url: "/settings/religion" })
+      .then((res) => {
+        res.map((element) => {
+          element["text"] = element.religion_name;
+          element["value"] = element.religion_name;
+        });
+        setreligion_list(res);
+      })
+      .catch((err) => console.log(err));
+    Call({ method: "get", url: "/settings/students_extended_info?use=true" })
+      .then((res) => {
+        setextended_info(res);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  React.useEffect(() => console.log(extended_info), [extended_info]);
+
+  const add_data = [
+    {
+      placeholder: "Student Name",
+      type: "text",
+      name: "student_name",
+      required: true,
+    },
+    {
+      placeholder: "Student Image",
+      type: "file",
+      name: "student_image",
+      required: false,
+    },
+    {
+      placeholder: "Gender",
+      type: "select",
+      name: "gender",
+      options: [
+        { text: "Male", value: "Male" },
+        { text: "Female", value: "Female" },
+      ],
+      required: true,
+    },
+    {
+      placeholder: "Religion",
+      type: "select",
+      name: "religion",
+      options: religion_list,
+      required: true,
+    },
+    {
+      placeholder: "Age",
+      type: "number",
+      name: "age",
+      required: true,
+    },
+    {
+      placeholder: "Primary Phone",
+      type: "text",
+      name: "primary_phone",
+      required: true,
+    },
+    {
+      placeholder: "Secondary Phone",
+      type: "text",
+      name: "secondary_phone",
+      required: false,
+    },
+    {
+      placeholder: "Student Email",
+      type: "email",
+      name: "student_email",
+      required: false,
+    },
+    {
+      placeholder: "Session",
+      type: "select",
+      name: "session_id",
+      options: session_list,
+      setState: setSelectedSession,
+      required: true,
+    },
+    {
+      placeholder: "Class",
+      type: "select",
+      name: "class_id",
+      options: class_list,
+      setState: setSelectedClass,
+      required: true,
+    },
+    {
+      placeholder: "Department",
+      type: "select",
+      name: "department_id",
+      options: department_list.filter(
+        (element) =>
+          element.class_id == selected_class &&
+          element.session_id == selected_session
+      ),
+      required: true,
+    },
+    {
+      placeholder: "Student Role",
+      type: "number",
+      name: "role",
+      required: true,
+    },
+    {
+      customInput: ExtendedInput,
+      title: "Student's Additional Info",
+      name: "extended_info",
+      children: extended_info,
+    },
+  ];
+  const edit_data = [
+    {
+      placeholder: "Student Name",
+      type: "text",
+      name: "student_name",
+      required: true,
+    },
+    {
+      placeholder: "Student Image",
+      type: "file",
+      name: "student_image",
+      required: false,
+    },
+    {
+      placeholder: "Gender",
+      type: "select",
+      name: "gender",
+      options: [
+        { text: "Male", value: "Male" },
+        { text: "Female", value: "Female" },
+      ],
+      required: true,
+    },
+    {
+      placeholder: "Religion",
+      type: "select",
+      name: "religion",
+      options: religion_list,
+      required: true,
+    },
+    {
+      placeholder: "Age",
+      type: "number",
+      name: "age",
+      required: true,
+    },
+    {
+      placeholder: "Primary Phone",
+      type: "text",
+      name: "primary_phone",
+      required: true,
+    },
+    {
+      placeholder: "Secondary Phone",
+      type: "text",
+      name: "secondary_phone",
+      required: false,
+    },
+    {
+      placeholder: "Student Email",
+      type: "email",
+      name: "student_email",
+      required: false,
+    },
+    {
+      customInput: ExtendedInput,
+      title: "Student's Additional Info",
+      name: "extended_info",
+      children: extended_info,
+    },
+  ];
+  return (
+    <div>
+      <Index
+        title="Student List"
+        list_url="/students/student"
+        list_head={[
+          {
+            title: "Student ID",
+            identifier: "student_id",
+          },
+          {
+            title: "Student Name",
+            identifier: "student_name",
+          },
+          {
+            title: "Age",
+            identifier: "age",
+          },
+          {
+            title: "Gender",
+            identifier: "gender",
+          },
+          {
+            title: "Religion",
+            identifier: "religion",
+          },
+        ]}
+        add={true}
+        edit={true}
+        remove={true}
+        add_data={add_data}
+        edit_data={edit_data}
+        add_initial_values={{
+          student_name: "",
+          student_image: "",
+          gender: -1,
+          religion: -1,
+          age: "",
+          primary_phone: "",
+          secondary_phone: "",
+          student_email: "",
+          class_id: -1,
+          session_id: -1,
+          department_id: -1,
+          role: "",
+          extended_info: {},
+        }}
+        query_title="Query Student List"
+        query_list={[
+          {
+            placeholder: "Student ID",
+            type: "text",
+            name: "student_id",
+            required: false,
+          },
+          {
+            placeholder: "Religion",
+            type: "select",
+            name: "religion",
+            options: religion_list,
+            required: false,
+          },
+          {
+            placeholder: "Gender",
+            type: "select",
+            name: "gender",
+            options: [
+              { text: "Male", value: "Male" },
+              { text: "Female", value: "Female" },
+            ],
+            required: false,
+          },
+          {
+            placeholder: "Age",
+            type: "number",
+            name: "age",
+            required: false,
+          },
+        ]}
+        query_data={{
+          student_id: "",
+          religion: -1,
+          gender: -1,
+          age: "",
+        }}
+      />
+    </div>
+  );
+}
