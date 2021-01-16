@@ -5,11 +5,15 @@ import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 
 export default function AssignSubject() {
-  const { class_list, department_list } = useContext(ClassDeptSessionContext);
+  const { class_list, department_list, session_list } = useContext(
+    ClassDeptSessionContext
+  );
   const [subject_list, setSubjectList] = useState([]);
   const [selected_class, setSelectedClass] = useState("");
+  const [selected_session, setSelectedSession] = useState("");
 
   const [selected_query_class, setQueryClass] = useState("");
+  const [selected_query_session, setQuerySession] = useState("");
 
   React.useEffect(() => {
     Call({ method: "get", url: "/settings/subject" })
@@ -22,6 +26,14 @@ export default function AssignSubject() {
       .catch((err) => console.log(err));
   }, []);
   const send_data = [
+    {
+      placeholder: "Session",
+      type: "select",
+      name: "session_id",
+      options: session_list,
+      setState: setSelectedSession,
+      required: true,
+    },
     {
       placeholder: "Class",
       type: "select",
@@ -58,6 +70,14 @@ export default function AssignSubject() {
         query_title="Get Assigned Subject List"
         query_list={[
           {
+            placeholder: "Session",
+            type: "select",
+            name: "session_id",
+            options: session_list,
+            setState: setQuerySession,
+            required: true,
+          },
+          {
             placeholder: "Class",
             type: "select",
             name: "class_id",
@@ -70,7 +90,9 @@ export default function AssignSubject() {
             type: "select",
             name: "department_id",
             options: department_list.filter(
-              (element) => element.class_id == selected_query_class
+              (element) =>
+                element.class_id == selected_query_class &&
+                element.session_id == selected_query_session
             ),
             required: true,
           },

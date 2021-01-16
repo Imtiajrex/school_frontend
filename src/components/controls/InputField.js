@@ -113,4 +113,19 @@ export default function InputField(props) {
         {...other}
       />
     );
+  else
+    return (
+      <TextInput
+        className="mt-3"
+        name={name}
+        placeholder={placeholder}
+        type="text"
+        handleChange={handleChange}
+        invalid_msg={`Enter Valid ${placeholder}!`}
+        value={value}
+        error={error}
+        disabled={disabled}
+        {...other}
+      />
+    );
 }

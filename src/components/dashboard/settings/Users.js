@@ -73,13 +73,13 @@ export default function Users() {
             required: true,
           },
         ]}
+        query_data={{ user_type: -1 }}
         list_head={[
           { title: "Name", identifier: "name" },
           { title: "Username", identifier: "username" },
           { title: "User Type", identifier: "user_type" },
-          { title: "Roles", identifier: "role" },
+          { title: "Roles", identifier: "role_name" },
         ]}
-        query_data={{ user_type: -1 }}
         add={true}
         edit={true}
         remove={true}

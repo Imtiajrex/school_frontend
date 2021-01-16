@@ -1,6 +1,5 @@
 import React from "react";
 import { FormGroup, Input } from "reactstrap";
-import Col from "reactstrap/lib/Col";
 import FormFeedback from "reactstrap/lib/FormFeedback";
 import Label from "reactstrap/lib/Label";
 
@@ -16,20 +15,15 @@ export default function TextInput(props) {
     ...other
   } = props;
   return (
-    <FormGroup row className="d-flex align-items-center">
-      <Label for="exampleFile" sm={2}>
-        {placeholder}
-      </Label>
-      <Col sm={10}>
-        <Input
-          type="file"
-          name="file"
-          id="exampleFile"
-          accept="image/*"
-          {...other}
-        />
-      </Col>
-
+    <FormGroup>
+      <small className="text-muted">{placeholder}</small>
+      <Input
+        type="file"
+        name="file"
+        id="exampleFile"
+        accept="image/*"
+        {...other}
+      />
       <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
     </FormGroup>
   );

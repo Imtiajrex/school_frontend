@@ -116,20 +116,32 @@ export default function Add(props) {
                 </Alert>
               ) : null}
               <Form role="form" onSubmit={handleSubmit}>
-                {add_data.map((element, index) => (
-                  <InputField
-                    key={index}
-                    type={element.type}
-                    placeholder={element.placeholder}
-                    name={element.name}
-                    handleChange={handleInputChange}
-                    value={values[element.name]}
-                    error={errors[element.name]}
-                    disabled={calling}
-                    options={element.options}
-                    setState={element.setState}
-                  />
-                ))}
+                {add_data.map((element, index) => {
+                  return element.customInput == undefined ? (
+                    <InputField
+                      key={index}
+                      type={element.type}
+                      placeholder={element.placeholder}
+                      name={element.name}
+                      handleChange={handleInputChange}
+                      value={values[element.name]}
+                      error={errors[element.name]}
+                      disabled={calling}
+                      options={element.options}
+                      setState={element.setState}
+                    />
+                  ) : (
+                    <element.customInput
+                      key={index}
+                      title={element.title}
+                      children={element.children}
+                      this_value={values[element.name]}
+                      this_name={element.name}
+                      handleChange={handleInputChange}
+                      disabled={calling}
+                    />
+                  );
+                })}
 
                 <div className="text-center" style={{ clear: "left" }}>
                   <Button

@@ -19,7 +19,7 @@ export default function AuthRouter() {
     <>
       <Switch>
         <Route exact path="/login">
-          {token === "" && allowed_user_types.includes(user_type) ? (
+          {token != "" && allowed_user_types.includes(user_type) ? (
             <Redirect to={"/" + user_type + "/dashboard"} />
           ) : (
             <Login />

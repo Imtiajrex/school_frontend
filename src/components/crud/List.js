@@ -43,7 +43,7 @@ export default function List(props) {
                 {index + 1}
               </th>
               {list_head.map((item, index) => (
-                <th key={uuid()} style={{ whiteSpace: "normal" }}>
+                <th key={uuid()} style={{ whiteSpace: "pre" }}>
                   {element[item.identifier]}
                 </th>
               ))}

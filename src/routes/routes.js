@@ -17,13 +17,40 @@ import {
   Grade,
   InstituteInfo,
   AssignSubject,
+  EmployeesExtendedInfo,
+  StudentsExtendedInfo,
 } from "components/dashboard/settings/Settings";
 
 import { BooksCrud } from "components/dashboard/library/Library";
+
 import { ProductCrud } from "components/dashboard/products/Products";
-import { AccountsCrud } from "components/dashboard/accounts/Accounts";
+
+import {
+  AccountsCrud,
+  AccountsReport,
+  AccountBalance,
+} from "components/dashboard/accounts/Accounts";
+
 import { ExamCrud } from "components/dashboard/exams/Exams";
+
 import { ResultCrud } from "components/dashboard/results/Results";
+
+import {
+  StudentsCrud,
+  AssignClassStudent,
+  StudentPaymentFees,
+} from "components/dashboard/students/Students";
+
+import {
+  EmployeeCrud,
+  EmployeeTypes,
+  EmployeePosts,
+} from "components/dashboard/employees/Employees";
+
+import { StudentPayment } from "components/dashboard/payments/Payment";
+import {} from "components/dashboard/students/Students";
+import { DuePayment } from "components/dashboard/payments/Payment";
+import { PaymentReport } from "components/dashboard/payments/Payment";
 
 const routes = [
   {
@@ -42,14 +69,21 @@ const routes = [
         path: "/crud",
         icon: "fas fa-link",
         layout: "/admin/students",
-        component: <Index />,
+        component: <StudentsCrud />,
+      },
+      {
+        name: "Class Assignment",
+        path: "/class_assignment",
+        icon: "fas fa-link",
+        layout: "/admin/students",
+        component: <AssignClassStudent />,
       },
       {
         name: "Payment Fees",
         path: "/payment_fees",
         icon: "fas fa-link",
         layout: "/admin/students",
-        component: <Index />,
+        component: <StudentPaymentFees />,
       },
       {
         name: "Admit Card",
@@ -86,14 +120,21 @@ const routes = [
         path: "/crud",
         icon: "fas fa-link",
         layout: "/admin/employees",
-        component: <Index />,
+        component: <EmployeeCrud />,
       },
       {
-        name: "Employee Type",
+        name: "Employee Types",
         path: "/employee_type",
         icon: "fas fa-link",
         layout: "/admin/employees",
-        component: <Index />,
+        component: <EmployeeTypes />,
+      },
+      {
+        name: "Employee Posts",
+        path: "/employee_post",
+        icon: "fas fa-link",
+        layout: "/admin/employees",
+        component: <EmployeePosts />,
       },
       {
         name: "Employee Salary Structure",
@@ -193,18 +234,18 @@ const routes = [
     path: "/admin/payment",
     children: [
       {
-        name: "Student Payment CRUD",
+        name: "Student Payment",
         path: "/student_payment",
         icon: "fas fa-link",
         layout: "/admin/payment",
-        component: <Index />,
+        component: <StudentPayment />,
       },
       {
-        name: "Employee Salary Payment CRUD",
-        path: "/employee_payment",
+        name: "Student Due Payment",
+        path: "/due_payment",
         icon: "fas fa-link",
         layout: "/admin/payment",
-        component: <Index />,
+        component: <DuePayment />,
       },
       {
         name: "Payment Receipt",
@@ -216,6 +257,13 @@ const routes = [
       {
         name: "Payment Report",
         path: "/report",
+        icon: "fas fa-link",
+        layout: "/admin/payment",
+        component: <PaymentReport />,
+      },
+      {
+        name: "Employee Salary Payment",
+        path: "/employee_payment",
         icon: "fas fa-link",
         layout: "/admin/payment",
         component: <Index />,
@@ -230,18 +278,25 @@ const routes = [
     path: "/accounts",
     children: [
       {
-        name: "Accounts Report",
-        path: "/report",
-        icon: "fas fa-link",
-        layout: "/admin/accounts",
-        component: <Index />,
-      },
-      {
         name: "Accounts CRUD",
         path: "/account",
         icon: "fas fa-link",
         layout: "/admin/accounts",
         component: <AccountsCrud />,
+      },
+      {
+        name: "Accounts Report",
+        path: "/report",
+        icon: "fas fa-link",
+        layout: "/admin/accounts",
+        component: <AccountsReport />,
+      },
+      {
+        name: "Accounts Balance",
+        path: "/account_balance",
+        icon: "fas fa-link",
+        layout: "/admin/accounts",
+        component: <AccountBalance />,
       },
     ],
     icon: "fas fa-file-invoice text-warning",
@@ -467,6 +522,20 @@ const routes = [
         icon: "fas fa-link",
         layout: "/admin/settings",
         component: <PaymentCategory />,
+      },
+      {
+        name: "Extended Fields Student",
+        path: "/students_extended_info",
+        icon: "fas fa-link",
+        layout: "/admin/settings",
+        component: <StudentsExtendedInfo />,
+      },
+      {
+        name: "Extended Fields Teacher",
+        path: "/teachers_extended_info",
+        icon: "fas fa-link",
+        layout: "/admin/settings",
+        component: <EmployeesExtendedInfo />,
       },
     ],
     icon: "fas fa-cogs text-success",
