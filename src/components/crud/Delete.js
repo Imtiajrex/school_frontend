@@ -23,13 +23,14 @@ export default function Delete({
       .then((res) => {
         setSuccessMessage(res.message);
         setUpdate(!update);
+        setdeleting(false);
         setTimeout(() => {
           setOpenDelete(false);
         }, 500);
       })
       .catch((err) => {
         setFailMessage(err);
-        setdeleting(true);
+        setdeleting(false);
       });
   };
 

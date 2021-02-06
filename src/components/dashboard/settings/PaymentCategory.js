@@ -35,8 +35,8 @@ export default function PaymentCategory() {
                 value: "select",
               },
               {
-                text: "Text",
-                value: "text",
+                text: "Text Area",
+                value: "textarea",
               },
             ],
             setState: setInfoType,

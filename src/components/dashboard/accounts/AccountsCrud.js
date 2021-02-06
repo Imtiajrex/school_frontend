@@ -51,7 +51,7 @@ export default function AccountsCrud() {
     },
     {
       placeholder: "Entry Info",
-      type: "text",
+      type: "textarea",
       name: "entry_info",
       required: false,
     },
@@ -94,10 +94,7 @@ export default function AccountsCrud() {
           },
         ]}
         add={true}
-        edit={true}
-        remove={true}
         add_data={send_data}
-        edit_data={send_data}
         add_initial_values={{
           date: "",
           balance_form: -1,

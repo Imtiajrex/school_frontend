@@ -1,3 +1,4 @@
+/* eslint-disable eqeqeq */
 /* eslint-disable react-hooks/exhaustive-deps */
 import InputField from "components/controls/InputField";
 import React, { useState } from "react";
@@ -9,7 +10,6 @@ export default function PaymentInput(props) {
     handleInputChange,
     disabled,
     index,
-    base_value,
     student_payment_fees = [],
     payment_category_list,
     error,

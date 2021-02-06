@@ -20,13 +20,13 @@ export default function Add(props) {
     initial_values,
     update,
     setUpdate,
+    file = false,
     modal_size,
   } = props;
 
   const [failMessage, setFailMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [calling, setCalling] = useState(false);
-
   const { values, handleInputChange, errors, setErrors, resetForm } = useForm(
     initial_values
   );
@@ -55,8 +55,37 @@ export default function Add(props) {
     event.preventDefault();
     setCalling(true);
     if (validate()) {
-      const data = { ...values };
-      const request = { method: "post", url: url, data: data };
+      let request = {};
+      if (file) {
+        let data = new FormData();
+        Object.keys(values).map((el) => {
+          if (
+            typeof values[el] == "object" &&
+            values[el].length > 0 &&
+            values[el][0].type != undefined
+          ) {
+            Array.from(values[el]).map((e) => data.append(el, e));
+          } else {
+            data.append(el, values[el]);
+          }
+        });
+
+        request = {
+          method: "post",
+          url: url,
+          data: data,
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        };
+      } else {
+        const data = { ...values };
+        request = {
+          method: "post",
+          url: url,
+          data: data,
+        };
+      }
       Call(request)
         .then((res) => {
           setUpdate(!update);
@@ -126,7 +155,17 @@ export default function Add(props) {
                       handleChange={handleInputChange}
                       value={values[element.name]}
                       error={errors[element.name]}
-                      disabled={calling}
+                      disabled={
+                        element.disabled != undefined
+                          ? element.disabled
+                          : calling
+                      }
+                      multiple={
+                        element.multiple != null &&
+                        element.multiple != undefined
+                          ? true
+                          : false
+                      }
                       options={element.options}
                       setState={element.setState}
                     />
@@ -134,11 +173,20 @@ export default function Add(props) {
                     <element.customInput
                       key={index}
                       title={element.title}
-                      children={element.children}
-                      this_value={values[element.name]}
-                      this_name={element.name}
+                      type={element.type}
+                      placeholder={element.placeholder}
+                      name={element.name}
                       handleChange={handleInputChange}
-                      disabled={calling}
+                      value={values[element.name]}
+                      error={errors[element.name]}
+                      disabled={
+                        element.disabled != undefined
+                          ? element.disabled
+                          : calling
+                      }
+                      children={element.children}
+                      options={element.options}
+                      setState={element.setState}
                     />
                   );
                 })}

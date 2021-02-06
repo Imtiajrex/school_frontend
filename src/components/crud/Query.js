@@ -51,14 +51,24 @@ export default function Query(props) {
         if (values[element.name] != -1 && values[element.name] != "") {
           query_to_set += element.name + "=" + values[element.name] + "&";
           let value =
-            element.type == "select" && values[element.name] != -1
+            element.type == "select" &&
+            values[element.name] != -1 &&
+            element.options.length > 0
               ? element.options.filter(
                   (option) => option.value == values[element.name]
                 )[0]["text"]
               : values[element.name];
+          let id =
+            element.type == "select" &&
+            values[element.name] != -1 &&
+            element.options.length > 0
+              ? element.options.filter(
+                  (option) => option.value == values[element.name]
+                )[0]["value"]
+              : values[element.name];
           query_tag_to_set = [
             ...query_tag_to_set,
-            { title: element.placeholder, value: value },
+            { title: element.placeholder, value, id },
           ];
         }
       });

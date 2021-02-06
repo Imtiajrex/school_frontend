@@ -31,7 +31,7 @@ import {
   AccountBalance,
 } from "components/dashboard/accounts/Accounts";
 
-import { ExamCrud } from "components/dashboard/exams/Exams";
+import { ExamCrud, Marks, Tabulation } from "components/dashboard/exams/Exams";
 
 import { ResultCrud } from "components/dashboard/results/Results";
 
@@ -39,6 +39,10 @@ import {
   StudentsCrud,
   AssignClassStudent,
   StudentPaymentFees,
+  StudentsDocuments,
+  StudentsPhonebook,
+  StudentsAttendanceReportDay,
+  StudentsAttendanceReportMonth,
 } from "components/dashboard/students/Students";
 
 import {
@@ -47,10 +51,23 @@ import {
   EmployeePosts,
 } from "components/dashboard/employees/Employees";
 
-import { StudentPayment } from "components/dashboard/payments/Payment";
-import {} from "components/dashboard/students/Students";
-import { DuePayment } from "components/dashboard/payments/Payment";
-import { PaymentReport } from "components/dashboard/payments/Payment";
+import {
+  StudentPayment,
+  DuePayment,
+  PaymentReceipt,
+  PaymentReport,
+} from "components/dashboard/payments/Payment";
+import { ResultPublishing } from "components/dashboard/results/Results";
+import AttendanceReportMonth from "components/dashboard/employees/attendance/AttendanceReportMonth";
+import AttendanceReportDay from "components/dashboard/employees/attendance/AttendanceReportDay";
+import { BooksCategory } from "components/dashboard/library/Library";
+import { FindBooks } from "components/dashboard/library/Library";
+import { IssueBooks } from "components/dashboard/library/Library";
+import { ProductOperations } from "components/dashboard/products/Products";
+import Album from "components/dashboard/website/Album";
+import { Pages } from "components/dashboard/website/WebsiteSettings";
+import SubPages from "components/dashboard/website/SubPages";
+import Gallery from "components/dashboard/website/Gallery";
 
 const routes = [
   {
@@ -86,25 +103,32 @@ const routes = [
         component: <StudentPaymentFees />,
       },
       {
-        name: "Admit Card",
+        name: "Student Documents",
         path: "/admit_card",
         icon: "fas fa-link",
         layout: "/admin/students",
-        component: <Index />,
+        component: <StudentsDocuments />,
       },
       {
-        name: "Attendance Report",
+        name: "Attendance Report(Day)",
         path: "/attendance",
         icon: "fas fa-link",
         layout: "/admin/students",
-        component: <Index />,
+        component: <StudentsAttendanceReportDay />,
+      },
+      {
+        name: "Attendance Report(Month)",
+        path: "/attendance_month",
+        icon: "fas fa-link",
+        layout: "/admin/students",
+        component: <StudentsAttendanceReportMonth />,
       },
       {
         name: "Phonebook",
         path: "/phonebook",
         icon: "fas fa-link",
         layout: "/admin/students",
-        component: <Index />,
+        component: <StudentsPhonebook />,
       },
     ],
     icon: "fas fa-graduation-cap text-warning",
@@ -144,11 +168,18 @@ const routes = [
         component: <Index />,
       },
       {
-        name: "Attendance Report",
+        name: "Attendance Report(Day)",
         path: "/attendance",
         icon: "fas fa-link",
         layout: "/admin/employees",
-        component: <Index />,
+        component: <AttendanceReportDay />,
+      },
+      {
+        name: "Attendance Report(Month)",
+        path: "/attendance_month",
+        icon: "fas fa-link",
+        layout: "/admin/employees",
+        component: <AttendanceReportMonth />,
       },
       {
         name: "Phonebook",
@@ -178,14 +209,14 @@ const routes = [
         path: "/marks",
         icon: "fas fa-link",
         layout: "/admin/exams",
-        component: <Index />,
+        component: <Marks />,
       },
       {
         name: "Tabulation Sheet",
         path: "/tabulation",
         icon: "fas fa-link",
         layout: "/admin/exams",
-        component: <Index />,
+        component: <Tabulation />,
       },
     ],
     icon: "fas fa-notes-medical text-info",
@@ -222,7 +253,7 @@ const routes = [
         path: "/publishing",
         icon: "fas fa-link",
         layout: "/admin/results",
-        component: <Index />,
+        component: <ResultPublishing />,
       },
     ],
     icon: "fas fa-file-alt text-success",
@@ -252,7 +283,7 @@ const routes = [
         path: "/receipt",
         icon: "fas fa-link",
         layout: "/admin/payment",
-        component: <Index />,
+        component: <PaymentReceipt />,
       },
       {
         name: "Payment Report",
@@ -315,25 +346,25 @@ const routes = [
         component: <BooksCrud />,
       },
       {
+        name: "Books Category",
+        path: "/books_category",
+        icon: "fas fa-link",
+        layout: "/admin/library",
+        component: <BooksCategory />,
+      },
+      {
         name: "Find Books",
         path: "/find_books",
         icon: "fas fa-link",
         layout: "/admin/library",
-        component: <Index />,
+        component: <FindBooks />,
       },
       {
         name: "Issue Books",
         path: "/issue_books",
         icon: "fas fa-link",
         layout: "/admin/library",
-        component: <Index />,
-      },
-      {
-        name: "Sell Books",
-        path: "/sell_books",
-        icon: "fas fa-link",
-        layout: "/admin/library",
-        component: <Index />,
+        component: <IssueBooks />,
       },
     ],
     icon: "fas fa-book text-default",
@@ -356,14 +387,7 @@ const routes = [
         path: "/sell_product",
         icon: "fas fa-link",
         layout: "/admin/products",
-        component: <Index />,
-      },
-      {
-        name: "Issue Product",
-        path: "/issue_product",
-        icon: "fas fa-link",
-        layout: "/admin/products",
-        component: <Index />,
+        component: <ProductOperations />,
       },
     ],
     icon: "fas fa-shopping-basket text-info",
@@ -375,32 +399,32 @@ const routes = [
     path: "/website",
     children: [
       {
-        name: "Website Template",
-        path: "/template",
-        icon: "fas fa-link",
-        layout: "/admin/website",
-        component: <Index />,
-      },
-      {
         name: "Pages CRUD",
         path: "/pages",
         icon: "fas fa-link",
         layout: "/admin/website",
-        component: <Index />,
+        component: <Pages />,
+      },
+      {
+        name: "Sub Pages CRUD",
+        path: "/sub_pages",
+        icon: "fas fa-link",
+        layout: "/admin/website",
+        component: <SubPages />,
       },
       {
         name: "Gallery",
         path: "/gallery",
         icon: "fas fa-link",
         layout: "/admin/website",
-        component: <Index />,
+        component: <Gallery />,
       },
       {
         name: "Album",
         path: "/admin/webiste/album",
         icon: "fas fa-link",
         layout: "/admin/website",
-        component: <Index />,
+        component: <Album />,
       },
       {
         name: "Banner",

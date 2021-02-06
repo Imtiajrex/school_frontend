@@ -212,6 +212,7 @@ export default function AccountsCrud() {
             identifier: "religion",
           },
         ]}
+        file={true}
         add={true}
         edit={true}
         remove={true}

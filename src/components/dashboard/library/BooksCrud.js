@@ -1,7 +1,15 @@
 import Index from "components/crud/Index";
-import React from "react";
+import React, { useState } from "react";
+import { Call } from "services/API/Call";
 
 export default function BooksCrud() {
+  const [categories, setCategories] = useState([]);
+  React.useEffect(() => {
+    Call({ method: "get", url: "library/books_category" })
+      .then((res) => setCategories(res))
+      .catch((err) => console.log(err));
+  }, []);
+
   const send_data = [
     {
       placeholder: "Book Name",
@@ -17,8 +25,9 @@ export default function BooksCrud() {
     },
     {
       placeholder: "Category Name",
-      type: "text",
+      type: "select",
       name: "category_name",
+      options: categories,
       required: true,
     },
     {

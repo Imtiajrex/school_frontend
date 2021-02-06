@@ -23,6 +23,7 @@ export default function Edit(props) {
     setEditInfo,
     edit_data,
     modal_size,
+    file = false,
   } = props;
   const [failMessage, setFailMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
@@ -55,8 +56,42 @@ export default function Edit(props) {
 
     setCalling(true);
     if (validate()) {
-      const data = { ...values };
-      const request = { method: "put", url: url + "/" + id, data: data };
+      let request = {};
+      if (file) {
+        let data = new FormData();
+        let i = 0;
+        edit_data.map((el) => {
+          console.log(el.name, values[el.name]);
+          if (
+            values[el.name] != null &&
+            typeof values[el.name] == "object" &&
+            values[el.name].length > 0 &&
+            values[el.name][0].type != undefined
+          ) {
+            Array.from(values[el.name]).map((e) => data.append(el.name, e));
+            i++;
+          } else {
+            data.append(el.name, values[el.name]);
+          }
+        });
+        data.append("_method", "put");
+        request = {
+          method: "post",
+          url: url + "/" + id,
+          data: data,
+          headers: {
+            "Content-Type": i > 0 ? "multipart/form-data" : "application/json",
+          },
+        };
+      } else {
+        let data = {};
+        Object.values(edit_data).map((el) => (data[el.name] = values[el.name]));
+        request = {
+          method: "put",
+          url: url + "/" + id,
+          data: data,
+        };
+      }
       Call(request)
         .then((res) => {
           console.log(res);
@@ -142,6 +177,12 @@ export default function Edit(props) {
                           ? element.disabled
                           : calling
                       }
+                      multiple={
+                        element.multiple != null &&
+                        element.multiple != undefined
+                          ? true
+                          : false
+                      }
                       options={element.options}
                       setState={element.setState}
                     />
@@ -149,11 +190,20 @@ export default function Edit(props) {
                     <element.customInput
                       key={index}
                       title={element.title}
-                      children={element.children}
-                      this_value={values[element.name]}
-                      this_name={element.name}
+                      type={element.type}
+                      placeholder={element.placeholder}
+                      name={element.name}
                       handleChange={handleInputChange}
-                      disabled={calling}
+                      value={values[element.name]}
+                      error={errors[element.name]}
+                      disabled={
+                        element.disabled != undefined
+                          ? element.disabled
+                          : calling
+                      }
+                      children={element.children}
+                      options={element.options}
+                      setState={element.setState}
                     />
                   );
                 })}

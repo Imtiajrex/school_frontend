@@ -30,6 +30,9 @@ function Index(props) {
     edit_data = [],
     query_title,
     query_data,
+    indexed = true,
+    file = false,
+    ...other
   } = props;
   const [openAdd, setOpenAdd] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -82,7 +85,7 @@ function Index(props) {
       if (setCustomUpdate !== undefined) setCustomUpdate(!custom_update);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [update]);
+  }, [update, list_url]);
   React.useEffect(() => {
     if (Object.keys(editInfo).length > 0) setOpenEdit(true);
     else setOpenEdit(false);
@@ -176,11 +179,14 @@ function Index(props) {
                   loading={
                     custom_loading !== undefined ? custom_loading : loading
                   }
+                  indexed={indexed}
+                  {...other}
                 />
               ) : (
                 <CustomListComponent
                   list={list}
                   list_head={list_head}
+                  query_tags={query_tags}
                   loading={loading}
                   url={list_url}
                   setOpenDelete={setOpenDelete}
@@ -191,6 +197,8 @@ function Index(props) {
                   setupdate={setUpdate}
                   edit={edit}
                   remove={remove}
+                  indexed={indexed}
+                  {...other}
                 />
               )}
             </Card>
@@ -205,6 +213,7 @@ function Index(props) {
             setUpdate={setUpdate}
             edit_data={edit_data}
             url={list_url}
+            file={file}
             setEditInfo={setEditInfo}
             modal_size={modal_size}
           />
@@ -219,6 +228,7 @@ function Index(props) {
             update={update}
             setUpdate={setUpdate}
             modal_size={modal_size}
+            file={file}
           />
         ) : null}
 

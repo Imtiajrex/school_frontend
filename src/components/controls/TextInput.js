@@ -23,6 +23,7 @@ export default function TextInput(props) {
         onChange={handleChange}
         invalid={error}
         valid={!error}
+        row="5"
         {...other}
       />
       <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
