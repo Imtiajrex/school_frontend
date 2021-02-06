@@ -7,19 +7,18 @@ export default function ExtendedInput(props) {
     title,
     children = [],
     disabled,
-    this_value = [],
+    value = [],
     handleChange,
-    this_name,
+    name,
   } = props;
 
   const [open, setopen] = useState(false);
   const handleOpen = () => setopen(!open);
 
   const handleInputChange = (e) => {
-    let extended_value = this_value;
-    const { name, value } = e.target;
-    extended_value[name] = value;
-    const send_value = { target: { name: this_name, value: extended_value } };
+    let extended_value = value;
+    extended_value[e.target.name] = e.target.value;
+    const send_value = { target: { name: name, value: extended_value } };
 
     handleChange(send_value);
   };
@@ -52,7 +51,7 @@ export default function ExtendedInput(props) {
                 placeholder={element.placeholder}
                 name={element.name}
                 handleChange={handleInputChange}
-                value={this_value[element.name]}
+                value={value[element.name]}
                 disabled={disabled}
                 options={element.options}
               />

@@ -1,0 +1,13 @@
+.rich-editor {
+  background-color: #fff;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+.rich-editor .rdw-editor-main {
+  background-color: #fff;
+}
+.rich-editor .DraftEditor-editorContainer {
+  padding: 1rem;
+}
+.draft-editor-wrapper {
+  border: 1px solid #ccc;
+}

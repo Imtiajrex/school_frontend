@@ -1,0 +1,6 @@
+.employee_attendance table tr {
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+.employee_attendance table th {
+  white-space: pre;
+}

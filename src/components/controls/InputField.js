@@ -18,9 +18,10 @@ export default function InputField(props) {
     error,
     disabled,
     setState = null,
+    multiple = false,
     ...other
   } = props;
-  if (["text", "number", "password", "email"].includes(type))
+  if (["text", "number", "password", "email", "textarea"].includes(type))
     return (
       <TextInput
         className="mt-3"
@@ -47,6 +48,7 @@ export default function InputField(props) {
         value={value}
         error={error}
         disabled={disabled}
+        multiple={multiple}
         {...other}
       />
     );

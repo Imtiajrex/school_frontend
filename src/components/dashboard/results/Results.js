@@ -1,2 +1,3 @@
 import ResultCrud from "./ResultCrud";
-export { ResultCrud };
+import ResultPublishing from "./ResultPublishing";
+export { ResultCrud, ResultPublishing };

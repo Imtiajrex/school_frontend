@@ -10,7 +10,7 @@ export default function AccountsCrud() {
 
   const [selected_employee_type, setSelectedEmployeeType] = useState([]);
 
-  const [extended_info, setextended_info] = useState([]);
+  const [extended_info, setExtendedInfo] = useState([]);
   React.useEffect(() => {
     Call({ method: "get", url: "/settings/religion" })
       .then((res) => {
@@ -41,7 +41,7 @@ export default function AccountsCrud() {
       .catch((err) => console.log(err));
     Call({ method: "get", url: "/settings/employees_extended_info?use=true" })
       .then((res) => {
-        setextended_info(res);
+        setExtendedInfo(res);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -124,6 +124,94 @@ export default function AccountsCrud() {
       children: extended_info,
     },
   ];
+  const edit_data = [
+    {
+      placeholder: "Employee Name",
+      type: "text",
+      name: "employee_name",
+      required: true,
+    },
+    {
+      placeholder: "Employee Image",
+      type: "file",
+      name: "employee_image",
+      required: false,
+    },
+    {
+      placeholder: "Employee Type",
+      type: "select",
+      name: "employee_type",
+      options: employee_type_list,
+      setState: setSelectedEmployeeType,
+      required: true,
+    },
+    {
+      placeholder: "Employee Post",
+      type: "select",
+      name: "employee_post",
+      options: employee_post_list.filter(
+        (element) => element.employee_type == selected_employee_type
+      ),
+      required: true,
+    },
+    {
+      placeholder: "Gender",
+      type: "select",
+      name: "employee_gender",
+      options: [
+        { text: "Male", value: "Male" },
+        { text: "Female", value: "Female" },
+      ],
+      required: true,
+    },
+    {
+      placeholder: "Religion",
+      type: "select",
+      name: "employee_religion",
+      options: religion_list,
+      required: true,
+    },
+    {
+      placeholder: "Age",
+      type: "number",
+      name: "employee_age",
+      required: true,
+    },
+    {
+      placeholder: "Primary Phone",
+      type: "text",
+      name: "employee_primary_phone",
+      required: true,
+    },
+    {
+      placeholder: "Secondary Phone",
+      type: "text",
+      name: "employee_secondary_phone",
+      required: false,
+    },
+    {
+      placeholder: "Employee Email",
+      type: "email",
+      name: "employee_email",
+      required: false,
+    },
+    {
+      placeholder: "Job Status",
+      type: "select",
+      name: "job_status",
+      options: [
+        { text: "Employee", value: "employee" },
+        { text: "Left", value: "left" },
+      ],
+      required: true,
+    },
+    {
+      customInput: ExtendedInput,
+      title: "Employee's Additional Info",
+      name: "employee_extended_info",
+      children: extended_info,
+    },
+  ];
   return (
     <div>
       <Index
@@ -131,11 +219,16 @@ export default function AccountsCrud() {
         list_url="/employees/employee"
         list_head={[
           {
-            title: "Employee ID",
+            title: "Image",
+            identifier: "employee_image",
+            type: "image",
+          },
+          {
+            title: "ID",
             identifier: "employee_id",
           },
           {
-            title: "Employee Name",
+            title: "Name",
             identifier: "employee_name",
           },
           {
@@ -159,14 +252,15 @@ export default function AccountsCrud() {
             identifier: "employee_religion",
           },
         ]}
+        file={true}
         add={true}
         edit={true}
         remove={true}
         add_data={add_data}
-        edit_data={add_data}
+        edit_data={edit_data}
         add_initial_values={{
           employee_name: "",
-          employee_image: "",
+          employee_image: {},
           employee_type: -1,
           employee_post: -1,
           employee_gender: -1,

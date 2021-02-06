@@ -18,7 +18,7 @@ export default function Checkbox(props) {
         id={name}
         type="checkbox"
         name={name}
-        value={value}
+        checked={value}
         onChange={handleChange}
         {...other}
       />

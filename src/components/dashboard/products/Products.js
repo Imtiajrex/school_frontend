@@ -1,2 +1,3 @@
 import ProductCrud from "./ProductCrud";
-export { ProductCrud };
+import ProductOperations from "./product_operation/ProductsOperation";
+export { ProductCrud, ProductOperations };

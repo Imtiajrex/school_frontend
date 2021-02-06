@@ -16,12 +16,13 @@ export default function List(props) {
     edit = false,
     remove = false,
     loading,
+    indexed = true,
   } = props;
   return (
     <Table className="align-items-center table-dark table-flush" responsive>
       <thead className="thead-dark">
         <tr>
-          <th scope="col">#</th>
+          {indexed ? <th scope="col">#</th> : null}
           {list_head.map((item, index) => (
             <th key={uuid()}>{item.title}</th>
           ))}
@@ -39,12 +40,26 @@ export default function List(props) {
         ) : typeof list == "object" && list.length > 0 ? (
           list.map((element, index) => (
             <tr key={uuid()}>
-              <th scope="row" key={index}>
-                {index + 1}
-              </th>
+              {indexed ? (
+                <th scope="row" key={index}>
+                  {index + 1}
+                </th>
+              ) : null}
               {list_head.map((item, index) => (
                 <th key={uuid()} style={{ whiteSpace: "pre" }}>
-                  {element[item.identifier]}
+                  {item.type != "image" ? (
+                    element[item.identifier]
+                  ) : (
+                    <img
+                      src={
+                        process.env.REACT_APP_IMAGE_PATH +
+                        "/" +
+                        element[item.identifier]
+                      }
+                      alt="Gallery IMG"
+                      style={{ width: "80px", objectFit: "cover" }}
+                    />
+                  )}
                 </th>
               ))}
 
