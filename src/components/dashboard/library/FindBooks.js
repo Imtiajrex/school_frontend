@@ -2,7 +2,9 @@ import Index from "components/crud/Index";
 import React, { useState } from "react";
 import { Call } from "services/API/Call";
 
-export default function FindBooks() {
+export default function FindBooks({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const [categories, setCategories] = useState([]);
   React.useEffect(() => {
     Call({ method: "get", url: "library/books_category" })
@@ -40,6 +42,10 @@ export default function FindBooks() {
             identifier: "stock",
           },
         ]}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         query_title="Query Exam Subject List"
         query_list={[
           {

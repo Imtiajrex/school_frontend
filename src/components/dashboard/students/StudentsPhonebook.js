@@ -2,7 +2,9 @@ import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 
-export default function StudentsPhonebook() {
+export default function StudentsPhonebook({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -40,13 +42,10 @@ export default function StudentsPhonebook() {
             identifier: "secondary_phone",
           },
         ]}
-        add_initial_values={{
-          student_id: "",
-          class_id: -1,
-          session_id: -1,
-          department_id: -1,
-          role: "",
-        }}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         query_title="Query Student List"
         query_list={[
           {
@@ -89,6 +88,7 @@ export default function StudentsPhonebook() {
           department_id: -1,
           student_id: "",
         }}
+        print_url="students/phonebook"
       />
     </div>
   );

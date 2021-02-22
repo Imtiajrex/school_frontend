@@ -15,7 +15,6 @@ import draftToHtml from "draftjs-to-html";
 class MyEditor extends Component {
   constructor(props) {
     super(props);
-    console.log(props.value);
     this.state = {
       editorState: EditorState.createWithContent(
         ContentState.createFromBlockArray(
@@ -26,7 +25,6 @@ class MyEditor extends Component {
   }
   onEditorStateChange = (editorState) => {
     this.setState({ editorState });
-    console.log(editorState);
     this.props.handleChange({
       target: {
         name: this.props.name,
@@ -46,6 +44,9 @@ class MyEditor extends Component {
           onEditorStateChange={this.onEditorStateChange}
           placeholder="The message goes here..."
         />
+        <small className="text-danger">
+          {this.props.error ? "No Empty Space Allowed!" : null}
+        </small>
       </div>
     );
   }

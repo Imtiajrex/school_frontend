@@ -4,7 +4,9 @@ import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 import ExtendedInput from "./ExtendedInput";
 
-export default function AccountsCrud() {
+export default function StudentsCrud({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -35,6 +37,18 @@ export default function AccountsCrud() {
       placeholder: "Student Name",
       type: "text",
       name: "student_name",
+      required: true,
+    },
+    {
+      placeholder: "Student Mother Name",
+      type: "text",
+      name: "mother_name",
+      required: true,
+    },
+    {
+      placeholder: "Student Father Name",
+      type: "text",
+      name: "father_name",
       required: true,
     },
     {
@@ -132,6 +146,18 @@ export default function AccountsCrud() {
       required: true,
     },
     {
+      placeholder: "Student Mother Name",
+      type: "text",
+      name: "mother_name",
+      required: true,
+    },
+    {
+      placeholder: "Student Father Name",
+      type: "text",
+      name: "father_name",
+      required: true,
+    },
+    {
       placeholder: "Student Image",
       type: "file",
       name: "student_image",
@@ -179,6 +205,16 @@ export default function AccountsCrud() {
       required: false,
     },
     {
+      placeholder: "Student Status",
+      type: "select",
+      name: "enrollment_status",
+      options: [
+        { text: "Student", value: "student" },
+        { text: "Inactive", value: "inactive" },
+      ],
+      required: true,
+    },
+    {
       customInput: ExtendedInput,
       title: "Student's Additional Info",
       name: "extended_info",
@@ -213,13 +249,28 @@ export default function AccountsCrud() {
           },
         ]}
         file={true}
-        add={true}
-        edit={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         add_data={add_data}
         edit_data={edit_data}
         add_initial_values={{
           student_name: "",
+          mother_name: "",
+          father_name: "",
           student_image: "",
           gender: -1,
           religion: -1,

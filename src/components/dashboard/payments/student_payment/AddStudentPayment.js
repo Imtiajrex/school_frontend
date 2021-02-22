@@ -246,7 +246,10 @@ export default function AddStudentPayment(props) {
                       onClick={(e) => {
                         e.preventDefault();
                         window.open(
-                          "/admin/print/receipt/" + receipt,
+                          "/print/payments/receipt?receipt_id=" +
+                            receipt +
+                            "&student_id=" +
+                            student_identifier,
                           "Print Receipt",
                           "height=600,width=800"
                         );

@@ -4,7 +4,9 @@ import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 import ResultExamInput from "./ResultExamInput";
 
-export default function ResultCrud() {
+export default function ResultCrud({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, session_list, department_list } = useContext(
     ClassDeptSessionContext
   );
@@ -87,8 +89,18 @@ export default function ResultCrud() {
           { title: "Class", identifier: "class" },
           { title: "Department", identifier: "department" },
         ]}
-        add={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
         add_data={add_data}
         add_initial_values={{
           result_name: "",
@@ -97,7 +109,7 @@ export default function ResultCrud() {
           session_id: -1,
           exams: [],
         }}
-        query_title="Query Student List"
+        query_title="Query Result List"
         query_list={[
           {
             placeholder: "Session",

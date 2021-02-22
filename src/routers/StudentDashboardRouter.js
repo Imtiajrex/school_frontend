@@ -1,6 +1,7 @@
 import React from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router";
-import MainBoard from "../components/dashboard/MainBoard";
+import createRoutes from "./createRoutes";
+import student_routes from "routes/student_routes";
 export default function StudentDashboardRouter() {
   let history = useHistory();
   const user_type = localStorage.getItem("user_type", "");
@@ -13,9 +14,8 @@ export default function StudentDashboardRouter() {
           <Route exact path="/student">
             <Redirect to="/student/dashboard" />
           </Route>
-          <Route exact path="/student/dashboard">
-            <MainBoard />
-          </Route>
+
+          {createRoutes(student_routes)}
         </Switch>
       )}
     </>

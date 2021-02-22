@@ -22,6 +22,7 @@ export default function Add(props) {
     setUpdate,
     file = false,
     modal_size,
+    title,
   } = props;
 
   const [failMessage, setFailMessage] = useState("");
@@ -50,7 +51,7 @@ export default function Add(props) {
       // eslint-disable-next-line eqeqeq
       return Object.values(temp).every((x) => x == false);
   };
-  const alert_message_time = 2500;
+  const alert_message_time = 4000;
   const handleSubmit = (event) => {
     event.preventDefault();
     setCalling(true);
@@ -112,7 +113,7 @@ export default function Add(props) {
       >
         <div className="modal-header">
           <h5 className="modal-title" id="exampleModalLabel">
-            Add
+            {title != undefined ? title : "Add"}
           </h5>
           <button
             aria-label="Close"
@@ -131,7 +132,11 @@ export default function Add(props) {
               {failMessage !== undefined && failMessage.length > 0 ? (
                 <Alert
                   color="danger"
-                  style={{ fontSize: "12px", textAlign: "center" }}
+                  style={{
+                    fontSize: "12px",
+                    textAlign: "center",
+                    whiteSpace: "pre-wrap",
+                  }}
                 >
                   {failMessage}
                 </Alert>
@@ -139,7 +144,11 @@ export default function Add(props) {
               {successMessage !== undefined && successMessage.length > 0 ? (
                 <Alert
                   color="success"
-                  style={{ fontSize: "12px", textAlign: "center" }}
+                  style={{
+                    fontSize: "12px",
+                    textAlign: "center",
+                    whiteSpace: "pre-wrap",
+                  }}
                 >
                   {successMessage}
                 </Alert>

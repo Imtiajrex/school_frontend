@@ -3,7 +3,9 @@ import { MyEditor } from "components/controls/MyEditor";
 import React, { useMemo, useState } from "react";
 import { Call } from "services/API/Call";
 
-export default function SubPages() {
+export default function SubPages({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const [page_list, setPageList] = useState([]);
   React.useEffect(() => {
     Call({ method: "get", url: "website_settings/pages?option=true" })
@@ -22,6 +24,7 @@ export default function SubPages() {
       type: "textarea",
       name: "page_content",
       customInput: MyEditor,
+      rich: true,
       required: true,
     },
     {
@@ -61,10 +64,23 @@ export default function SubPages() {
             identifier: "page_status",
           },
         ]}
-        add={true}
         modal_size="lg"
-        edit={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         add_data={send_data}
         edit_data={send_data}
         add_initial_values={{

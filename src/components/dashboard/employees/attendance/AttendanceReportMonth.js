@@ -3,7 +3,9 @@ import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 import AttendanceListMonth from "./AttendanceListMonth";
-export default function AttendanceReportMonth() {
+export default function AttendanceReportMonth({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { session_list } = useContext(ClassDeptSessionContext);
   const [employee_type_list, setEmployeeTypelist] = useState([]);
   React.useEffect(() => {
@@ -23,6 +25,22 @@ export default function AttendanceReportMonth() {
         title="Employee Attendance Month"
         list_url="/employees/employee_monthly_attendance"
         CustomListComponent={AttendanceListMonth}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         query_title="Query Employee Attendance"
         query_list={[
           {
@@ -72,6 +90,7 @@ export default function AttendanceReportMonth() {
           year: -1,
           month: -1,
         }}
+        print_url="employees/monthly_attendance"
       />
     </div>
   );

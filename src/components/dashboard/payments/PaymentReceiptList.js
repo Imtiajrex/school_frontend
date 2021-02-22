@@ -51,7 +51,10 @@ export default function PaymentReceiptList(props) {
                     onClick={(e) => {
                       e.preventDefault();
                       window.open(
-                        "/admin/print/receipt/" + element.id,
+                        "/print/payments/receipt?receipt_id=" +
+                          element.id +
+                          "&student_id=" +
+                          element.student_identifier,
                         "Print Receipt",
                         "height=600,width=800"
                       );

@@ -12,6 +12,7 @@ import Grade from "./Grade";
 import AssignSubject from "./AssignSubject";
 import StudentsExtendedInfo from "./StudentsExtendedInfo";
 import EmployeesExtendedInfo from "./EmployeesExtendedInfo";
+import InstituteInfo from "./InstituteInfo";
 export {
   Religion,
   Session,
@@ -27,4 +28,5 @@ export {
   AssignSubject,
   StudentsExtendedInfo,
   EmployeesExtendedInfo,
+  InstituteInfo,
 };

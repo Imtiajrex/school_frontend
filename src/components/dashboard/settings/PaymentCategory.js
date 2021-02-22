@@ -1,7 +1,9 @@
 import Index from "components/crud/Index";
 import React from "react";
 
-export default function PaymentCategory() {
+export default function PaymentCategory({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const [info_type, setInfoType] = React.useState("");
   return (
     <div>
@@ -15,9 +17,22 @@ export default function PaymentCategory() {
           { title: "Default Amount", identifier: "default_amount" },
           { title: "Recurring Type", identifier: "recurring_type" },
         ]}
-        add={true}
-        edit={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         add_data={[
           {
             placeholder: "Payment Category",

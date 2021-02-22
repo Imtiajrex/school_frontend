@@ -2,7 +2,9 @@ import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 
-export default function AccountsCrud() {
+export default function AssignClassStudent({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -37,7 +39,6 @@ export default function AccountsCrud() {
       ),
       required: true,
     },
-
     {
       placeholder: "Student ID",
       type: "text",
@@ -71,7 +72,7 @@ export default function AccountsCrud() {
           },
           {
             title: "Student ID",
-            identifier: "student_identifier",
+            identifier: "student_id",
           },
           {
             title: "Student Name",
@@ -82,9 +83,31 @@ export default function AccountsCrud() {
             identifier: "role",
           },
         ]}
-        add={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         add_data={add_data}
+        edit_data={[
+          {
+            placeholder: "Student Role",
+            type: "number",
+            name: "role",
+            required: true,
+          },
+        ]}
         add_initial_values={{
           student_id: "",
           class_id: -1,
@@ -134,6 +157,7 @@ export default function AccountsCrud() {
           department_id: -1,
           student_id: "",
         }}
+        print_url="students/list"
       />
     </div>
   );

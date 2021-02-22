@@ -1,7 +1,9 @@
 import Index from "components/crud/Index";
 import React from "react";
 
-export default function AccountsCrud() {
+export default function AccountsCrud({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const send_data = [
     {
       placeholder: "Entry Date",
@@ -93,7 +95,14 @@ export default function AccountsCrud() {
             identifier: "amount",
           },
         ]}
-        add={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         add_data={send_data}
         add_initial_values={{
           date: "",

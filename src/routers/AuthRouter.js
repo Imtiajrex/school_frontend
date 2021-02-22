@@ -1,14 +1,10 @@
 import React from "react";
-import {
-  Redirect,
-  Route,
-  Switch,
-} from "react-router"; /*
-import AdminDashboard from "../pages/admin/AdminDashboard";
-import StudentDashboard from "../pages/student/StudentDashboard";
-import TeacherDashboard from "../pages/teacher/TeacherDashboard";*/
+import { Redirect, Route, Switch } from "react-router";
+import StudentDashboard from "../pages/student/Dashboard";
+import TeacherDashboard from "../pages/teacher/Dashboard";
 import Login from "../pages/Login";
 import AdminDashboard from "../pages/admin/dashboard/Dashboard";
+import PrintRouter from "./PrintRouter";
 
 export default function AuthRouter() {
   const token = localStorage.getItem("token", "");
@@ -28,14 +24,16 @@ export default function AuthRouter() {
         <Route path="/admin">
           <AdminDashboard />
         </Route>
-        {/*
+        <Route path="/print">
+          <PrintRouter />
+        </Route>
+
         <Route path="/student">
           <StudentDashboard />
         </Route>
         <Route path="/teacher">
           <TeacherDashboard />
         </Route>
-        */}
       </Switch>
     </>
   );

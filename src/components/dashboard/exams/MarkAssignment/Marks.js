@@ -6,7 +6,9 @@ import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 import MarkList from "./MarkList";
 
-export default function Marks() {
+export default function Marks({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, session_list, department_list } = useContext(
     ClassDeptSessionContext
   );
@@ -51,6 +53,10 @@ export default function Marks() {
           { title: "Department", identifier: "department" },
         ]}
         CustomListComponent={MarkList}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
         query_title="Query Exam Subject List"
         query_list={[
           {

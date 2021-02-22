@@ -1,7 +1,9 @@
 import Index from "components/crud/Index";
 import React from "react";
 
-export default function AccountBalance() {
+export default function AccountBalance({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const send_data = [
     {
       placeholder: "Cash Balance",
@@ -32,7 +34,14 @@ export default function AccountBalance() {
           },
         ]}
         add={false}
-        edit={true}
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         remove={false}
         edit_data={send_data}
         add_initial_values={{

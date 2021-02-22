@@ -1,7 +1,9 @@
 import Index from "components/crud/Index";
 import React from "react";
 
-export default function AccountsCrud() {
+export default function AccountsCrud({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const send_data = [
     {
       placeholder: "Entry Date",
@@ -67,8 +69,6 @@ export default function AccountsCrud() {
       <Index
         title="Accounts Report"
         list_url="/accounts/account"
-        edit={true}
-        remove={true}
         edit_data={send_data}
         list_head={[
           {
@@ -111,7 +111,20 @@ export default function AccountsCrud() {
             required: true,
           },
         ]}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         query_data={{ from: "", to: "" }}
+        print_url="accounts/report"
       />
     </div>
   );

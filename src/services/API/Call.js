@@ -7,7 +7,6 @@ async function Call(request) {
     const send_request = Api(request);
 
     const res = await send_request;
-
     return res.data;
   } catch (err) {
     const error_message = ErrorMessage(err);

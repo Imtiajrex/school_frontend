@@ -2,7 +2,9 @@ import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import AttendanceListMonth from "./AttendanceListMonth";
-export default function AttendanceReportMonth() {
+export default function AttendanceReportMonth({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -14,6 +16,10 @@ export default function AttendanceReportMonth() {
         title="Students Attendance Month"
         list_url="/students/student_monthly_attendance"
         CustomListComponent={AttendanceListMonth}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         query_title="Query Student Attendance"
         query_list={[
           {
@@ -22,7 +28,7 @@ export default function AttendanceReportMonth() {
             name: "session_id",
             options: session_list,
             setState: setSelectedSession,
-            required: false,
+            required: true,
           },
           {
             placeholder: "Class",
@@ -30,7 +36,7 @@ export default function AttendanceReportMonth() {
             name: "class_id",
             options: class_list,
             setState: setSelectedClass,
-            required: false,
+            required: true,
           },
           {
             placeholder: "Department",
@@ -85,6 +91,7 @@ export default function AttendanceReportMonth() {
           year: -1,
           month: -1,
         }}
+        print_url="students/monthly_attendance"
       />
     </div>
   );

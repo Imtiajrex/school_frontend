@@ -3,7 +3,9 @@ import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import StudentPaymentList from "./StudentPaymentList";
 
-export default function StudentPayment() {
+export default function StudentPayment({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -15,6 +17,10 @@ export default function StudentPayment() {
       <Index
         title="Student Payment"
         list_url="/students/student_assignment"
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         CustomListComponent={StudentPaymentList}
         query_title="Query Student List"
         list_head={[
@@ -32,7 +38,7 @@ export default function StudentPayment() {
           },
           {
             title: "Student ID",
-            identifier: "student_identifier",
+            identifier: "student_id",
           },
           {
             title: "Student Name",
@@ -50,7 +56,7 @@ export default function StudentPayment() {
             name: "session_id",
             options: session_list,
             setState: setSelectedSession,
-            required: false,
+            required: true,
           },
           {
             placeholder: "Class",

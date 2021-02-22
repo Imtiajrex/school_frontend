@@ -53,7 +53,8 @@ export default function Login() {
           localStorage.setItem("role", res.role);
           localStorage.setItem("permissions", res.permissions);
           localStorage.setItem("user_type", res.user_type);
-          history.push("/" + res.user_type);
+          localStorage.setItem("user_id", res.user_id);
+          window.location.reload();
           setLoggingIn(false);
         })
         .catch((error) => {
