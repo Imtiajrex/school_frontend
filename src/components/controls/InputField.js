@@ -115,6 +115,21 @@ export default function InputField(props) {
         {...other}
       />
     );
+  else if (["time"].includes(type))
+    return (
+      <TextInput
+        className="mt-3"
+        name={name}
+        placeholder={placeholder}
+        type="time"
+        handleChange={handleChange}
+        invalid_msg={`Enter Valid ${placeholder}!`}
+        value={value}
+        error={error}
+        disabled={disabled}
+        {...other}
+      />
+    );
   else
     return (
       <TextInput

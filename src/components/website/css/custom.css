@@ -1,0 +1,109 @@
+/* Your custom css code goes here */
+a {
+  color: none !important;
+}
+.probootstrap-page-wrapper {
+  font-family: Raleway;
+  font-weight: 100;
+}
+@media screen and (max-width: 1500px) {
+  .probootstrap-page-wrapper {
+    max-width: 100% !important;
+  }
+}
+
+.owl-nav,
+.owl-dots {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.owl-nav {
+  bottom: 50%;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.owl-carousel .owl-nav button.owl-prev,
+.owl-carousel .owl-nav button.owl-next {
+  background: rgba(0, 0, 0, 0.3);
+  padding: 1rem !important;
+  color: white;
+  font-size: 1rem;
+}
+
+.owl-dots {
+  bottom: 0% !important;
+}
+.owl-carousel {
+  margin-bottom: 0;
+}
+.flexslider {
+  display: inline !important;
+}
+.slide-caption {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+  border-radius: 10px;
+}
+.slide-caption p {
+  font-size: 2.6rem;
+  font-weight: 100;
+}
+@media screen and (max-width: 650px) {
+  .slide-caption {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.35rem;
+    border-radius: 10px;
+  }
+  .slide-caption p {
+    font-size: 0.9rem;
+  }
+}
+
+.item-div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.item-div .item {
+  max-width: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+}
+.item-div .item img {
+  max-height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+.albums {
+  max-width: 750px;
+}
+.album {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transition: 0.15s;
+  margin: 1rem;
+  transform: translateY(0%);
+}
+.album:hover {
+  transform: translateY(-10%);
+}
+
+.album img {
+  width: 200px !important;
+  height: 170px !important;
+  object-fit: cover !important;
+}

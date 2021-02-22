@@ -3,7 +3,9 @@ import React, { useState } from "react";
 import { Call } from "services/API/Call";
 import ExtendedInput from "../students/ExtendedInput";
 
-export default function AccountsCrud() {
+export default function AccountsCrud({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const [religion_list, setreligion_list] = useState([]);
   const [employee_post_list, setEmployeePostList] = useState([]);
   const [employee_type_list, setEmployeeTypeList] = useState([]);
@@ -51,6 +53,18 @@ export default function AccountsCrud() {
       placeholder: "Employee Name",
       type: "text",
       name: "employee_name",
+      required: true,
+    },
+    {
+      placeholder: "Employee Mother Name",
+      type: "text",
+      name: "mother_name",
+      required: true,
+    },
+    {
+      placeholder: "Employee Father Name",
+      type: "text",
+      name: "father_name",
       required: true,
     },
     {
@@ -129,6 +143,18 @@ export default function AccountsCrud() {
       placeholder: "Employee Name",
       type: "text",
       name: "employee_name",
+      required: true,
+    },
+    {
+      placeholder: "Employee Mother Name",
+      type: "text",
+      name: "mother_name",
+      required: true,
+    },
+    {
+      placeholder: "Employee Father Name",
+      type: "text",
+      name: "father_name",
       required: true,
     },
     {
@@ -253,14 +279,30 @@ export default function AccountsCrud() {
           },
         ]}
         file={true}
-        add={true}
-        edit={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.create) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         add_data={add_data}
         edit_data={edit_data}
         add_initial_values={{
           employee_name: "",
+          mother_name: "",
+          father_name: "",
           employee_image: {},
+
           employee_type: -1,
           employee_post: -1,
           employee_gender: -1,
@@ -317,6 +359,7 @@ export default function AccountsCrud() {
           gender: -1,
           age: "",
         }}
+        print_url="employees/list"
       />
     </div>
   );

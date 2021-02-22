@@ -67,6 +67,7 @@ export default function DuePayment() {
         query_data={{
           student_id: "",
         }}
+        print_url="payments/due_list"
       />
     </div>
   );

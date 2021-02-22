@@ -4,7 +4,9 @@ import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 
-export default function AssignSubject() {
+export default function AssignSubject({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -103,8 +105,18 @@ export default function AssignSubject() {
           { title: "Department", identifier: "department" },
           { title: "Subject", identifier: "name" },
         ]}
-        add={true}
-        remove={true}
+        add={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.assign) != -1
+        }
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
         add_data={send_data}
         edit_data={send_data}
         add_initial_values={{ class_id: "", department_id: "", subjects: "[]" }}

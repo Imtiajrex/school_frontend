@@ -19,6 +19,7 @@ import {
   Row,
   Col,
 } from "reactstrap";
+import TopBar from "pages/admin/dashboard/TopBar";
 
 class Sidebar extends React.Component {
   state = {
@@ -91,10 +92,7 @@ class Sidebar extends React.Component {
               <DropdownToggle nav>
                 <Media className="align-items-center">
                   <span className="avatar avatar-sm rounded-circle">
-                    <img
-                      alt="..."
-                      src={require("argon/assets/img/theme/team-1-800x800.jpg")}
-                    />
+                    <i className="fas fa-user"></i>
                   </span>
                 </Media>
               </DropdownToggle>
@@ -114,6 +112,7 @@ class Sidebar extends React.Component {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
+
           {/* Collapse */}
           <Collapse navbar isOpen={this.state.collapseOpen}>
             {/* Collapse header */}

@@ -87,6 +87,7 @@ export default function Tabulation() {
           department_id: -1,
           exam_id: -1,
         }}
+        print_url="exams/tabulation"
       />
     </>
   );

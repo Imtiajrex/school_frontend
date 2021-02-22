@@ -49,7 +49,7 @@ export default function StudentPaymentList(props) {
                       setopen(true);
                       setData({
                         student_id: element.student_id,
-                        student_identifier: element.student_identifier,
+                        student_identifier: element.student_id,
                         session_id: element.session_id,
                         session: element.session,
                         student_name: element.student_name,

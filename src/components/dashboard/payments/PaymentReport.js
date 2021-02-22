@@ -1,9 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable eqeqeq */
 import Index from "components/crud/Index";
-import React from "react";
+import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
+import React, { useContext } from "react";
 
-export default function PaymentReport() {
+export default function PaymentReport({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
+  const { session_list } = useContext(ClassDeptSessionContext);
   const send_data = [
     {
       placeholder: "Payment Category",
@@ -43,6 +47,10 @@ export default function PaymentReport() {
             identifier: "date",
           },
           {
+            title: "Student Name",
+            identifier: "student_name",
+          },
+          {
             title: "Payment Category",
             identifier: "payment_category",
           },
@@ -59,8 +67,18 @@ export default function PaymentReport() {
             identifier: "paid_amount",
           },
         ]}
-        edit={true}
-        remove={true}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        remove={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.delete) != -1
+        }
+        edit={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.update) != -1
+        }
         edit_data={send_data}
         query_title="Query Student Payment List"
         query_list={[
@@ -68,12 +86,21 @@ export default function PaymentReport() {
             placeholder: "Student ID",
             type: "text",
             name: "student_id",
-            required: false,
+            required: true,
+          },
+          {
+            placeholder: "Year",
+            type: "select",
+            name: "session",
+            options: session_list,
+            required: true,
           },
         ]}
         query_data={{
           student_id: "",
+          session_list: -1,
         }}
+        print_url="payments/list"
       />
     </div>
   );

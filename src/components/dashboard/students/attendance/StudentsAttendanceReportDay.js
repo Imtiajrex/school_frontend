@@ -2,7 +2,9 @@ import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import AttendanceListDay from "./AttendanceListDay";
-export default function StudentsAttendanceReportDay() {
+export default function StudentsAttendanceReportDay({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -11,7 +13,7 @@ export default function StudentsAttendanceReportDay() {
   return (
     <div>
       <Index
-        title="Student Phonebook"
+        title="Student Attendance (Day)"
         list_url="/students/student_attendance"
         list_head={[
           {
@@ -40,6 +42,10 @@ export default function StudentsAttendanceReportDay() {
           },
         ]}
         CustomListComponent={AttendanceListDay}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         query_title="Query Student Attendance"
         query_list={[
           {
@@ -48,7 +54,7 @@ export default function StudentsAttendanceReportDay() {
             name: "session_id",
             options: session_list,
             setState: setSelectedSession,
-            required: false,
+            required: true,
           },
           {
             placeholder: "Class",
@@ -89,6 +95,7 @@ export default function StudentsAttendanceReportDay() {
           student_id: "",
           date: "",
         }}
+        print_url="students/attendance"
       />
     </div>
   );

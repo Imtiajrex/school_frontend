@@ -1,9 +1,9 @@
 import React from "react";
-import AuthRouter from "./routers/AuthRouter";
+import WebsiteRouter from "routers/WebsiteRouter";
 function App() {
   return (
     <div className="App">
-      <AuthRouter />
+      <WebsiteRouter />
     </div>
   );
 }

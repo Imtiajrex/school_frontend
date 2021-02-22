@@ -4,7 +4,9 @@ import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
 import PublishList from "./PublishList";
 
-export default function ResultPublishing() {
+export default function ResultPublishing({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, session_list, department_list } = useContext(
     ClassDeptSessionContext
   );
@@ -54,6 +56,10 @@ export default function ResultPublishing() {
           session_id: -1,
           exams: [],
         }}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
         query_title="Query Student List"
         query_list={[
           {

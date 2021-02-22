@@ -92,15 +92,7 @@ export default function MarkAssignment({ data }) {
       .then((res) => {
         if (res[0] != null) {
           const structure = JSON.parse(res[0].structure);
-
-          let t_xm_mrk = res.reduce(
-            (cb, val) =>
-              (cb =
-                parseInt(cb) +
-                parseInt(val.total_mark != "" ? val.total_mark : 0)),
-            0
-          );
-          setTotalExamMark(t_xm_mrk);
+          setTotalExamMark(res[0].total_exam_mark);
           setMarkStructureID(res[0].id);
           setMarkFields(
             structure != undefined || structure != null ? structure : []

@@ -7,7 +7,7 @@ import InputField from "components/controls/InputField";
 import PublishModal from "./PublishModal";
 
 export default function PublishList(props) {
-  const { list, list_head, loading, update, setupdate } = props;
+  const { list, list_head, loading, update, setupdate, query } = props;
   const [open, setopen] = useState(false);
   const [values, setvalues] = useState([]);
   const [all_value, setAll] = useState([]);
@@ -30,6 +30,51 @@ export default function PublishList(props) {
   }, [loading]);
   return (
     <>
+      {query.length > 0 ? (
+        <>
+          <Button
+            color="secondary"
+            style={{
+              maxWidth: "200px",
+              marginLeft: "1.5rem",
+              marginBottom: "1.5rem",
+              fontSize: "12px",
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(
+                "/print/results/result_card" + query + "&published=true",
+                "Print Receipt",
+                "height=600,width=800"
+              );
+              return false;
+            }}
+          >
+            Print Published Result
+          </Button>
+          <Button
+            color="secondary"
+            style={{
+              maxWidth: "200px",
+              marginLeft: "1.5rem",
+              marginBottom: "1.5rem",
+              fontSize: "12px",
+            }}
+            onClick={(e) => {
+              e.preventDefault();
+              window.open(
+                "/print/results/result_card" + query + "&unpublished=true",
+                "Print Receipt",
+                "height=600,width=800"
+              );
+              return false;
+            }}
+          >
+            Print All Result
+          </Button>
+        </>
+      ) : null}
+
       {list.length > 0 && values.length > 0 ? (
         <Button
           color="warning"

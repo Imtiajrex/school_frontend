@@ -2,29 +2,49 @@ import React, { useState } from "react";
 import { NavLink as NavLinkRRD, useLocation } from "react-router-dom";
 import { NavLink, NavItem, Collapse } from "reactstrap";
 
-const createLinks = (routes, child = false) => {
-  return routes.map((prop, key) => {
-    return prop.children === undefined ? (
-      <MenuLink
-        layout={prop.layout}
-        path={prop.path}
-        icon={prop.icon}
-        name={prop.name}
-        key={key}
-        child={child}
-      />
-    ) : (
-      <CollapseLink
-        icon={prop.icon}
-        name={prop.name}
-        children={prop.children}
-        key={key}
-        path={prop.layout + prop.path}
-      />
-    );
-  });
-};
+const user_role = localStorage.getItem("role");
+const permissions = JSON.parse(localStorage.getItem("permissions"));
+const createLinks = (routes, child = false) =>
+  routes.map((prop, key) =>
+    checkPermission(prop.permission) ? (
+      prop.children === undefined ? (
+        <MenuLink
+          layout={prop.layout}
+          path={prop.path}
+          icon={prop.icon}
+          name={prop.name}
+          key={key}
+          child={child}
+        />
+      ) : (
+        <CollapseLink
+          icon={prop.icon}
+          name={prop.name}
+          children={prop.children}
+          key={key}
+          path={prop.layout + prop.path}
+        />
+      )
+    ) : null
+  );
 
+const checkPermission = (route_permission) => {
+  if (permissions != null) {
+    if (route_permission == undefined) return true;
+    else if (user_role == "Super Admin") return true;
+    else if (route_permission.length != undefined) {
+      const found = route_permission.some(
+        (element) => permissions.indexOf(element) != -1
+      );
+      return found;
+    } else {
+      const found = Object.values(route_permission).some(
+        (element) => permissions.indexOf(element) != -1
+      );
+      return found;
+    }
+  } else return false;
+};
 export default createLinks;
 function MenuLink({ layout, path, icon, name, child }) {
   return (

@@ -92,7 +92,7 @@ export default function Query(props) {
                 error={errors[element.name]}
                 handleChange={handleInputChange}
                 setState={element.setState}
-                disabled={querying}
+                disabled={element.disabled ? element.disabled : querying}
               />
             ))
           : null}

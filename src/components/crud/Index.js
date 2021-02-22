@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet";
 
 import { Card, CardHeader, Container, Row } from "reactstrap";
 import Button from "reactstrap/lib/Button";
@@ -24,6 +25,7 @@ function Index(props) {
     modal_size = "sm",
     list_url,
     list_head,
+    list_active = true,
     add = false,
     edit = false,
     remove = false,
@@ -32,6 +34,8 @@ function Index(props) {
     query_data,
     indexed = true,
     file = false,
+    print_url = "",
+    add_button_title = "Add New Record",
     ...other
   } = props;
   const [openAdd, setOpenAdd] = useState(false);
@@ -47,7 +51,7 @@ function Index(props) {
   const [querying, setQuerying] = useState(false);
 
   React.useEffect(() => {
-    if (custom_list === undefined) {
+    if (custom_list === undefined && list_active) {
       if (typeof query_list == "object") {
         if (query.length > 0) {
           setloading(true);
@@ -94,6 +98,9 @@ function Index(props) {
   return (
     <>
       <Container fluid>
+        <Helmet>
+          <title>{title}</title>
+        </Helmet>
         {query_list != null && query_list.length > 0 ? (
           <Row className="mt-5 mb-5">
             <div className="col">
@@ -126,13 +133,33 @@ function Index(props) {
             <Card className="bg-default shadow">
               <CardHeader className="bg-transparent border-0">
                 <h3 className="text-white mb-0">{title}</h3>
+                {print_url.length > 0 ? (
+                  query.length > 0 ? (
+                    <Button
+                      color="white"
+                      className="m-2"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        window.open(
+                          "/print/" + print_url + query,
+                          "Print Receipt",
+                          "height=600,width=800"
+                        );
+                        return false;
+                      }}
+                    >
+                      Print
+                    </Button>
+                  ) : null
+                ) : null}
+
                 {add ? (
                   <Button
                     color="primary"
                     style={{ display: "flex", alignItems: "center" }}
                     onClick={() => setOpenAdd(!openAdd)}
                   >
-                    Add New Record
+                    {add_button_title}
                     <i
                       className="ni ni-fat-add"
                       style={{ fontSize: "1.5rem" }}
@@ -165,42 +192,58 @@ function Index(props) {
                       ))
                     : null}
                 </div>
+                <Button
+                  color="white"
+                  size="sm"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    maxWidth: "250px",
+                    marginRight: "1rem",
+                    marginTop: "1rem",
+                  }}
+                >
+                  Total Records : {list.length}
+                </Button>
               </CardHeader>
-              {CustomListComponent == undefined ? (
-                <List
-                  setOpenDelete={setOpenDelete}
-                  setOpenEdit={setOpenEdit}
-                  setDeleteInfo={setDeleteInfo}
-                  setEditInfo={setEditInfo}
-                  list={custom_list === undefined ? list : custom_list}
-                  list_head={list_head}
-                  edit={edit}
-                  remove={remove}
-                  loading={
-                    custom_loading !== undefined ? custom_loading : loading
-                  }
-                  indexed={indexed}
-                  {...other}
-                />
-              ) : (
-                <CustomListComponent
-                  list={list}
-                  list_head={list_head}
-                  query_tags={query_tags}
-                  loading={loading}
-                  url={list_url}
-                  setOpenDelete={setOpenDelete}
-                  setOpenEdit={setOpenEdit}
-                  setDeleteInfo={setDeleteInfo}
-                  setEditInfo={setEditInfo}
-                  update={update}
-                  setupdate={setUpdate}
-                  edit={edit}
-                  remove={remove}
-                  indexed={indexed}
-                  {...other}
-                />
-              )}
+              {list_active ? (
+                CustomListComponent == undefined ? (
+                  <List
+                    setOpenDelete={setOpenDelete}
+                    setOpenEdit={setOpenEdit}
+                    setDeleteInfo={setDeleteInfo}
+                    setEditInfo={setEditInfo}
+                    list={custom_list === undefined ? list : custom_list}
+                    list_head={list_head}
+                    edit={edit}
+                    remove={remove}
+                    loading={
+                      custom_loading !== undefined ? custom_loading : loading
+                    }
+                    indexed={indexed}
+                    {...other}
+                  />
+                ) : (
+                  <CustomListComponent
+                    list={list}
+                    list_head={list_head}
+                    query_tags={query_tags}
+                    query={query}
+                    loading={loading}
+                    url={list_url}
+                    setOpenDelete={setOpenDelete}
+                    setOpenEdit={setOpenEdit}
+                    setDeleteInfo={setDeleteInfo}
+                    setEditInfo={setEditInfo}
+                    update={update}
+                    setupdate={setUpdate}
+                    edit={edit}
+                    remove={remove}
+                    indexed={indexed}
+                    {...other}
+                  />
+                )
+              ) : null}
             </Card>
           </div>
         </Row>
