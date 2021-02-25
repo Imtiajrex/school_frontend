@@ -4,12 +4,35 @@ import Spinner from "reactstrap/lib/Spinner";
 import Table from "reactstrap/lib/Table";
 
 import uuid from "react-uuid";
-import AddStudentPayment from "./AddStudentPayment";
+import StudentAssignModal from "./StudentAssignModal";
 
-export default function StudentPaymentList(props) {
+export default function StudentAssignList(props) {
   const { list, list_head, loading } = props;
-  const [data, setData] = useState({});
+
   const [open, setopen] = useState(false);
+  const [initial_values, setInitialValues] = useState({ id: "", card: "" });
+  const add_data = [
+    {
+      placeholder: "Student ID",
+      type: "text",
+      name: "id",
+      required: true,
+      disabled: true,
+    },
+    {
+      placeholder: "Card",
+      type: "text",
+      name: "card",
+      required: true,
+    },
+  ];
+  const setAssignment = (student_id) => {
+    setInitialValues({ id: student_id, card: "" });
+    setopen(true);
+  };
+  React.useEffect(() => {
+    if (!open) setInitialValues({ id: "", card: "" });
+  }, [open]);
   return (
     <>
       <Table className="align-items-center table-dark table-flush" responsive>
@@ -18,7 +41,7 @@ export default function StudentPaymentList(props) {
             {list_head.map((item, index) => (
               <th key={uuid()}>{item.title}</th>
             ))}
-            <th>Payment</th>
+            <th>Assign</th>
           </tr>
         </thead>
         <tbody>
@@ -32,27 +55,15 @@ export default function StudentPaymentList(props) {
             list.map((element, index) => (
               <tr key={uuid()}>
                 {list_head.map((item, index) => (
-                  <th key={uuid()} style={{ whiteSpace: "normal" }}>
+                  <th key={uuid()} style={{ whiteSpace: "pre" }}>
                     {element[item.identifier]}
                   </th>
                 ))}
-
                 <th>
                   <Button
-                    color="primary"
-                    size="sm"
-                    onClick={() => {
-                      setopen(true);
-                      setData({
-                        student_id: element.student_id,
-                        student_identifier: element.student_identifier,
-                        session_id: element.session_id,
-                        session: element.session,
-                        student_name: element.student_name,
-                      });
-                    }}
+                    onClick={() => setAssignment(element.student_identifier)}
                   >
-                    Payment
+                    Assign Card
                   </Button>
                 </th>
               </tr>
@@ -66,12 +77,14 @@ export default function StudentPaymentList(props) {
           )}
         </tbody>
       </Table>
-      {list.length > 0 ? (
-        <AddStudentPayment
-          data={data}
-          setPaymentModal={setopen}
+      {initial_values.id != "" ? (
+        <StudentAssignModal
           open={open}
-          url="/payments/student_payment"
+          setOpen={setopen}
+          add_data={add_data}
+          initial_values={initial_values}
+          title="Student Card Assignment"
+          url="attendance/assign_card"
         />
       ) : null}
     </>

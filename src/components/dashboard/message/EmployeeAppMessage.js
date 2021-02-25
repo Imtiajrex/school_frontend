@@ -98,7 +98,7 @@ export default function EmployeeAppMessage({ permission }) {
           },
         ]}
         query_data={{
-          student_id: -1,
+          employee_id: -1,
         }}
       />
     </div>

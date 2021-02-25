@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import { Card, CardHeader, Container, Row } from "reactstrap";
 import Button from "reactstrap/lib/Button";
 import CardBody from "reactstrap/lib/CardBody";
+import Api from "services/API/Api";
 import { Call } from "services/API/Call";
 import Add from "./Add";
 import Delete from "./Delete";
@@ -36,6 +37,7 @@ function Index(props) {
     file = false,
     print_url = "",
     add_button_title = "Add New Record",
+    def_url_param = "",
     ...other
   } = props;
   const [openAdd, setOpenAdd] = useState(false);
@@ -56,12 +58,12 @@ function Index(props) {
         if (query.length > 0) {
           setloading(true);
           setQuerying(true);
-          Call({
+          Api({
             method: "get",
-            url: list_url + query,
+            url: list_url + query + def_url_param,
           })
             .then((res) => {
-              setList(res);
+              setList(res.data);
               setQuerying(false);
               setloading(false);
             })
@@ -72,12 +74,12 @@ function Index(props) {
         }
       } else {
         setloading(true);
-        Call({
+        Api({
           method: "get",
           url: list_url,
         })
           .then((res) => {
-            setList(res);
+            setList(res.data);
             setloading(false);
           })
           .catch((error) => {

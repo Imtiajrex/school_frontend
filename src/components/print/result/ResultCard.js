@@ -39,6 +39,9 @@ export default function ResultCard() {
     } else if (query.get("unpublished") != null) {
       u += "&unpublished=" + query.get("unpublished");
     }
+    if (query.get("result_id") != null) {
+      u += "&result_id=" + query.get("result_id");
+    }
     Call({ method: "get", url: u })
       .then((res) => setList(res))
       .catch((err) => console.log(err));

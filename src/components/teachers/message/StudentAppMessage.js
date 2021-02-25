@@ -1,9 +1,10 @@
 import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
+import Api from "services/API/Api";
 import { Call } from "services/API/Call";
 
-export default function MyMessage() {
+export default function StudentAppMessage() {
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -22,7 +23,7 @@ export default function MyMessage() {
       selected_class != -1 &&
       selected_department != -1
     )
-      Call({
+      Api({
         method: "get",
         url:
           "students/student_assignment?student_options=true&class_id=" +
@@ -32,13 +33,13 @@ export default function MyMessage() {
           "&session_id=" +
           selected_session,
       })
-        .then((res) => setStudentList(res))
+        .then((res) => setStudentList(res.data))
         .catch((err) => console.log(err));
   }, [selected_session, selected_class, selected_department]);
 
   React.useEffect(() => {
     if (class_id != -1 && session_id != -1 && department_id != -1)
-      Call({
+      Api({
         method: "get",
         url:
           "students/student_assignment?student_options=true&class_id=" +
@@ -48,7 +49,7 @@ export default function MyMessage() {
           "&session_id=" +
           session_id,
       })
-        .then((res) => setStudents(res))
+        .then((res) => setStudents(res.data))
         .catch((err) => console.log(err));
   }, [class_id, department_id, session_id]);
 
@@ -59,7 +60,7 @@ export default function MyMessage() {
       name: "session_id",
       options: session_list,
       setState: setSelectedSession,
-      required: false,
+      required: true,
     },
     {
       placeholder: "Class",
@@ -97,28 +98,42 @@ export default function MyMessage() {
     {
       placeholder: "Message Content",
       type: "textarea",
-      name: "message",
+      name: "content",
+      required: true,
+    },
+  ];
+  const edit_data = [
+    {
+      placeholder: "Message Title",
+      type: "text",
+      name: "title",
+      required: true,
+    },
+    {
+      placeholder: "Message Content",
+      type: "textarea",
+      name: "content",
       required: true,
     },
   ];
   return (
     <div>
       <Index
-        title="App Message"
-        list_url="messages/app_message"
+        title="Student App Message"
+        list_url="messages/student_message"
         list_head={[
           { title: "Student ID", identifier: "student_identifier" },
           { title: "Student Name", identifier: "student_name" },
           { title: "Title", identifier: "title" },
-          { title: "Message", identifier: "message" },
+          { title: "Message", identifier: "content" },
         ]}
-        add_button_title="Send APP Message"
+        add_button_title="Send Student APP Message"
         add={true}
-        remove={true}
         edit={true}
+        remove={true}
         modal_size="md"
         add_data={send_data}
-        edit_data={send_data}
+        edit_data={edit_data}
         add_initial_values={{
           class_id: -1,
           department_id: -1,

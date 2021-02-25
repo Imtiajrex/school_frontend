@@ -13,13 +13,18 @@ export default function ManualAttendanceModel({
   setUpdate,
   url,
   values,
+  date,
 }) {
   const [sending, setsending] = useState(false);
   const [failMessage, setFailMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
-  const sendRecord = () => {
+  const sendRecord = (absent = false) => {
     setsending(true);
-    const request = { method: "post", url: `${url}`, data: { ids: values } };
+    const request = {
+      method: "post",
+      url: `students/mark_attendance${absent ? "?absent=true" : ""}`,
+      data: { ids: values, date },
+    };
     Call(request)
       .then((res) => {
         setSuccessMessage(res.message);
@@ -86,7 +91,7 @@ export default function ManualAttendanceModel({
           <Button
             color="success"
             type="button"
-            onClick={sendRecord}
+            onClick={() => sendRecord(false)}
             disabled={sending}
           >
             {sending ? (
@@ -98,7 +103,7 @@ export default function ManualAttendanceModel({
           <Button
             color="danger"
             type="button"
-            onClick={sendRecord}
+            onClick={() => sendRecord(true)}
             disabled={sending}
           >
             {sending ? (

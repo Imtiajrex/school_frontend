@@ -40,7 +40,7 @@ export default function StudentsAttendanceReportDay() {
           {
             placeholder: "Student ID",
             type: "text",
-            name: "student_id",
+            name: "student_identifier",
             required: true,
             disabled: true,
           },
@@ -52,7 +52,7 @@ export default function StudentsAttendanceReportDay() {
           },
         ]}
         query_data={{
-          student_id,
+          student_identifier: student_id,
           date: "",
         }}
       />

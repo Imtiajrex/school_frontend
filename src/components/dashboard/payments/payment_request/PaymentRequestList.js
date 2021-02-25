@@ -4,7 +4,7 @@ import Spinner from "reactstrap/lib/Spinner";
 import Table from "reactstrap/lib/Table";
 import uuid from "react-uuid";
 import InputField from "components/controls/InputField";
-import DuePaymentModal from "./DuePaymentModal";
+import DuePaymentModal from "./PaymentRequestModal";
 
 export default function DuePaymentList(props) {
   const {

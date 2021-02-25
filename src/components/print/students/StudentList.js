@@ -62,7 +62,7 @@ export default function StudentList() {
           ]}
           val={[
             "role",
-            "student_id",
+            "student_identifier",
             "student_name",
             "mother_name",
             "father_name",

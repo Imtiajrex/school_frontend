@@ -1,8 +1,10 @@
 import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
-
-export default function StudentsDocuments() {
+import StudentAssignList from "./StudentAssignList";
+export default function StudentAssignID({ permission }) {
+  const user_role = localStorage.getItem("role");
+  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -15,6 +17,10 @@ export default function StudentsDocuments() {
         title="Student List"
         list_url="/students/student_assignment"
         list_head={[
+          {
+            title: "Roll",
+            identifier: "role",
+          },
           {
             title: "Session",
             identifier: "session",
@@ -35,18 +41,13 @@ export default function StudentsDocuments() {
             title: "Student Name",
             identifier: "student_name",
           },
-          {
-            title: "Student Role",
-            identifier: "role",
-          },
         ]}
-        add_initial_values={{
-          student_id: "",
-          class_id: -1,
-          session_id: -1,
-          department_id: -1,
-          role: "",
-        }}
+        indexed={false}
+        list_active={
+          user_role == "Super Admin" ||
+          user_permissions.indexOf(permission.view) != -1
+        }
+        CustomListComponent={StudentAssignList}
         query_title="Query Student List"
         query_list={[
           {
@@ -76,18 +77,11 @@ export default function StudentsDocuments() {
             ),
             required: false,
           },
-          {
-            placeholder: "Student ID",
-            type: "text",
-            name: "student_id",
-            required: false,
-          },
         ]}
         query_data={{
           class_id: -1,
           session_id: -1,
           department_id: -1,
-          student_id: "",
         }}
       />
     </div>

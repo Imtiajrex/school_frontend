@@ -1,15 +1,15 @@
 import React, { createContext, useState } from "react";
-import { Call } from "services/API/Call";
+import Api from "services/API/Api";
 export const ClassDeptSessionContext = createContext();
 function getList(setList, url) {
-  Call({ method: "get", url: "settings/" + url })
+  Api({ method: "get", url: "settings/" + url })
     .then((res) => {
-      res.forEach((element) => {
+      res.data.forEach((element) => {
         element.value = element.id;
         if (url === "session") element.text = element.session;
         else element.text = element.name;
       });
-      setList(res);
+      setList(res.data);
     })
     .catch((err) => console.log(err));
 }

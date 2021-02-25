@@ -1,6 +1,7 @@
 import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
+import Api from "services/API/Api";
 import StudentPaymentList from "./StudentPaymentList";
 
 export default function StudentPayment({ permission }) {
@@ -9,9 +10,25 @@ export default function StudentPayment({ permission }) {
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
-  const [selected_class, setSelectedClass] = useState("");
-  const [selected_session, setSelectedSession] = useState("");
-
+  const [class_id, setClass] = useState(-1);
+  const [session_id, setSession] = useState(-1);
+  const [department_id, setDepartment] = useState(-1);
+  const [students, setStudents] = useState([]);
+  React.useEffect(() => {
+    if (class_id != -1 && session_id != -1 && department_id != -1)
+      Api({
+        method: "get",
+        url:
+          "students/student_assignment?student_options=true&class_id=" +
+          class_id +
+          "&department_id=" +
+          department_id +
+          "&session_id=" +
+          session_id,
+      })
+        .then((res) => setStudents(res.data))
+        .catch((err) => console.log(err));
+  }, [class_id, department_id, session_id]);
   return (
     <div>
       <Index
@@ -23,7 +40,16 @@ export default function StudentPayment({ permission }) {
         }
         CustomListComponent={StudentPaymentList}
         query_title="Query Student List"
+        indexed={false}
         list_head={[
+          {
+            title: "Roll",
+            identifier: "role",
+          },
+          {
+            title: "ID",
+            identifier: "student_identifier",
+          },
           {
             title: "Session",
             identifier: "session",
@@ -37,16 +63,8 @@ export default function StudentPayment({ permission }) {
             identifier: "department",
           },
           {
-            title: "Student ID",
-            identifier: "student_id",
-          },
-          {
             title: "Student Name",
             identifier: "student_name",
-          },
-          {
-            title: "Student Role",
-            identifier: "role",
           },
         ]}
         query_list={[
@@ -55,7 +73,7 @@ export default function StudentPayment({ permission }) {
             type: "select",
             name: "session_id",
             options: session_list,
-            setState: setSelectedSession,
+            setState: setSession,
             required: true,
           },
           {
@@ -63,8 +81,8 @@ export default function StudentPayment({ permission }) {
             type: "select",
             name: "class_id",
             options: class_list,
-            setState: setSelectedClass,
-            required: false,
+            setState: setClass,
+            required: true,
           },
           {
             placeholder: "Department",
@@ -72,15 +90,16 @@ export default function StudentPayment({ permission }) {
             name: "department_id",
             options: department_list.filter(
               (element) =>
-                element.class_id == selected_class &&
-                element.session_id == selected_session
+                element.class_id == class_id && element.session_id == session_id
             ),
+            setState: setDepartment,
             required: false,
           },
           {
-            placeholder: "Student ID",
-            type: "text",
+            placeholder: "Students",
+            type: "select",
             name: "student_id",
+            options: students,
             required: false,
           },
         ]}
@@ -88,7 +107,7 @@ export default function StudentPayment({ permission }) {
           class_id: -1,
           session_id: -1,
           department_id: -1,
-          student_id: "",
+          student_id: -1,
         }}
       />
     </div>

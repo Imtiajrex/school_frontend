@@ -55,7 +55,7 @@ export default function Books(props) {
                   marginRight: "1rem",
                 }}
               >
-                Student ID: {student_info.student_id}
+                Student ID: {student_info.student_identifier}
               </Button>
             </div>
           </div>
@@ -79,8 +79,8 @@ export default function Books(props) {
                     identifier: "book_return_date",
                   },
                   {
-                    title: "To Return Date",
-                    identifier: "book_return_date",
+                    title: "Returned Date",
+                    identifier: "returned_at",
                   },
                   {
                     title: "Status",

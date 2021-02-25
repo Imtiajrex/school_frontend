@@ -1,10 +1,9 @@
 import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
+import ManualAttendanceList from "./ManualAttendanceList";
 
-export default function StudentsPhonebook({ permission }) {
-  const user_role = localStorage.getItem("role");
-  const user_permissions = JSON.parse(localStorage.getItem("permissions"));
+export default function ManualAttendance() {
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -14,53 +13,42 @@ export default function StudentsPhonebook({ permission }) {
   return (
     <div>
       <Index
-        title="Student Phonebook"
-        list_url="/students/student_assignment"
-        def_url_param="phonebook=true"
-        indexed={false}
+        title="Student Manual Attendance"
+        list_url="/students/mark_attendance"
         list_head={[
           {
-            title: "Roll",
+            title: "Role",
             identifier: "role",
           },
           {
-            title: "ID",
+            title: "Student ID",
             identifier: "student_identifier",
           },
           {
-            title: "Class",
-            identifier: "class",
-          },
-          {
-            title: "Department",
-            identifier: "department",
-          },
-          {
-            title: "Name",
+            title: "Student Name",
             identifier: "student_name",
           },
           {
-            title: "Primary Phone",
-            identifier: "primary_phone",
-          },
-          {
-            title: "Secondary Phone",
-            identifier: "secondary_phone",
+            title: "Attendance Status",
+            identifier: "attendance_status",
           },
         ]}
-        list_active={
-          user_role == "Super Admin" ||
-          user_permissions.indexOf(permission.view) != -1
-        }
+        CustomListComponent={ManualAttendanceList}
         query_title="Query Student List"
         query_list={[
+          {
+            placeholder: "Date",
+            type: "date",
+            name: "date",
+            required: true,
+          },
           {
             placeholder: "Session",
             type: "select",
             name: "session_id",
             options: session_list,
             setState: setSelectedSession,
-            required: false,
+            required: true,
           },
           {
             placeholder: "Class",
@@ -68,7 +56,7 @@ export default function StudentsPhonebook({ permission }) {
             name: "class_id",
             options: class_list,
             setState: setSelectedClass,
-            required: false,
+            required: true,
           },
           {
             placeholder: "Department",
@@ -79,15 +67,15 @@ export default function StudentsPhonebook({ permission }) {
                 element.class_id == selected_class &&
                 element.session_id == selected_session
             ),
-            required: false,
+            required: true,
           },
         ]}
         query_data={{
+          date: "",
           class_id: -1,
           session_id: -1,
           department_id: -1,
         }}
-        print_url="students/phonebook"
       />
     </div>
   );

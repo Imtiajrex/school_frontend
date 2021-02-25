@@ -1,16 +1,23 @@
 /* eslint-disable no-unused-vars */
-import Index from "components/crud/Index";
-import StudentsAttendanceMonth from "components/print/students/attendance_month/StudentsAttendanceMonth";
 import AttendanceReportMonth from "components/students/attendance/AttendanceReportMonth";
 import StudentsAttendanceReportDay from "components/students/attendance/StudentsAttendanceReportDay";
+import Dashboard from "components/students/Dashboard";
 import AppMessage from "components/students/message/AppMessage";
 import DuePayment from "components/students/payments/due_payment/DuePayment";
 import PaymentReceipt from "components/students/payments/PaymentReceipt";
 import PaymentReport from "components/students/payments/PaymentReport";
+import ResultPublishing from "components/students/results/ResultPublishing";
 import React from "react";
 import { Redirect } from "react-router-dom";
 
 const student_routes = [
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: "fas fa-columns text-primary",
+    layout: "/student",
+    component: Dashboard,
+  },
   {
     name: "My Info",
     path: "/students",
@@ -20,21 +27,21 @@ const student_routes = [
         path: "/attendance",
         icon: "fas fa-link",
         layout: "/student/students",
-        component: <StudentsAttendanceReportDay />,
+        component: StudentsAttendanceReportDay,
       },
       {
         name: "Attendance Report(Month)",
         path: "/attendance_month",
         icon: "fas fa-link",
         layout: "/student/students",
-        component: <AttendanceReportMonth />,
+        component: AttendanceReportMonth,
       },
       {
         name: "My Messages",
         path: "/messages",
         icon: "fas fa-link",
         layout: "/student/students",
-        component: <AppMessage />,
+        component: AppMessage,
       },
     ],
     icon: "fas fa-graduation-cap text-warning",
@@ -45,25 +52,9 @@ const student_routes = [
   {
     name: "Result",
     path: "/result",
-    children: [
-      {
-        name: "Result Card",
-        path: "/card",
-        icon: "fas fa-link",
-        layout: "/student/results",
-        component: <Index />,
-      },
-      {
-        name: "Marksheet",
-        path: "/marksheet",
-        icon: "fas fa-link",
-        layout: "/student/results",
-        component: <Index />,
-      },
-    ],
     icon: "fas fa-file-alt text-success",
     layout: "/student",
-    component: <Redirect to="/student/dashboard" />,
+    component: ResultPublishing,
   },
   {
     name: "Payment",
@@ -74,21 +65,21 @@ const student_routes = [
         path: "/receipt",
         icon: "fas fa-link",
         layout: "/student/payment",
-        component: <PaymentReceipt />,
+        component: PaymentReceipt,
       },
       {
         name: "Payment Report",
         path: "/report",
         icon: "fas fa-link",
         layout: "/student/payment",
-        component: <PaymentReport />,
+        component: PaymentReport,
       },
       {
         name: "Due Payment",
         path: "/due",
         icon: "fas fa-link",
         layout: "/student/payment",
-        component: <DuePayment />,
+        component: DuePayment,
       },
     ],
     icon: "fas fa-money-bill-alt text-danger",

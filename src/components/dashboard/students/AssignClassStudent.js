@@ -59,6 +59,10 @@ export default function AssignClassStudent({ permission }) {
         list_url="/students/student_assignment"
         list_head={[
           {
+            title: "Roll",
+            identifier: "role",
+          },
+          {
             title: "Session",
             identifier: "session",
           },
@@ -72,17 +76,14 @@ export default function AssignClassStudent({ permission }) {
           },
           {
             title: "Student ID",
-            identifier: "student_id",
+            identifier: "student_identifier",
           },
           {
             title: "Student Name",
             identifier: "student_name",
           },
-          {
-            title: "Student Role",
-            identifier: "role",
-          },
         ]}
+        indexed={false}
         add={
           user_role == "Super Admin" ||
           user_permissions.indexOf(permission.create) != -1

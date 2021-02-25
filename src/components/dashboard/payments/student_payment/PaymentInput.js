@@ -32,8 +32,9 @@ export default function PaymentInput(props) {
     if (payment_cat.length > 0) {
       setPaymentInfoType(payment_cat[0]["info_type"]);
       setPaymentInfoOptions(payment_cat[0]["info_options"]);
+
       const std_fees = student_payment_fees.filter(
-        (element) => element.student_payment_category == payment_cat[0].id
+        (element) => element.payment_category == payment_cat[0].category_name
       );
       let fees = "";
       if (std_fees.length == 0) fees = payment_cat[0]["default_amount"];

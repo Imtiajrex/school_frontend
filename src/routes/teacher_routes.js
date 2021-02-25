@@ -1,18 +1,25 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { Redirect } from "react-router-dom";
-import Index from "components/dashboard/settings/Religion";
 
 import AttendanceReportDay from "components/teachers/employee_attendance/AttendanceReportDay";
 import AttendanceReportMonth from "components/teachers/employee_attendance/AttendanceReportMonth";
-import { ExamCrud } from "components/dashboard/exams/Exams";
-import { Marks } from "components/dashboard/exams/Exams";
+import { ExamCrud } from "components/teachers/exams/Exams";
+import { Marks } from "components/teachers/exams/Exams";
 import { Tabulation } from "components/dashboard/exams/Exams";
-import AppMessage from "components/teachers/message/AppMessage";
-import MyMessage from "components/teachers/message/MyMessage";
-import ManualAttendance from "components/teachers/student_manual_attendance/ManualAttendance";
+import ManualAttendance from "components/teachers/students/manual_attendance/ManualAttendance";
+import StudentAppMessage from "components/teachers/message/StudentAppMessage";
+import EmployeeAppMessage from "components/teachers/message/EmployeeAppMessage";
+import Dashboard from "components/teachers/Dashboard";
 
 const teacher_routes = [
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    icon: "fas fa-columns text-primary",
+    layout: "/teacher",
+    component: Dashboard,
+  },
   {
     name: "Students",
     path: "/students",
@@ -21,8 +28,8 @@ const teacher_routes = [
         name: "Students Manual Attendance",
         path: "/student_manual_attendance",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <ManualAttendance />,
+        layout: "/teacher/students",
+        component: ManualAttendance,
       },
     ],
     icon: "fas fa-notes-medical text-info",
@@ -37,15 +44,15 @@ const teacher_routes = [
         name: "Attendance Report(Day)",
         path: "/attendance",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <AttendanceReportDay />,
+        layout: "/teacher/employees",
+        component: AttendanceReportDay,
       },
       {
         name: "Attendance Report(Month)",
         path: "/attendance_month",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <AttendanceReportMonth />,
+        layout: "/teacher/employees",
+        component: AttendanceReportMonth,
       },
     ],
     icon: "fas fa-briefcase text-default",
@@ -60,22 +67,22 @@ const teacher_routes = [
         name: "Exam CRUD",
         path: "/exam",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <ExamCrud />,
+        layout: "/teacher/exams",
+        component: ExamCrud,
       },
       {
         name: "Marks CRUD",
         path: "/marks",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <Marks />,
+        layout: "/teacher/exams",
+        component: Marks,
       },
       {
         name: "Tabulation Sheet",
         path: "/tabulation",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <Tabulation />,
+        layout: "/teacher/exams",
+        component: Tabulation,
       },
     ],
     icon: "fas fa-notes-medical text-info",
@@ -91,15 +98,15 @@ const teacher_routes = [
         name: "Student App Message",
         path: "/app_message",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <AppMessage />,
+        layout: "/teacher/messages",
+        component: StudentAppMessage,
       },
       {
         name: "My Messages",
         path: "/my_messages",
         icon: "fas fa-link",
-        layout: "/teacher",
-        component: <MyMessage />,
+        layout: "/teacher/messages",
+        component: EmployeeAppMessage,
       },
     ],
     icon: "fas fa-envelope text-success",

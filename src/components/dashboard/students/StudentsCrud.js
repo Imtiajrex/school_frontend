@@ -10,8 +10,10 @@ export default function StudentsCrud({ permission }) {
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
-  const [selected_class, setSelectedClass] = useState("");
+  const [class_id, setClass] = useState("");
+  const [session_id, setSession] = useState("");
   const [selected_session, setSelectedSession] = useState("");
+  const [selected_class, setSelectedClass] = useState("");
   const [religion_list, setreligion_list] = useState([]);
   const [extended_info, setextended_info] = useState([]);
   React.useEffect(() => {
@@ -226,26 +228,33 @@ export default function StudentsCrud({ permission }) {
       <Index
         title="Student List"
         list_url="/students/student"
+        indexed={false}
         list_head={[
           {
+            title: "Roll",
+            identifier: "role",
+          },
+
+          {
+            title: "Session",
+            identifier: "session",
+          },
+          {
+            title: "Class",
+            identifier: "class",
+          },
+          {
             title: "Student ID",
-            identifier: "student_id",
+            identifier: "student_identifier",
           },
           {
             title: "Student Name",
             identifier: "student_name",
           },
           {
-            title: "Age",
-            identifier: "age",
-          },
-          {
-            title: "Gender",
-            identifier: "gender",
-          },
-          {
-            title: "Religion",
-            identifier: "religion",
+            title: "Image",
+            identifier: "student_image",
+            type: "image",
           },
         ]}
         file={true}
@@ -287,9 +296,29 @@ export default function StudentsCrud({ permission }) {
         query_title="Query Student List"
         query_list={[
           {
-            placeholder: "Student ID",
-            type: "text",
-            name: "student_id",
+            placeholder: "Session",
+            type: "select",
+            name: "session_id",
+            options: session_list,
+            setState: setSession,
+            required: true,
+          },
+          {
+            placeholder: "Class",
+            type: "select",
+            name: "class_id",
+            options: class_list,
+            setState: setClass,
+            required: false,
+          },
+          {
+            placeholder: "Department",
+            type: "select",
+            name: "department_id",
+            options: department_list.filter(
+              (element) =>
+                element.class_id == class_id && element.session_id == session_id
+            ),
             required: false,
           },
           {
@@ -317,7 +346,9 @@ export default function StudentsCrud({ permission }) {
           },
         ]}
         query_data={{
-          student_id: "",
+          session_id: -1,
+          class_id: -1,
+          department_id: -1,
           religion: -1,
           gender: -1,
           age: "",
