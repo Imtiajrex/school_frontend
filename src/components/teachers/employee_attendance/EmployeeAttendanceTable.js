@@ -4,9 +4,12 @@ import Button from "reactstrap/lib/Button";
 import Spinner from "reactstrap/lib/Spinner";
 import "./style.css";
 import uuid from "react-uuid";
+import Api from "services/API/Api";
 export default function EmployeeAttendanceTable(props) {
   const { list, loading, top, indexed = true, year, month } = props;
   const [days, setDays] = useState([]);
+  const [weekdays, setWeekDays] = useState(0);
+  const [week_day_active, setWeekdayActive] = useState([]);
   function getDaysInMonth(month, year) {
     var date = new Date(year, month, 0);
     let i = 1;
@@ -20,9 +23,34 @@ export default function EmployeeAttendanceTable(props) {
     }
     return _days;
   }
+  function daysInMonth(iMonth, iYear) {
+    return 32 - new Date(iYear, iMonth, 32).getDate();
+  }
+  function isWeekday(year, month, day) {
+    var day = new Date(year, month, day).getDay();
+
+    return week_day_active.indexOf(day) == -1;
+  }
+
+  function getWeekdaysInMonth(month, year) {
+    var days = daysInMonth(month, year);
+    var weekdays = 0;
+    for (var i = 0; i < days; i++) {
+      if (isWeekday(year, month, i + 1)) weekdays++;
+    }
+    return days - weekdays;
+  }
   React.useEffect(() => {
     setDays(getDaysInMonth(month, year));
+    Api({ method: "get", url: "settings/weekdays?attendance=true" })
+      .then((res) => {
+        setWeekdayActive(res.data);
+      })
+      .catch((err) => console.log(err));
   }, [list]);
+  React.useEffect(() => {
+    setWeekDays(getWeekdaysInMonth(month, year));
+  }, [week_day_active]);
   return (
     <Table
       className="align-items-center table-light table-flush"
@@ -44,11 +72,30 @@ export default function EmployeeAttendanceTable(props) {
               <br />
               <small>Total Days: {days.length}</small>
               <br />
-              <small>Present: {Object.keys(list[item]).length}</small>
+
+              <small>
+                Present:{" "}
+                {
+                  Object.values(list[item]).filter((el) =>
+                    el.includes("Present")
+                  ).length
+                }
+              </small>
               <br />
               <small>
-                Absent: {days.length - Object.keys(list[item]).length}
+                Late:{" "}
+                {
+                  Object.values(list[item]).filter((el) => el.includes("Late"))
+                    .length
+                }
               </small>
+              <br />
+              <small>
+                Absent:{" "}
+                {days.length - Object.keys(list[item]).length - weekdays}
+              </small>
+              <br />
+              <small>Weekdays: {weekdays}</small>
             </th>
           ))}
         </tr>
@@ -65,7 +112,7 @@ export default function EmployeeAttendanceTable(props) {
             <tr>
               <td style={{ width: "75px" }}>{item}</td>
               {top.map((element, index) => (
-                <td>
+                <td style={{ whiteSpace: "pre" }}>
                   <small
                     className="text-muted"
                     style={{ fontSize: "8px", lineHeight: "0.1" }}
@@ -90,9 +137,21 @@ export default function EmployeeAttendanceTable(props) {
                       <i
                         className="text-success fas fa-circle"
                         style={{ fontSize: "8px" }}
-                      />{" "}
-                      <small>
+                      />
+                      <small className="text-muted">
                         {list[element][item].replace("Present", "")}
+                      </small>{" "}
+                    </>
+                  ) : list[element][item] != undefined &&
+                    list[element][item].includes("Late") ? (
+                    <>
+                      Late{" "}
+                      <i
+                        className="text-warning fas fa-circle"
+                        style={{ fontSize: "8px" }}
+                      />
+                      <small className="text-muted">
+                        {list[element][item].replace("Late", "")}
                       </small>{" "}
                     </>
                   ) : (

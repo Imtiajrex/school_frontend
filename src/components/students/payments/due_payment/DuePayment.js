@@ -1,11 +1,9 @@
 import Index from "components/crud/Index";
-import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
-import React, { useContext } from "react";
+import React from "react";
 import DuePaymentList from "./DuePaymentList";
 
 export default function DuePayment() {
   const student_id = localStorage.getItem("user_id");
-  const { session_list } = useContext(ClassDeptSessionContext);
   return (
     <div>
       <Index
@@ -39,20 +37,13 @@ export default function DuePayment() {
           {
             placeholder: "Student ID",
             type: "text",
-            name: "student_id",
+            name: "student_identifier",
             required: true,
             disabled: true,
           },
-          {
-            placeholder: "Session",
-            type: "select",
-            name: "session",
-            options: session_list,
-            required: true,
-          },
         ]}
         query_data={{
-          student_id,
+          student_identifier: student_id,
         }}
       />
     </div>

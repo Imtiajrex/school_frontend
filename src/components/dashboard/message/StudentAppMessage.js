@@ -61,7 +61,7 @@ export default function StudentAppMessage({ permission }) {
       name: "session_id",
       options: session_list,
       setState: setSelectedSession,
-      required: false,
+      required: true,
     },
     {
       placeholder: "Class",
@@ -88,7 +88,7 @@ export default function StudentAppMessage({ permission }) {
       type: "select",
       name: "student_id",
       options: student_list,
-      required: true,
+      required: false,
     },
     {
       placeholder: "Message Title",

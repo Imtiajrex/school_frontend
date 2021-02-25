@@ -15,17 +15,18 @@ export default function StudentsAttendanceReportDay({ permission }) {
       <Index
         title="Student Attendance (Day)"
         list_url="/students/student_attendance"
+        indexed={false}
         list_head={[
           {
-            title: "Student ID",
-            identifier: "student_identifier",
-          },
-          {
-            title: "Student Role",
+            title: "Roll",
             identifier: "role",
           },
           {
-            title: "Student Name",
+            title: "ID",
+            identifier: "student_identifier",
+          },
+          {
+            title: "Name",
             identifier: "student_name",
           },
           {

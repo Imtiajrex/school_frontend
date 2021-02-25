@@ -9,7 +9,7 @@ export default function Dashboard() {
           <h2 className="text-white">
             Welcome to Schoolify - School Management Dashboard!
           </h2>
-          <h3 className="text-light">User Type: Student</h3>
+          <h3 className="text-light">User Type: Teacher</h3>
         </CardBody>
       </Card>
     </div>

@@ -42,11 +42,15 @@ export default function ListTable(props) {
   }
   React.useEffect(() => {
     setDays(getDaysInMonth(month, year));
-    setWeekDays(getWeekdaysInMonth(month, year));
     Api({ method: "get", url: "settings/weekdays?attendance=true" })
-      .then((res) => setWeekdayActive(res.data))
+      .then((res) => {
+        setWeekdayActive(res.data);
+      })
       .catch((err) => console.log(err));
   }, [list]);
+  React.useEffect(() => {
+    setWeekDays(getWeekdaysInMonth(month, year));
+  }, [week_day_active]);
   return (
     <Table
       className="align-items-center attendance"

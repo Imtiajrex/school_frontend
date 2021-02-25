@@ -9,9 +9,18 @@ import InputField from "components/controls/InputField";
 import ManualAttendanceModel from "./ManualAttendanceModel";
 
 export default function List(props) {
-  const { list, list_head, loading, indexed = true, update, setupdate } = props;
+  const {
+    list,
+    list_head,
+    loading,
+    indexed = true,
+    update,
+    setupdate,
+    query_tags,
+  } = props;
   const [values, setValues] = useState([]);
   const [open, setOpen] = useState(false);
+  const [date, setDate] = useState("");
   const handleChange = (id) => {
     let new_val = [...values];
     const index = new_val.indexOf(id);
@@ -19,6 +28,10 @@ export default function List(props) {
     else new_val.push(id);
     setValues(new_val);
   };
+  React.useEffect(() => {
+    let l = query_tags.filter((el) => el.title == "Date");
+    setDate(l.length > 0 ? l[0].value : null);
+  }, [list]);
   return (
     <>
       {values.length > 0 ? (
@@ -76,13 +89,14 @@ export default function List(props) {
           )}
         </tbody>
       </Table>
-      {values.length > 0 ? (
+      {values.length > 0 && date != null ? (
         <ManualAttendanceModel
           open={open}
           setOpen={setOpen}
           values={values}
           update={update}
           setUpdate={setupdate}
+          date={date}
           url="students/mark_attendance"
         />
       ) : null}

@@ -39,7 +39,8 @@ import {
   StudentsCrud,
   AssignClassStudent,
   StudentPaymentFees,
-  StudentsDocuments,
+  StudentsIDCard,
+  StudentsAdmitCard,
   StudentsPhonebook,
   StudentsAttendanceReportDay,
   StudentsAttendanceReportMonth,
@@ -88,6 +89,9 @@ import Dashboard from "components/dashboard/Dashboard";
 import StudentAttendanceTime from "components/dashboard/settings/StudentAttendanceTime";
 import EmployeeAttendanceTime from "components/dashboard/settings/EmployeeAttendanceTime";
 import WeekDays from "components/dashboard/settings/WeekDays";
+
+import StudentAssignID from "components/dashboard/attendance/student_assign/StudentAssignID";
+import EmployeeAssignID from "components/dashboard/attendance/employee_assign/EmployeeAssignID";
 const routes = [
   {
     name: "Dashboard",
@@ -180,6 +184,26 @@ const routes = [
           view: "View Students",
         },
       },
+      {
+        name: "ID Cards",
+        path: "/id_card",
+        icon: "fas fa-link",
+        layout: "/admin/students",
+        component: StudentsIDCard,
+        permission: {
+          view: "View Students",
+        },
+      },
+      {
+        name: "Admit Cards",
+        path: "/admit_card",
+        icon: "fas fa-link",
+        layout: "/admin/students",
+        component: StudentsAdmitCard,
+        permission: {
+          view: "View Students",
+        },
+      },
     ],
     icon: "fas fa-graduation-cap text-warning",
     layout: "/admin",
@@ -199,7 +223,7 @@ const routes = [
       "View ClassHasStudents",
       "Update ClassHasStudents",
     ],
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Employee",
@@ -304,7 +328,7 @@ const routes = [
     ],
     icon: "fas fa-briefcase text-default",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Exam",
@@ -358,7 +382,7 @@ const routes = [
     ],
     icon: "fas fa-notes-medical text-info",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Result",
@@ -403,7 +427,7 @@ const routes = [
     ],
     icon: "fas fa-file-alt text-success",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Payment",
@@ -472,7 +496,7 @@ const routes = [
     ],
     icon: "fas fa-money-bill-alt text-danger",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Accounts",
@@ -523,7 +547,7 @@ const routes = [
     ],
     icon: "fas fa-file-invoice text-warning",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Message",
@@ -579,7 +603,7 @@ const routes = [
     ],
     icon: "fas fa-envelope text-success",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Library",
@@ -651,7 +675,7 @@ const routes = [
     ],
     icon: "fas fa-book text-default",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Products",
@@ -696,7 +720,7 @@ const routes = [
     ],
     icon: "fas fa-shopping-basket text-info",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Website Settings",
@@ -864,7 +888,37 @@ const routes = [
     ],
     icon: "fas fa-server text-warning",
     layout: "/admin",
-    component: <Redirect to="/admin/dashboard" t />,
+    component: <Redirect to="/admin/dashboard" />,
+  },
+
+  {
+    name: "Attendance",
+    path: "/attendance",
+    children: [
+      {
+        name: "Assign Student Card",
+        path: "/assign_student_card",
+        icon: "fas fa-link",
+        layout: "/admin/attendance",
+        component: StudentAssignID,
+        permission: {
+          view: "Assign ID",
+        },
+      },
+      {
+        name: "Assign Teacher Card",
+        path: "/assign_teacher_card",
+        layout: "/admin/attendance",
+        icon: "fas fa-link",
+        component: EmployeeAssignID,
+        permission: {
+          view: "Assign ID",
+        },
+      },
+    ],
+    icon: "fas fa-fingerprint text-default",
+    layout: "/admin",
+    component: <Redirect to="/admin/dashboard" />,
   },
   {
     name: "Settings",

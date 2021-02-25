@@ -16,6 +16,12 @@ export default function WebsiteRouter() {
         <Route exact path="/admin/*">
           <AuthRouter />
         </Route>
+        <Route exact path="/student">
+          <AuthRouter />
+        </Route>
+        <Route exact path="/teacher">
+          <AuthRouter />
+        </Route>
         <Route exact path="/student/*">
           <AuthRouter />
         </Route>

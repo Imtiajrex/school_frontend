@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // nodejs library to set properties for components
 import { PropTypes } from "prop-types";
 import createLinks from "./createLinks";
@@ -19,8 +19,6 @@ import {
   Row,
   Col,
 } from "reactstrap";
-import TopBar from "pages/admin/dashboard/TopBar";
-
 class Sidebar extends React.Component {
   state = {
     collapseOpen: false,
@@ -100,12 +98,16 @@ class Sidebar extends React.Component {
                 <DropdownItem className="noti-title" header tag="div">
                   <h6 className="text-overflow m-0">Welcome!</h6>
                 </DropdownItem>
-                <DropdownItem to="/admin/user-profile" tag={Link}>
-                  <i className="ni ni-single-02" />
-                  <span>My profile</span>
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem href="#pablo" onClick={(e) => e.preventDefault()}>
+                <DropdownItem
+                  href="#pablo"
+                  onClick={() => {
+                    localStorage.removeItem("user_id");
+                    localStorage.removeItem("user_type");
+                    localStorage.removeItem("role");
+                    localStorage.removeItem("token");
+                    localStorage.removeItem("permissions");
+                  }}
+                >
                   <i className="ni ni-user-run" />
                   <span>Logout</span>
                 </DropdownItem>

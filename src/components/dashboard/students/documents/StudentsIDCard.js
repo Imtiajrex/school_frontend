@@ -1,9 +1,8 @@
 import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
-import ManualAttendanceList from "./ManualAttendanceList";
 
-export default function ManualAttendance() {
+export default function StudentIDCard() {
   const { class_list, department_list, session_list } = useContext(
     ClassDeptSessionContext
   );
@@ -13,42 +12,16 @@ export default function ManualAttendance() {
   return (
     <div>
       <Index
-        title="Student Manual Attendance"
-        list_url="/students/student_assignment"
-        list_head={[
-          {
-            title: "Role",
-            identifier: "role",
-          },
-          {
-            title: "Student ID",
-            identifier: "student_id",
-          },
-          {
-            title: "Student Name",
-            identifier: "student_name",
-          },
-          {
-            title: "Attendance Status",
-            identifier: "attendance_status",
-          },
-        ]}
-        CustomListComponent={ManualAttendanceList}
-        query_title="Query Student List"
+        list_active={false}
+        query_title="Query ID Card"
         query_list={[
-          {
-            placeholder: "Date",
-            type: "date",
-            name: "date",
-            required: true,
-          },
           {
             placeholder: "Session",
             type: "select",
             name: "session_id",
             options: session_list,
             setState: setSelectedSession,
-            required: true,
+            required: false,
           },
           {
             placeholder: "Class",
@@ -56,7 +29,7 @@ export default function ManualAttendance() {
             name: "class_id",
             options: class_list,
             setState: setSelectedClass,
-            required: true,
+            required: false,
           },
           {
             placeholder: "Department",
@@ -67,15 +40,15 @@ export default function ManualAttendance() {
                 element.class_id == selected_class &&
                 element.session_id == selected_session
             ),
-            required: true,
+            required: false,
           },
         ]}
         query_data={{
-          date: "",
           class_id: -1,
           session_id: -1,
           department_id: -1,
         }}
+        print_url="id"
       />
     </div>
   );

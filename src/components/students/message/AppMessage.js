@@ -1,15 +1,13 @@
 import Index from "components/crud/Index";
-import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
-import React, { useContext, useState } from "react";
-import { Call } from "services/API/Call";
+import React from "react";
 
 export default function AppMessage() {
   const student_id = localStorage.getItem("user_id");
   return (
     <div>
       <Index
-        title="App Message"
-        list_url="messages/app_message"
+        title="My Message"
+        list_url="messages/student_message"
         list_head={[
           { title: "Student Name", identifier: "student_name" },
           { title: "Title", identifier: "title" },
@@ -20,13 +18,13 @@ export default function AppMessage() {
           {
             placeholder: "Student ID",
             type: "text",
-            name: "student_id",
+            name: "student_identifier",
             disabled: true,
             required: true,
           },
         ]}
         query_data={{
-          student_id,
+          student_identifier: student_id,
         }}
       />
     </div>
