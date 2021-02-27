@@ -49,7 +49,7 @@ export default function AdCard(props) {
         <tbody>
           <tr>
             <th style={th_style}>Student ID</th>
-            <td style={td_style}>{data.student_id}</td>
+            <td style={td_style}>{data.student_identifier}</td>
           </tr>
           <tr>
             <th style={th_style}>Student Name</th>

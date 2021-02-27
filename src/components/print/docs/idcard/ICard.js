@@ -79,6 +79,10 @@ export default function ICard(props) {
         <b>{data.student_name}</b>
       </div>
       <div style={td_style}>
+        <div>ID:</div>
+        <div style={text}>{data.student_identifier}</div>
+      </div>
+      <div style={td_style}>
         <div>Class:</div>
         <div style={text}>{data.class}</div>
       </div>
