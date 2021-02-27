@@ -32,7 +32,7 @@ export default function DueList() {
           head={["Payment Category", "Payment Info", "Fees"]}
           val={["payment_category", "payment_info", "fees"]}
           query_info={[
-            { title: "Student ID:", value: student_info.student_id },
+            { title: "Student ID:", value: student_info.student_identifier },
             { title: "Student Name:", value: student_info.student_name },
           ]}
         />

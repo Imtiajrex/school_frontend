@@ -77,11 +77,7 @@ class Sidebar extends React.Component {
           {/* Brand */}
           {logo ? (
             <NavbarBrand className="pt-0" {...navbarBrandProps}>
-              <img
-                alt={logo.imgAlt}
-                className="navbar-brand-img"
-                src={logo.imgSrc}
-              />
+              <i className="fab fa-medapps"></i>
             </NavbarBrand>
           ) : null}
           {/* User */}
