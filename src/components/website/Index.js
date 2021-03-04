@@ -22,7 +22,7 @@ export default function Index() {
   const [loading, setLoading] = useState(0);
 
   React.useEffect(() => {
-    Api({ method: "get", url: "homepage/institute_info" })
+    Api({ method: "get", url: "homepage/institute_info?home=true" })
       .then((res) => {
         setSchoolInfo(res.data);
         setLoading((prev_state) => prev_state + 1);
