@@ -29,28 +29,41 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
       style={{ maxHeight: "100px" }}
     >
       <div className="container" style={{ alignItems: "normal" }}>
-        <div
-          style={{
-            height: "auto",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}
-        >
-          <RNavLink to="/" style={{ display: "flex", alignItems: "center" }}>
-            <img
-              src={
-                process.env.REACT_APP_IMAGE_PATH +
-                "/" +
-                institute_info.institute_logo
-              }
-              alt="Logo"
-              style={{ width: "80px", objectFit: "cover" }}
-            />
-            <div className="ml-3">{institute_info.institute_name}</div>
-          </RNavLink>
+        <div className="row">
+          <div className="col-md-12">
+            <div
+              style={{
+                height: "auto",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <RNavLink
+                to="/"
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <img
+                  src={
+                    process.env.REACT_APP_IMAGE_PATH +
+                    "/" +
+                    institute_info.institute_logo
+                  }
+                  alt="Logo"
+                  style={{ width: "80px", objectFit: "cover" }}
+                />
+                <div className="ml-3">{institute_info.institute_name}</div>
+              </RNavLink>
+            </div>
+          </div>
+          <div className="col-md-12">
+            <NavbarToggler onClick={toggle} />
+          </div>
         </div>
-        <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <i
             className="fas fa-times text-danger d-md-none"
