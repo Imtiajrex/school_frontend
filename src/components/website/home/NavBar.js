@@ -102,6 +102,12 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
                 </NavItem>
               )
             )}
+
+            <NavItem className="d-md-none d-block">
+              <RNavLink className="nav-link" to={"/login"}>
+                Login
+              </RNavLink>
+            </NavItem>
           </Nav>
         </Collapse>
       </div>
