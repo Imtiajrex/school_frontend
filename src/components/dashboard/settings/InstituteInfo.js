@@ -39,9 +39,9 @@ export default function InstituteInfo({ permission }) {
             required: true,
           },
           {
-            placeholder: "Institute Phonenumbers",
-            type: "textarea",
-            name: "institute_phonenumbers",
+            placeholder: "Institute Email",
+            type: "text",
+            name: "institute_email",
             required: true,
           },
           {
