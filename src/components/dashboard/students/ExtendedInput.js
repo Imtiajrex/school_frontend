@@ -13,12 +13,20 @@ export default function ExtendedInput(props) {
   } = props;
 
   const [open, setopen] = useState(false);
+  const [val, setVal] = useState({});
+
   const handleOpen = () => setopen(!open);
 
+  React.useEffect(() => {
+    setVal(JSON.parse(value));
+  }, [value]);
+
   const handleInputChange = (e) => {
-    let extended_value = value;
+    let extended_value = JSON.parse(value);
     extended_value[e.target.name] = e.target.value;
-    const send_value = { target: { name: name, value: extended_value } };
+    const send_value = {
+      target: { name: name, value: JSON.stringify(extended_value) },
+    };
 
     handleChange(send_value);
   };
@@ -51,7 +59,7 @@ export default function ExtendedInput(props) {
                 placeholder={element.placeholder}
                 name={element.name}
                 handleChange={handleInputChange}
-                value={value[element.name]}
+                value={val[element.name]}
                 disabled={disabled}
                 options={element.options}
               />
