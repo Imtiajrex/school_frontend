@@ -291,7 +291,7 @@ export default function StudentsCrud({ permission }) {
           session_id: -1,
           department_id: -1,
           role: "",
-          extended_info: {},
+          extended_info: "{}",
         }}
         query_title="Query Student List"
         query_list={[

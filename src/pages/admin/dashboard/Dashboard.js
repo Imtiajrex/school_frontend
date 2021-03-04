@@ -9,10 +9,10 @@ import TopBar from "./TopBar";
 export default function Dashboard() {
   return (
     <div>
-      <Container fluid>
+      <Container fluid className="p-0">
         <TopBar />
       </Container>
-      <Container fluid>
+      <Container fluid className="p-0">
         <Sidebar
           routes={routes}
           logo={{

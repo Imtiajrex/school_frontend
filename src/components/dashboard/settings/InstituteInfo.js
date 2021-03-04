@@ -18,6 +18,7 @@ export default function InstituteInfo({ permission }) {
           user_role == "Super Admin" ||
           user_permissions.indexOf(permission.update) != -1
         }
+        file={true}
         edit_data={[
           {
             placeholder: "Institute Name",
