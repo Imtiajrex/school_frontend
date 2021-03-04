@@ -8,7 +8,7 @@ export default function InstituteInfo({ permission }) {
     <div>
       <Index
         title="Institute Info Update"
-        list_url="/settings/institute_info?update=true"
+        list_url="/settings/institute_info"
         list_head={[{ title: "Institute Name", identifier: "institute_name" }]}
         list_active={
           user_role == "Super Admin" ||
