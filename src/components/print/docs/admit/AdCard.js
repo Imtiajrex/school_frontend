@@ -50,33 +50,46 @@ export default function AdCard(props) {
           <tr>
             <th style={th_style}>Student ID</th>
             <td style={td_style}>{data.student_identifier}</td>
-          </tr>
-          <tr>
             <th style={th_style}>Student Name</th>
             <td style={td_style}>{data.student_name}</td>
           </tr>
           <tr>
             <th style={th_style}>Roll</th>
             <td style={td_style}>{data.role}</td>
-          </tr>
-          <tr>
             <th style={th_style}>Class</th>
             <td style={td_style}>{data.class}</td>
           </tr>
           <tr>
             <th style={th_style}>Department</th>
             <td style={td_style}>{data.department}</td>
-          </tr>
-          <tr>
             <th style={th_style}>Session</th>
             <td style={td_style}>{data.session}</td>
           </tr>
-          <tr>
-            <th style={th_style}>Exam</th>
-            <td style={td_style}>{exam_data.exam_name}</td>
+          <tr className="text-center">
+            <th colSpan="2" style={th_style}>
+              Exam
+            </th>
+            <td colSpan="2" style={td_style}>
+              {exam_data.exam_name}
+            </td>
           </tr>
         </tbody>
       </Table>
+      <div
+        className="d-flex"
+        style={{
+          maxWidth: "65%",
+          justifyContent: "space-between",
+          margin: "2.5rem auto",
+        }}
+      >
+        <div style={{ ...th_style, borderTop: "1px dotted black" }}>
+          Exam Controller
+        </div>
+        <div style={{ ...th_style, borderTop: "1px dotted black" }}>
+          Office Executive
+        </div>
+      </div>
     </div>
   );
 }

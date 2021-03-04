@@ -1,6 +1,7 @@
 import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
+import StudentList from "./class_assignment/StudentList";
 
 export default function AssignClassStudent({ permission }) {
   const user_role = localStorage.getItem("role");
@@ -57,6 +58,7 @@ export default function AssignClassStudent({ permission }) {
       <Index
         title="Student List"
         list_url="/students/student_assignment"
+        CustomListComponent={StudentList}
         list_head={[
           {
             title: "Roll",

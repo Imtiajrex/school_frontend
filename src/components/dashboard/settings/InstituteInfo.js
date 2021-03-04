@@ -69,6 +69,7 @@ export default function InstituteInfo({ permission }) {
             required: false,
           },
         ]}
+        def_url_param="update=true"
       />
     </div>
   );
