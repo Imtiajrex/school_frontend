@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { NavLink as NavLinkRRD, useLocation } from "react-router-dom";
 import { NavLink, NavItem, Collapse } from "reactstrap";
@@ -55,8 +56,8 @@ function MenuLink({ layout, path, icon, name, child }) {
         activeClassName="active"
         className={child ? `text-white` : null}
       >
-        <i className={icon} />
-        {name}
+        <i className={icon} style={{ color: "grey" }} />
+        <span style={{ color: "grey" }}>{name}</span>
       </NavLink>
     </NavItem>
   );

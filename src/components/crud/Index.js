@@ -76,7 +76,7 @@ function Index(props) {
         setloading(true);
         Api({
           method: "get",
-          url: list_url,
+          url: list_url + "?" + def_url_param,
         })
           .then((res) => {
             setList(res.data);
