@@ -247,7 +247,9 @@ export default function List(props) {
               <tr>
                 <th style={th_style}>Student ID:</th>
                 <td style={td_style}>
-                  {student_info.length > 0 ? student_info[0].student_id : null}
+                  {student_info.length > 0
+                    ? student_info[0].student_identifier
+                    : null}
                 </td>
               </tr>
               <tr>
