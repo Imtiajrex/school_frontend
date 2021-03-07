@@ -234,7 +234,10 @@ export default function DuePaymentModal(props) {
                       onClick={(e) => {
                         e.preventDefault();
                         window.open(
-                          "/print/payments/receipt/" + receipt,
+                          "/print/payments/receipt?receipt_id=" +
+                            receipt +
+                            "&student_id=" +
+                            student_identifier,
                           "Print Receipt",
                           "height=600,width=800"
                         );
