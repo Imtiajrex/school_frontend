@@ -6,7 +6,13 @@ import "owl.carousel/dist/assets/owl.theme.default.css";
 export default function Slideshow({ slides }) {
   return (
     <section className="flexslider">
-      <ReactOwlCarousel className="owl-theme" loop nav items={1}>
+      <ReactOwlCarousel
+        className="owl-theme"
+        loop
+        nav
+        items={1}
+        autoPlay={true}
+      >
         {slides.map((el, idx) => (
           <div class="item" key={idx}>
             <img
