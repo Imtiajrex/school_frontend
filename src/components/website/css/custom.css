@@ -43,7 +43,7 @@ a {
 }
 .slide-caption {
   position: absolute;
-  top: 50%;
+  top: 90%;
   left: 50%;
   transform: translate(-50%, -50%);
   background: rgba(0, 0, 0, 0.05);
@@ -51,7 +51,7 @@ a {
   border-radius: 10px;
 }
 .slide-caption p {
-  font-size: 2.6rem;
+  font-size: 1.9rem;
   font-weight: 100;
 }
 @media screen and (max-width: 650px) {
