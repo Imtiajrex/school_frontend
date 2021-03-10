@@ -34,7 +34,8 @@ function withClearCache(Component) {
           } else {
             setIsLatestBuildDate(true);
           }
-        });
+        })
+        .catch((err) => console.log(err));
     }, []);
 
     const refreshCacheAndReload = () => {
