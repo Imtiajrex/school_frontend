@@ -43,7 +43,7 @@ export default function Home({ data }) {
       <Albums albums={albums} />
       <Teachers teachers={teachers} />
       <Testimonial testimonial={testimonial} />
-      <Specialty specialty={specialty} />
+      <Specialty specialty={specialty} institute_info={school_info} />
       <Footer
         institute_info={school_info}
         about_school={about_school}

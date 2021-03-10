@@ -2,7 +2,7 @@
 import React from "react";
 import ScrollAnimation from "react-animate-on-scroll";
 
-export default function Specialty({ specialty }) {
+export default function Specialty({ specialty, institute_info }) {
   return (
     <>
       <section className="probootstrap-section">
@@ -10,7 +10,7 @@ export default function Specialty({ specialty }) {
           <ScrollAnimation animateIn="fadeInUp">
             <div className="row" style={{ justifyContent: "center" }}>
               <div className="col-md-6 col-md-offset-3 text-center section-heading ">
-                <h2>Why Choose Enlight School</h2>
+                <h2>Why Choose {institute_info.institute_name}</h2>
                 <p className="lead">
                   Reasons to choose Our School over others!
                 </p>
