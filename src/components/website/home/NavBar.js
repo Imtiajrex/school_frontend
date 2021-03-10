@@ -22,12 +22,7 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 
   const toggleDropdown = () => setDropdown(!dropdownOpen);
   return (
-    <Navbar
-      light
-      expand="md"
-      className="probootstrap-navbar p-lg-0 p-md-3"
-      style={{ maxHeight: "100px" }}
-    >
+    <Navbar light expand="md" className="probootstrap-navbar p-lg-0 p-md-3">
       <div className="container" style={{ alignItems: "normal" }}>
         <div className="row">
           <div className="col-md-12">
