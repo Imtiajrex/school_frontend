@@ -158,15 +158,13 @@ export default function List(props) {
           <Table>
             <tbody>
               <tr>
-                <th style={th_style}>Student ID:</th>
+                <th style={th_style}>ID:</th>
                 <td style={td_style}>
                   {student_info.length > 0
                     ? student_info[0].student_identifier
                     : null}
                 </td>
-              </tr>
-              <tr>
-                <th style={th_style}>Student Name:</th>
+                <th style={th_style}>Name:</th>
                 <td style={td_style}>
                   {student_info.length > 0
                     ? student_info[0].student_name
@@ -174,8 +172,22 @@ export default function List(props) {
                 </td>
               </tr>
               <tr>
+                <th style={th_style}>Class:</th>
+                <td style={td_style}>
+                  {student_info.length > 0 ? student_info[0].class : null}
+                </td>
+                <th style={th_style}>Department:</th>
+                <td style={td_style}>
+                  {student_info.length > 0 ? student_info[0].department : null}
+                </td>
+              </tr>
+              <tr>
+                <th style={th_style}>Roll:</th>
+                <td style={td_style}>
+                  {student_info.length > 0 ? student_info[0].role : null}
+                </td>
                 <th style={th_style}>Receipt No:</th>
-                <td style={td_style}>{receipt_id}</td>
+                <td style={{ ...td_style, textAlign: "left" }}>{receipt_id}</td>
               </tr>
             </tbody>
           </Table>
@@ -245,15 +257,13 @@ export default function List(props) {
           <Table>
             <tbody>
               <tr>
-                <th style={th_style}>Student ID:</th>
+                <th style={th_style}>ID:</th>
                 <td style={td_style}>
                   {student_info.length > 0
                     ? student_info[0].student_identifier
                     : null}
                 </td>
-              </tr>
-              <tr>
-                <th style={th_style}>Student Name:</th>
+                <th style={th_style}>Name:</th>
                 <td style={td_style}>
                   {student_info.length > 0
                     ? student_info[0].student_name
@@ -261,8 +271,22 @@ export default function List(props) {
                 </td>
               </tr>
               <tr>
+                <th style={th_style}>Class:</th>
+                <td style={td_style}>
+                  {student_info.length > 0 ? student_info[0].class : null}
+                </td>
+                <th style={th_style}>Department:</th>
+                <td style={td_style}>
+                  {student_info.length > 0 ? student_info[0].department : null}
+                </td>
+              </tr>
+              <tr>
+                <th style={th_style}>Roll:</th>
+                <td style={td_style}>
+                  {student_info.length > 0 ? student_info[0].role : null}
+                </td>
                 <th style={th_style}>Receipt No:</th>
-                <td style={td_style}>{receipt_id}</td>
+                <td style={{ ...td_style, textAlign: "left" }}>{receipt_id}</td>
               </tr>
             </tbody>
           </Table>

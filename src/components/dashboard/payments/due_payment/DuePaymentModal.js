@@ -62,6 +62,10 @@ export default function DuePaymentModal(props) {
       setErrors(Array(data.length).fill(new_error));
     }
   }, [data]);
+  const [std_id, setStdId] = useState("");
+  React.useEffect(() => {
+    if (student_identifier != undefined) setStdId(student_identifier);
+  }, [student_identifier]);
 
   const handleInputChange = (index, vals) => {
     let val = [...values];
@@ -237,7 +241,7 @@ export default function DuePaymentModal(props) {
                           "/print/payments/receipt?receipt_id=" +
                             receipt +
                             "&student_id=" +
-                            student_identifier,
+                            std_id,
                           "Print Receipt",
                           "height=600,width=800"
                         );
