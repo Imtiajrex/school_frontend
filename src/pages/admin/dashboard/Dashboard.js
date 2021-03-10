@@ -16,7 +16,7 @@ export default function Dashboard() {
         <Sidebar
           routes={routes}
           logo={{
-            innerLink: "/admin/index",
+            innerLink: "/admin/dashboard",
             imgSrc: "argon/assets/img/brand/argon-react.png",
             imgAlt: "...",
           }}
