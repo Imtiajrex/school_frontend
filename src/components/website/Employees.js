@@ -49,7 +49,7 @@ export default function Employees({ data }) {
       });
   }, []);
   return (
-    <div class="probootstrap-page-wrapper">
+    <div className="probootstrap-page-wrapper">
       <Helmet>
         <title>{employee_type}</title>
       </Helmet>

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
 import { Button, Form, Alert, Spinner } from "reactstrap";
 import { useHistory } from "react-router-dom";
@@ -83,13 +84,21 @@ export default function Login() {
         }}
         className="bg-white"
       >
+        <img
+          src="./192.png"
+          alt="Software Logo"
+          style={{ width: "65px", objectFit: "cover" }}
+        />
+        <br />
+        <a>Schoolify - School Management Software</a>
+        <br />
         {failMessage !== undefined && failMessage.length > 0 ? (
           <Alert color="danger" style={{ fontSize: "12px" }}>
             {failMessage}
           </Alert>
         ) : null}
 
-        <Form onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit} className="mt-3">
           <h3 className="text-dark">Log In</h3>
           <TextInput
             name="username"

@@ -43,7 +43,7 @@ export default function SubPages({ data }) {
       });
   }, []);
   return (
-    <div class="probootstrap-page-wrapper">
+    <div className="probootstrap-page-wrapper">
       <Helmet>
         <title>{page.page_title}</title>
       </Helmet>

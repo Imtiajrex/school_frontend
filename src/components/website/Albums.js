@@ -49,7 +49,7 @@ export default function Pages({ data }) {
     setAlbumName(album_arr.length > 0 ? album_arr[0].album_name : "");
   }, []);
   return (
-    <div class="probootstrap-page-wrapper">
+    <div className="probootstrap-page-wrapper">
       <Helmet>
         <title>{album_name}</title>
       </Helmet>
@@ -76,7 +76,7 @@ export default function Pages({ data }) {
           <div className="container pt-4 pb-4">
             <ReactOwlCarousel items={1} loop nav lazyLoad={true} dots>
               {images.map((el, idx) => (
-                <div class="item" key={idx}>
+                <div className="item" key={idx}>
                   <img
                     src={process.env.REACT_APP_IMAGE_PATH + "/" + el.image_name}
                     alt="gallery"
