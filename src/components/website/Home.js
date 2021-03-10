@@ -29,7 +29,7 @@ export default function Home({ data }) {
     albums,
   } = data;
   return (
-    <div class="probootstrap-page-wrapper">
+    <div className="probootstrap-page-wrapper">
       <TopBar institute_info={school_info} />
       <NavBar
         pages={pages}
