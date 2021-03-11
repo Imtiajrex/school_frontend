@@ -5,25 +5,31 @@ import Albums from "./Albums";
 import Pages from "./Pages";
 import SubPages from "./SubPages";
 import Employees from "./Employees";
+import { Helmet } from "react-helmet";
 
 export default function FrontEndRouter({ data }) {
   return (
-    <Switch>
-      <Route exact path="/">
-        <Home data={data} />
-      </Route>
-      <Route exact path="/pages/:id">
-        <Pages data={data} />
-      </Route>
-      <Route exact path="/sub_pages/:id">
-        <SubPages data={data} />
-      </Route>
-      <Route exact path="/albums/:id">
-        <Albums data={data} />
-      </Route>
-      <Route exact path="/employees/:employee_type">
-        <Employees data={data} />
-      </Route>
-    </Switch>
+    <>
+      <Helmet>
+        <title>{data.school_info.institute_name}</title>
+      </Helmet>
+      <Switch>
+        <Route exact path="/">
+          <Home data={data} />
+        </Route>
+        <Route exact path="/pages/:id">
+          <Pages data={data} />
+        </Route>
+        <Route exact path="/sub_pages/:id">
+          <SubPages data={data} />
+        </Route>
+        <Route exact path="/albums/:id">
+          <Albums data={data} />
+        </Route>
+        <Route exact path="/employees/:employee_type">
+          <Employees data={data} />
+        </Route>
+      </Switch>
+    </>
   );
 }
