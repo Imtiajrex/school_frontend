@@ -23,16 +23,16 @@ export default function List(props) {
   const [other_size, setOtherSize] = useState(12);
   const [school_name_color, setSchoolNameColor] = useState("#525f7f");
   const [other_color, setOtherColor] = useState("#8898aa");
-  const [school_name, setSchoolName] = useState(true);
-  const [other_info, setOtherInfo] = useState(true);
-  const [logo, setLogo] = useState(true);
-  const [line, setLine] = useState(true);
+  const [school_name, setSchoolName] = useState(false);
+  const [other_info, setOtherInfo] = useState(false);
+  const [logo, setLogo] = useState(false);
+  const [line, setLine] = useState(false);
 
   const [head_color, setHeadColor] = useState("#525f7f");
   const [data_color, setDataColor] = useState("#3D4956");
   const [border_color, setBorderColor] = useState("#e9ecef");
-  const [head_size, setHeadSize] = useState(12);
-  const [data_size, setDataSize] = useState(11);
+  const [head_size, setHeadSize] = useState(13);
+  const [data_size, setDataSize] = useState(12);
   const [student_info, setStudentInfo] = useState({});
   const th_style = {
     color: head_color,
