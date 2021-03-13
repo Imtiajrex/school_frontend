@@ -28,6 +28,8 @@ export default function AddStudentPayment(props) {
   const [calling, setCalling] = useState(false);
   const [payment_category_list, setPaymentCategoryList] = useState([]);
   const [student_payment_fees, setStudentPaymentFees] = useState([]);
+  const [due_list, setDueList] = useState([]);
+
   const [date, setDate] = useState("");
   const [receipt, setReceipt] = useState("");
 
@@ -45,7 +47,7 @@ export default function AddStudentPayment(props) {
   }, []);
 
   React.useEffect(() => {
-    if (student_id != undefined)
+    if (student_id != undefined) {
       Call({
         method: "get",
         url: "students/assign_fees?student_id=" + student_id,
@@ -54,6 +56,16 @@ export default function AddStudentPayment(props) {
           setStudentPaymentFees(res);
         })
         .catch((err) => console.log(err));
+
+      Call({
+        method: "get",
+        url: "payments/student_due?options=true&student_id=" + student_id,
+      })
+        .then((res) => {
+          setDueList(res);
+        })
+        .catch((err) => console.log(err));
+    }
   }, [student_id]);
 
   const new_value = {
@@ -283,6 +295,7 @@ export default function AddStudentPayment(props) {
                     disabled={calling}
                     payment_category_list={payment_category_list}
                     student_payment_fees={student_payment_fees}
+                    due_list={due_list}
                   />
                 ))}
 

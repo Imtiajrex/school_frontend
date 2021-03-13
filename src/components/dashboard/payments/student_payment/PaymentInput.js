@@ -12,11 +12,13 @@ export default function PaymentInput(props) {
     index,
     student_payment_fees = [],
     payment_category_list,
+    due_list,
     error,
   } = props;
   const [payment_category, setPaymentCategory] = useState("");
   const [payment_info_type, setPaymentInfoType] = useState("");
   const [payment_info_options, setPaymentInfoOptions] = useState("");
+  const [payment_info, setPaymentInfo] = useState("");
 
   const new_value = {
     payment_category: "",
@@ -31,7 +33,8 @@ export default function PaymentInput(props) {
     );
     if (payment_cat.length > 0) {
       setPaymentInfoType(payment_cat[0]["info_type"]);
-      setPaymentInfoOptions(payment_cat[0]["info_options"]);
+      if (payment_category == "Due") setPaymentInfoOptions(due_list);
+      else setPaymentInfoOptions(payment_cat[0]["info_options"]);
 
       const std_fees = student_payment_fees.filter(
         (element) => element.payment_category == payment_cat[0].category_name
@@ -53,6 +56,18 @@ export default function PaymentInput(props) {
     }
   }, [clear]);
 
+  React.useEffect(() => {
+    if (payment_category == "Due" && payment_info != -1) {
+      let _due = due_list.filter((el) => el.value == payment_info);
+      if (_due.length > 0) {
+        setValues({
+          ...vals,
+          payment_amount: _due[0]["amount"],
+        });
+      }
+    }
+  }, [payment_info]);
+
   const fields = [
     {
       placeholder: "Payment Category",
@@ -67,6 +82,7 @@ export default function PaymentInput(props) {
       type: payment_info_type,
       name: "payment_info",
       options: payment_info_options,
+      setState: setPaymentInfo,
       required: false,
     },
     {
