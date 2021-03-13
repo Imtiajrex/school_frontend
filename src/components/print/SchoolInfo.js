@@ -9,10 +9,10 @@ export default function SchoolInfo(props) {
     other_size,
     school_name_color,
     other_color,
-    school_name,
-    other_info,
-    logo,
-    line,
+    school_name = false,
+    other_info = false,
+    logo = false,
+    line = false,
     inf,
   } = props.val;
 
