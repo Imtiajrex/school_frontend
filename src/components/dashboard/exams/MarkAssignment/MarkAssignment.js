@@ -267,7 +267,7 @@ export default function MarkAssignment({ data }) {
           {student_list.length > 0
             ? student_list.map((el, idx) => (
                 <tr key={idx}>
-                  <td>{idx + 1}</td>
+                  <td>{el["role"]}</td>
                   <td style={{ padding: "0.1rem" }}>
                     {el["student_identifier"]}
                   </td>
