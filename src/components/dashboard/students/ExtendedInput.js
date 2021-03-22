@@ -18,7 +18,8 @@ export default function ExtendedInput(props) {
   const handleOpen = () => setopen(!open);
 
   React.useEffect(() => {
-    setVal(JSON.parse(value));
+    if (typeof value != "object") setVal(JSON.parse(value));
+    else setVal(value);
   }, [value]);
 
   const handleInputChange = (e) => {
