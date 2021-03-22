@@ -311,7 +311,7 @@ export default function AccountsCrud({ permission }) {
           employee_primary_phone: "",
           employee_secondary_phone: "",
           employee_email: "",
-          employee_extended_info: {},
+          employee_extended_info: "{}",
         }}
         query_title="Query Employee List"
         query_list={[
