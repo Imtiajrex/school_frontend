@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { FormGroup, FormFeedback, Input } from "reactstrap";
 
 export default function TextInput(props) {
@@ -13,6 +13,7 @@ export default function TextInput(props) {
     error,
     ...other
   } = props;
+  let input_field = useRef();
   return (
     <FormGroup>
       <Input
@@ -23,8 +24,13 @@ export default function TextInput(props) {
         onChange={handleChange}
         invalid={error}
         valid={!error}
+        ref={input_field}
         row="5"
         {...other}
+        onFocus={(e) => {
+          console.log(input_field);
+          e.preventDefault();
+        }}
       />
       <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
     </FormGroup>
