@@ -47,7 +47,7 @@ export default function TabulationList(props) {
       <Table className="align-items-center table-dark table-flush" responsive>
         <thead className="thead-dark">
           <tr>
-            <th rowSpan="3">ID</th>
+            <th rowSpan="3">Roll</th>
             <th rowSpan="3">Student Name</th>
           </tr>
           <tr>
