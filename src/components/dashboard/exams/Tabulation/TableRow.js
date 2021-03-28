@@ -9,7 +9,7 @@ export default function TableRow(props) {
   };
   return (
     <tr>
-      <td>{info[0].student_identifier}</td>
+      <td>{info[0].role}</td>
       <td>{info[0].student_name}</td>
       {subjects.map((el, idx) =>
         subjectMark(el.subject_id).length > 0 ? (
