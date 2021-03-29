@@ -28,16 +28,16 @@ export default function StudentsPhonebook({ permission }) {
             identifier: "student_identifier",
           },
           {
-            title: "Class",
-            identifier: "class",
-          },
-          {
-            title: "Department",
-            identifier: "department",
-          },
-          {
             title: "Name",
             identifier: "student_name",
+          },
+          {
+            title: "Mother",
+            identifier: "mother_name",
+          },
+          {
+            title: "Father",
+            identifier: "father_name",
           },
           {
             title: "Primary Phone",
@@ -46,6 +46,10 @@ export default function StudentsPhonebook({ permission }) {
           {
             title: "Secondary Phone",
             identifier: "secondary_phone",
+          },
+          {
+            title: "Primary Phone",
+            identifier: "primary_phone",
           },
         ]}
         list_active={
