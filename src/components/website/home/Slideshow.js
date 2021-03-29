@@ -11,6 +11,7 @@ export default function Slideshow({ slides }) {
         loop
         nav
         items={1}
+        autoplay={true}
         autoPlay={true}
       >
         {slides.map((el, idx) => (
