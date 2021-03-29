@@ -13,6 +13,7 @@ export default function Slideshow({ slides }) {
         items={1}
         autoplay={true}
         autoPlay={true}
+        autoplayTimeout={500}
       >
         {slides.map((el, idx) => (
           <div class="item" key={idx}>
