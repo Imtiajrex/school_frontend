@@ -24,10 +24,6 @@ export default function StudentsPhonebook({ permission }) {
             identifier: "role",
           },
           {
-            title: "ID",
-            identifier: "student_identifier",
-          },
-          {
             title: "Name",
             identifier: "student_name",
           },
@@ -46,10 +42,6 @@ export default function StudentsPhonebook({ permission }) {
           {
             title: "Secondary Phone",
             identifier: "secondary_phone",
-          },
-          {
-            title: "Primary Phone",
-            identifier: "primary_phone",
           },
         ]}
         list_active={

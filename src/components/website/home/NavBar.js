@@ -24,7 +24,7 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
   const toggleDropdown = () => setDropdown(!dropdownOpen);
   return (
     <>
-      <Navbar light expand="md" className="probootstrap-navbar p-lg-0 p-md-3">
+      <Navbar light expand="md" className="probootstrap-navbar">
         <div className="container" style={{ alignItems: "normal" }}>
           <div className="row">
             <div className="col-md-12">
@@ -57,15 +57,15 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
                 </RNavLink>
               </div>
             </div>
-            <div className="col-md-12">
-              <NavbarToggler onClick={toggle} />
-            </div>
           </div>
         </div>
       </Navbar>
-      <Navbar light expand="md" className="probootstrap-navbar p-lg-0 p-md-3">
+      <Navbar light expand="md" className="probootstrap-navbar">
         <div className="container" style={{ alignItems: "normal" }}>
           <MenuBar pages={pages} sub_pages={sub_pages} />
+          <div className="col-md-12">
+            <NavbarToggler onClick={toggle} />
+          </div>
         </div>
       </Navbar>
     </>

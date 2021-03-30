@@ -234,22 +234,21 @@ export default function StudentsCrud({ permission }) {
             title: "Roll",
             identifier: "role",
           },
-
           {
-            title: "Session",
-            identifier: "session",
-          },
-          {
-            title: "Class",
-            identifier: "class",
-          },
-          {
-            title: "Student ID",
-            identifier: "student_identifier",
-          },
-          {
-            title: "Student Name",
+            title: "Name",
             identifier: "student_name",
+          },
+          {
+            title: "Mother",
+            identifier: "mother_name",
+          },
+          {
+            title: "Father",
+            identifier: "father_name",
+          },
+          {
+            title: "Religion",
+            identifier: "religion",
           },
           {
             title: "Image",

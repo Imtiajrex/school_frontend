@@ -52,7 +52,6 @@ export default function StudentList() {
           title="Students List"
           head={[
             "Roll",
-            "ID",
             "Student Name",
             "Mother Name",
             "Father Name",
@@ -62,7 +61,6 @@ export default function StudentList() {
           ]}
           val={[
             "role",
-            "student_identifier",
             "student_name",
             "mother_name",
             "father_name",
