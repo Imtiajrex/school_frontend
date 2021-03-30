@@ -107,3 +107,63 @@ a {
   height: 170px !important;
   object-fit: cover !important;
 }
+.articles-div {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.article {
+  width: 85%;
+  background: white !important;
+  filter: brightness(1);
+}
+.article-title {
+  width: 100%;
+  padding: 1rem 2rem;
+  font-size: 32px;
+  background: white !important;
+}
+.article-content {
+  width: 100%;
+  background: white !important;
+  padding: 1rem 2rem;
+}
+.notification-div {
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  background: rgb(11, 11, 11);
+}
+.notification-title {
+  flex: 0.15;
+  padding: 0.5rem 1rem;
+  color: white;
+}
+.notificaions {
+  flex: 0.85;
+  padding: 0.5rem 1rem;
+  color: white;
+}
+.notification {
+  margin: 0.1rem 5rem;
+  white-space: nowrap;
+  color: white !important;
+  text-decoration: none;
+}
+.overlay {
+  display: none !important;
+}
+@media screen and (max-width: 500px) {
+  .article {
+    width: 95%;
+  }
+  .notification-title {
+    font-size: 11px;
+  }
+  .notification {
+    font-size: 11px;
+  }
+}

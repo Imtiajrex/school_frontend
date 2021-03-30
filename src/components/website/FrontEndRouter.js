@@ -6,6 +6,7 @@ import Pages from "./Pages";
 import SubPages from "./SubPages";
 import Employees from "./Employees";
 import { Helmet } from "react-helmet";
+import Notifications from "./Notifications";
 
 export default function FrontEndRouter({ data }) {
   return (
@@ -22,6 +23,9 @@ export default function FrontEndRouter({ data }) {
         </Route>
         <Route exact path="/sub_pages/:id">
           <SubPages data={data} />
+        </Route>
+        <Route exact path="/notifications/:id">
+          <Notifications data={data} />
         </Route>
         <Route exact path="/albums/:id">
           <Albums data={data} />

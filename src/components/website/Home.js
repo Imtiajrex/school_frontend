@@ -13,6 +13,7 @@ import HighLights from "./home/HighLights";
 import Albums from "./home/Albums";
 
 import "./css/custom.css";
+import Notification from "./home/Notification";
 export default function Home({ data }) {
   const {
     pages,
@@ -37,6 +38,7 @@ export default function Home({ data }) {
         institute_info={school_info}
       />
       <Slideshow slides={slides} />
+      <Notification notifs={notifs} />
       <Welcome about_school={about_school} institute_info={school_info} />
       <Figures figure={figure} />
       <HighLights notifs={notifs} articles={content} />
