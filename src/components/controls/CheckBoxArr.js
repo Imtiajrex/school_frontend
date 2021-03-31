@@ -30,6 +30,13 @@ export default function CheckBoxArr(props) {
   React.useEffect(() => {
     setCheckedValue(JSON.parse(value));
   }, []);
+  React.useEffect(() => {
+    if (
+      Object.keys(checked_value).length > 0 &&
+      Object.keys(JSON.parse(value)).length == 0
+    )
+      setCheckedValue(value);
+  }, [value]);
   return (
     <>
       <div className="text-dark">{placeholder}:</div>
