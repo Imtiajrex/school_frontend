@@ -18,6 +18,9 @@ export default function Select(props) {
   React.useEffect(() => {
     if (typeof setState === "function") setState(value);
   }, []);
+  React.useEffect(() => {
+    if (typeof setState === "function") setState(value);
+  }, [value]);
   return (
     <FormGroup>
       <Input
