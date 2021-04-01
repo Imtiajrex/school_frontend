@@ -28,8 +28,7 @@ export default function TextInput(props) {
         row="5"
         {...other}
         onFocus={(e) => {
-          console.log(input_field);
-          e.preventDefault();
+          window.scrollTo(0, input_field.current.offsetTop);
         }}
       />
       <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
