@@ -152,16 +152,7 @@ export default function MarkAssignment({ data }) {
               #
             </th>
             <th rowSpan="2" style={{ padding: "0.1rem" }}>
-              ID
-            </th>
-            <th rowSpan="2" style={{ padding: "0.1rem" }}>
               Name
-            </th>
-            <th rowSpan="2" style={{ padding: "0.1rem" }}>
-              Optional
-            </th>
-            <th rowSpan="2" style={{ padding: "0.1rem" }}>
-              Absent
             </th>
             <th
               colSpan={mark_fields.length + 1}

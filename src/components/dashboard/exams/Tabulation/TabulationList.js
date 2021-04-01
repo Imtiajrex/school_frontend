@@ -62,6 +62,7 @@ export default function TabulationList(props) {
                 {el.subject_name}
               </th>
             ))}
+            <th rowSpan="2">Total</th>
           </tr>
           <tr>
             {subject_cols.map((el, idx) =>

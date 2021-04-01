@@ -28,8 +28,7 @@ export default function TextInput(props) {
         row="5"
         {...other}
         onFocus={(e) => {
-          console.log(input_field);
-          e.preventDefault();
+          input_field.current.scrollIntoView();
         }}
       />
       <FormFeedback>{error ? invalid_msg : valid_msg}</FormFeedback>
