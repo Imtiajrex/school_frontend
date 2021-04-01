@@ -26,10 +26,17 @@ export default function TableRow(props) {
       )}
       <th>
         {subjects.reduce((cb, el) => {
-          cb += subjectMark(el.subject_id)[0]?.marks?.reduce(
-            (ecb, element) => (ecb += element.value)
-          );
-        }, 0)}
+          cb =
+            parseInt(cb) +
+            parseInt(
+              subjectMark(el.subject_id)[0]?.marks?.reduce(
+                (ecb, element) =>
+                  (ecb = parseInt(ecb) + parseInt(element.value)),
+                0
+              ) || 0
+            );
+          return cb;
+        }, 0) || 0}
       </th>
     </tr>
   );
