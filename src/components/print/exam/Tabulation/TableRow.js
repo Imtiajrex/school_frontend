@@ -10,7 +10,6 @@ export default function TableRow(props) {
   return (
     <tr>
       <td style={style}>{info[0].role}</td>
-      <td style={style}>{info[0].student_identifier}</td>
       <td style={style}>{info[0].student_name}</td>
       {subjects.map((el, idx) =>
         subjectMark(el.subject_id).length > 0 ? (
@@ -31,6 +30,21 @@ export default function TableRow(props) {
           </th>
         )
       )}
+
+      <th>
+        {subjects.reduce((cb, el) => {
+          cb =
+            parseInt(cb) +
+            parseInt(
+              subjectMark(el.subject_id)[0]?.marks?.reduce(
+                (ecb, element) =>
+                  (ecb = parseInt(ecb) + parseInt(element.value)),
+                0
+              ) || 0
+            );
+          return cb;
+        }, 0) || 0}
+      </th>
     </tr>
   );
 }
