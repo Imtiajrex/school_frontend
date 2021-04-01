@@ -61,16 +61,6 @@ export default function TabulationList(props) {
                 borderTop: `1px solid ${border_color}`,
               }}
             >
-              ID
-            </th>
-            <th
-              rowSpan="3"
-              style={{
-                fontSize: head_size + "px",
-                color: head_color,
-                borderTop: `1px solid ${border_color}`,
-              }}
-            >
               Student Name
             </th>
           </tr>
@@ -91,6 +81,7 @@ export default function TabulationList(props) {
                 {el.subject_name}
               </th>
             ))}
+            <th>Total</th>
           </tr>
           <tr>
             {subject_cols.map((el, idx) =>
