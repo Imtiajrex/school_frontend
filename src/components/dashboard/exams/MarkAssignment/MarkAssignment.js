@@ -27,12 +27,14 @@ export default function MarkAssignment({ data }) {
   };
   const validate = () => {
     let status = false;
+    console.log("Mark Fields:", mark_fields);
     status = mark_fields.every((el) => {
       return el.mark_name != "" && el.total_mark != "";
     });
     if (!status) return false;
-    status = form_data.every((el) =>
-      el.marks.length > 0
+    status = form_data.every((el) => {
+      console.log(el.marks);
+      return el.marks.length > 0
         ? el.marks.every((element) => {
             return (
               element.title != "" &&
@@ -41,8 +43,8 @@ export default function MarkAssignment({ data }) {
               element.value != null
             );
           })
-        : false
-    );
+        : false;
+    });
     if (!status) return false;
     return true;
   };
@@ -77,6 +79,8 @@ export default function MarkAssignment({ data }) {
           setTimeout(() => setFail(false), 1500);
           console.log(err);
         });
+    } else {
+      console.log("Invalidated!");
     }
   };
   const [form_data, setFormData] = useState([]);
@@ -97,51 +101,65 @@ export default function MarkAssignment({ data }) {
           setMarkFields(
             structure != undefined || structure != null ? structure : []
           );
+
+          Call({
+            method: "get",
+            url:
+              "exams/student_marks?exam_id=" +
+              exam_id +
+              "&session_id=" +
+              session_id +
+              "&department_id=" +
+              department_id +
+              "&class_id=" +
+              class_id +
+              "&subject_id=" +
+              subject_id,
+          })
+            .then((res) => {
+              let new_form_data = [];
+              res.map((el, idx) => {
+                const t_mark = JSON.parse(
+                  el.marks == null ? "[]" : el.marks
+                ).reduce(
+                  (cb, val) =>
+                    (cb =
+                      parseInt(cb) + parseInt(val.value != "" ? val.value : 0)),
+                  0
+                );
+                let std_marks = [];
+                if (
+                  structure != undefined &&
+                  structure != null &&
+                  el.marks == null
+                ) {
+                  structure.map((element) =>
+                    std_marks.push({ title: element.mark_name, value: "0" })
+                  );
+                }
+                new_form_data.push({
+                  id: el.id,
+                  student_id: el.student_id,
+                  exam_id: el.exam_id,
+                  subject_id: el.subject_id,
+                  subject_type: false,
+                  absent: false,
+                  total_mark: t_mark,
+                  marks: el.marks == null ? std_marks : JSON.parse(el.marks),
+                });
+              });
+              setFormData(new_form_data);
+              setStudentList(res);
+
+              setCalling(false);
+            })
+            .catch((err) => {
+              setCalling(false);
+              console.log(err);
+            });
         }
       })
       .catch((err) => console.log(err));
-    Call({
-      method: "get",
-      url:
-        "exams/student_marks?exam_id=" +
-        exam_id +
-        "&session_id=" +
-        session_id +
-        "&department_id=" +
-        department_id +
-        "&class_id=" +
-        class_id +
-        "&subject_id=" +
-        subject_id,
-    })
-      .then((res) => {
-        let new_form_data = [];
-        res.map((el, idx) => {
-          const t_mark = JSON.parse(el.marks == null ? "[]" : el.marks).reduce(
-            (cb, val) =>
-              (cb = parseInt(cb) + parseInt(val.value != "" ? val.value : 0)),
-            0
-          );
-          new_form_data.push({
-            id: el.id,
-            student_id: el.student_id,
-            exam_id: el.exam_id,
-            subject_id: el.subject_id,
-            subject_type: false,
-            absent: false,
-            total_mark: t_mark,
-            marks: JSON.parse(el.marks == null ? "[]" : el.marks),
-          });
-        });
-        setFormData(new_form_data);
-        setStudentList(res);
-
-        setCalling(false);
-      })
-      .catch((err) => {
-        setCalling(false);
-        console.log(err);
-      });
   }, []);
   return (
     <Form role="form" onSubmit={handleSubmit}>
@@ -152,16 +170,7 @@ export default function MarkAssignment({ data }) {
               #
             </th>
             <th rowSpan="2" style={{ padding: "0.1rem" }}>
-              ID
-            </th>
-            <th rowSpan="2" style={{ padding: "0.1rem" }}>
               Name
-            </th>
-            <th rowSpan="2" style={{ padding: "0.1rem" }}>
-              Optional
-            </th>
-            <th rowSpan="2" style={{ padding: "0.1rem" }}>
-              Absent
             </th>
             <th
               colSpan={mark_fields.length + 1}
@@ -198,10 +207,10 @@ export default function MarkAssignment({ data }) {
                         let new_val = [...mark_fields];
                         new_val[idx].mark_name = e.target.value;
                         let new_data = [...form_data];
-                        new_data.map(
-                          (element, index) =>
-                            (element["marks"][idx].title = e.target.value)
-                        );
+                        new_data.map((element, index) => {
+                          if (element["marks"][idx])
+                            element["marks"][idx].title = e.target.value;
+                        });
                         setFormData(new_data);
                         setMarkFields(new_val);
                       }}
@@ -267,34 +276,8 @@ export default function MarkAssignment({ data }) {
           {student_list.length > 0
             ? student_list.map((el, idx) => (
                 <tr key={idx}>
-                  <td>{idx + 1}</td>
-                  <td style={{ padding: "0.1rem" }}>
-                    {el["student_identifier"]}
-                  </td>
+                  <td>{el["role"]}</td>
                   <td style={{ padding: "0.1rem" }}>{el["student_name"]}</td>
-                  <td style={{ padding: "0.1rem" }}>
-                    <InputField
-                      type="checkbox"
-                      checked={form_data[idx].subject_type}
-                      handleChange={() => {
-                        let new_data = [...form_data];
-                        new_data[idx].subject_type = !new_data[idx]
-                          .subject_type;
-                        setFormData(new_data);
-                      }}
-                    />
-                  </td>
-                  <td style={{ padding: "0.1rem" }}>
-                    <InputField
-                      type="checkbox"
-                      checked={form_data[idx].absent}
-                      handleChange={() => {
-                        let new_data = [...form_data];
-                        new_data[idx].absent = !new_data[idx].absent;
-                        setFormData(new_data);
-                      }}
-                    />
-                  </td>
 
                   {mark_fields.map((element, index) => (
                     <td key={index} style={{ padding: "0.1rem" }}>
@@ -304,20 +287,24 @@ export default function MarkAssignment({ data }) {
                         placeholder={mark_fields[index].mark_name}
                         handleChange={(e) => {
                           let new_data = [...form_data];
-                          new_data[idx]["marks"][index].value = e.target.value;
-                          new_data[idx].total_mark = new_data[idx][
-                            "marks"
-                          ].reduce(
-                            (cb, val) =>
-                              (cb =
-                                parseInt(cb) +
-                                parseInt(val.value != "" ? val.value : 0)),
-                            0
-                          );
-                          setFormData(new_data);
+                          if (new_data[idx]["marks"]) {
+                            new_data[idx]["marks"][index].value =
+                              e.target.value;
+                            new_data[idx].total_mark = new_data[idx][
+                              "marks"
+                            ].reduce(
+                              (cb, val) =>
+                                (cb =
+                                  parseInt(cb) +
+                                  parseInt(val.value != "" ? val.value : 0)),
+                              0
+                            );
+                            setFormData(new_data);
+                          } else {
+                          }
                         }}
-                        value={form_data[idx]["marks"][index].value}
-                        error={form_data[idx]["marks"][index].value === ""}
+                        value={form_data[idx]["marks"][index]?.value}
+                        error={form_data[idx]["marks"][index]?.value === ""}
                         disabled={calling}
                       />
                     </td>
