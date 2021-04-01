@@ -259,33 +259,7 @@ export default function MarkAssignment({ data }) {
             ? student_list.map((el, idx) => (
                 <tr key={idx}>
                   <td>{el["role"]}</td>
-                  <td style={{ padding: "0.1rem" }}>
-                    {el["student_identifier"]}
-                  </td>
                   <td style={{ padding: "0.1rem" }}>{el["student_name"]}</td>
-                  <td style={{ padding: "0.1rem" }}>
-                    <InputField
-                      type="checkbox"
-                      checked={form_data[idx].subject_type}
-                      handleChange={() => {
-                        let new_data = [...form_data];
-                        new_data[idx].subject_type = !new_data[idx]
-                          .subject_type;
-                        setFormData(new_data);
-                      }}
-                    />
-                  </td>
-                  <td style={{ padding: "0.1rem" }}>
-                    <InputField
-                      type="checkbox"
-                      checked={form_data[idx].absent}
-                      handleChange={() => {
-                        let new_data = [...form_data];
-                        new_data[idx].absent = !new_data[idx].absent;
-                        setFormData(new_data);
-                      }}
-                    />
-                  </td>
 
                   {mark_fields.map((element, index) => (
                     <td key={index} style={{ padding: "0.1rem" }}>
