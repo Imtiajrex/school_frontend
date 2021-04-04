@@ -2,7 +2,6 @@ import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
-import ExtendedInput from "./ExtendedInput";
 
 export default function StudentsCrud({ permission }) {
   const user_role = localStorage.getItem("role");
@@ -45,29 +44,22 @@ export default function StudentsCrud({ permission }) {
             title: "Roll",
             identifier: "role",
           },
+
           {
-            title: "Name",
+            title: "Session",
+            identifier: "session",
+          },
+          {
+            title: "Class",
+            identifier: "class",
+          },
+          {
+            title: "Student ID",
+            identifier: "student_identifier",
+          },
+          {
+            title: "Student Name",
             identifier: "student_name",
-          },
-          {
-            title: "Mother",
-            identifier: "mother_name",
-          },
-          {
-            title: "Father",
-            identifier: "father_name",
-          },
-          {
-            title: "Religion",
-            identifier: "religion",
-          },
-          {
-            title: "Primary Phone",
-            identifier: "primary_phone",
-          },
-          {
-            title: "Secondary Phone",
-            identifier: "secondary_phone",
           },
           {
             title: "Image",
@@ -128,6 +120,12 @@ export default function StudentsCrud({ permission }) {
             ],
             required: false,
           },
+          {
+            placeholder: "Age",
+            type: "number",
+            name: "age",
+            required: false,
+          },
         ]}
         query_data={{
           session_id: -1,
@@ -135,6 +133,7 @@ export default function StudentsCrud({ permission }) {
           department_id: -1,
           religion: -1,
           gender: -1,
+          age: "",
         }}
       />
     </div>
