@@ -2,7 +2,6 @@ import Index from "components/crud/Index";
 import { ClassDeptSessionContext } from "contexts/ClassDeptSessionContext";
 import React, { useContext, useState } from "react";
 import { Call } from "services/API/Call";
-import ExtendedInput from "./ExtendedInput";
 
 export default function StudentsCrud({ permission }) {
   const user_role = localStorage.getItem("role");
