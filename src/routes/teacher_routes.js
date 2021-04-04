@@ -11,6 +11,7 @@ import ManualAttendance from "components/teachers/students/manual_attendance/Man
 import StudentAppMessage from "components/teachers/message/StudentAppMessage";
 import EmployeeAppMessage from "components/teachers/message/EmployeeAppMessage";
 import Dashboard from "components/teachers/Dashboard";
+import StudentsCrud from "components/teachers/students/StudentsCrud";
 
 const teacher_routes = [
   {
@@ -30,6 +31,13 @@ const teacher_routes = [
         icon: "fas fa-link",
         layout: "/teacher/students",
         component: ManualAttendance,
+      },
+      {
+        name: "Students List",
+        path: "/student_list",
+        icon: "fas fa-link",
+        layout: "/teacher/students",
+        component: StudentsCrud,
       },
     ],
     icon: "fas fa-notes-medical text-info",

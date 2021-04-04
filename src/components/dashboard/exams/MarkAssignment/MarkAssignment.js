@@ -94,70 +94,71 @@ export default function MarkAssignment({ data }) {
         "exams/mark_structure?exam_id=" + exam_id + "&subject_id=" + subject_id,
     })
       .then((res) => {
+        let structure = null;
         if (res[0] != null) {
-          const structure = JSON.parse(res[0].structure);
+          structure = JSON.parse(res[0].structure);
           setTotalExamMark(res[0].total_exam_mark);
           setMarkStructureID(res[0].id);
           setMarkFields(
             structure != undefined || structure != null ? structure : []
           );
-
-          Call({
-            method: "get",
-            url:
-              "exams/student_marks?exam_id=" +
-              exam_id +
-              "&session_id=" +
-              session_id +
-              "&department_id=" +
-              department_id +
-              "&class_id=" +
-              class_id +
-              "&subject_id=" +
-              subject_id,
-          })
-            .then((res) => {
-              let new_form_data = [];
-              res.map((el, idx) => {
-                const t_mark = JSON.parse(
-                  el.marks == null ? "[]" : el.marks
-                ).reduce(
-                  (cb, val) =>
-                    (cb =
-                      parseInt(cb) + parseInt(val.value != "" ? val.value : 0)),
-                  0
-                );
-                let std_marks = [];
-                if (
-                  structure != undefined &&
-                  structure != null &&
-                  el.marks == null
-                ) {
-                  structure.map((element) =>
-                    std_marks.push({ title: element.mark_name, value: "0" })
-                  );
-                }
-                new_form_data.push({
-                  id: el.id,
-                  student_id: el.student_id,
-                  exam_id: el.exam_id,
-                  subject_id: el.subject_id,
-                  subject_type: false,
-                  absent: false,
-                  total_mark: t_mark,
-                  marks: el.marks == null ? std_marks : JSON.parse(el.marks),
-                });
-              });
-              setFormData(new_form_data);
-              setStudentList(res);
-
-              setCalling(false);
-            })
-            .catch((err) => {
-              setCalling(false);
-              console.log(err);
-            });
         }
+
+        Call({
+          method: "get",
+          url:
+            "exams/student_marks?exam_id=" +
+            exam_id +
+            "&session_id=" +
+            session_id +
+            "&department_id=" +
+            department_id +
+            "&class_id=" +
+            class_id +
+            "&subject_id=" +
+            subject_id,
+        })
+          .then((res) => {
+            let new_form_data = [];
+            res.map((el, idx) => {
+              const t_mark = JSON.parse(
+                el.marks == null ? "[]" : el.marks
+              ).reduce(
+                (cb, val) =>
+                  (cb =
+                    parseInt(cb) + parseInt(val.value != "" ? val.value : 0)),
+                0
+              );
+              let std_marks = [];
+              if (
+                structure != undefined &&
+                structure != null &&
+                el.marks == null
+              ) {
+                structure.map((element) =>
+                  std_marks.push({ title: element.mark_name, value: "0" })
+                );
+              }
+              new_form_data.push({
+                id: el.id,
+                student_id: el.student_id,
+                exam_id: el.exam_id,
+                subject_id: el.subject_id,
+                subject_type: false,
+                absent: false,
+                total_mark: t_mark,
+                marks: el.marks == null ? std_marks : JSON.parse(el.marks),
+              });
+            });
+            setFormData(new_form_data);
+            setStudentList(res);
+
+            setCalling(false);
+          })
+          .catch((err) => {
+            setCalling(false);
+            console.log(err);
+          });
       })
       .catch((err) => console.log(err));
   }, []);
