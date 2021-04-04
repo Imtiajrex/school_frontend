@@ -251,6 +251,14 @@ export default function StudentsCrud({ permission }) {
             identifier: "religion",
           },
           {
+            title: "Primary Phone",
+            identifier: "primary_phone",
+          },
+          {
+            title: "Secondary Phone",
+            identifier: "secondary_phone",
+          },
+          {
             title: "Image",
             identifier: "student_image",
             type: "image",
