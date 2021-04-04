@@ -77,9 +77,9 @@ export default function StudentsCrud({ permission }) {
       required: true,
     },
     {
-      placeholder: "Age",
-      type: "number",
-      name: "age",
+      placeholder: "Date Of Birth",
+      type: "date",
+      name: "date_of_birth",
       required: true,
     },
     {
@@ -183,9 +183,9 @@ export default function StudentsCrud({ permission }) {
       required: true,
     },
     {
-      placeholder: "Age",
-      type: "number",
-      name: "age",
+      placeholder: "Date Of Birth",
+      type: "date",
+      name: "date_of_birth",
       required: true,
     },
     {
