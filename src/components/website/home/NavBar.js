@@ -53,14 +53,21 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
                     alt="Logo"
                     style={{ width: "80px", objectFit: "cover" }}
                   />
-                  <div className="ml-3">{institute_info.institute_name}</div>
+                  <div className="ml-3" style={{ fontSize: "30px" }}>
+                    {institute_info.institute_name}
+                  </div>
                 </RNavLink>
               </div>
             </div>
           </div>
         </div>
       </Navbar>
-      <Navbar light expand="md" className="probootstrap-navbar">
+      <Navbar
+        light
+        expand="md"
+        className="probootstrap-navbar"
+        style={{ backgroundColor: "#49d292" }}
+      >
         <div className="container" style={{ alignItems: "normal" }}>
           <MenuBar pages={pages} sub_pages={sub_pages} />
           <div className="col-md-12">
