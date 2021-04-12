@@ -8,9 +8,9 @@ import { Call } from "services/API/Call";
 import TableRow from "./TableRow";
 
 export default function TabulationList(props) {
-  const { list = [], loading = false, exam_id } = props;
-  const { data_color, head_color, border_color } = props.colors;
-  const { data_size, head_size } = props.size;
+  const { list = [], list_head, loading, indexed = true, query_tags } = props;
+  const [open, setopen] = useState(false);
+  const [data, setdata] = useState({});
   const [student_list, setStudentList] = useState([]);
   const [subject_cols, setSubjectCols] = useState([]);
   const groupBy = (items, key) =>
@@ -24,45 +24,39 @@ export default function TabulationList(props) {
         [item[key]]: [...(result[item[key]] || []), item],
       };
     }, {});
+  const sortByRoll = (list) => {
+    let new_list = {};
 
+    Object.values(list).map(
+      (el) => (new_list[el[0].role + el[0].student_identifier] = el)
+    );
+    return new_list;
+  };
   React.useEffect(() => {
+    let exam_id =
+      query_tags.length > 0
+        ? query_tags.filter((el) => el.title == "Exams")[0]["id"]
+        : null;
     if (exam_id != null)
       Call({
         method: "get",
-        url: "exams/mark_structure?exam=true&exam_id=" + exam_id,
+        url: "exams/mark_structure?exam=1&exam_id=" + exam_id,
       })
         .then((res) => {
           let new_list = groupBy(list, "student_identifier");
+          new_list = sortByRoll(new_list);
           setStudentList(new_list);
           setSubjectCols(res);
         })
         .catch((err) => console.log(err));
-  }, [list]);
+  }, [query_tags, list]);
   return (
     <>
-      <Table className="align-items-center" responsive>
-        <thead>
+      <Table className="align-items-center table-dark table-flush" responsive>
+        <thead className="thead-dark">
           <tr>
-            <th
-              rowSpan="3"
-              style={{
-                fontSize: head_size + "px",
-                color: head_color,
-                borderTop: `1px solid ${border_color}`,
-              }}
-            >
-              Roll
-            </th>
-            <th
-              rowSpan="3"
-              style={{
-                fontSize: head_size + "px",
-                color: head_color,
-                borderTop: `1px solid ${border_color}`,
-              }}
-            >
-              Student Name
-            </th>
+            <th rowSpan="3">Roll</th>
+            <th rowSpan="3">Student Name</th>
           </tr>
           <tr>
             {subject_cols.map((el, index) => (
@@ -70,29 +64,20 @@ export default function TabulationList(props) {
                 colSpan={
                   el.structure != null ? JSON.parse(el.structure).length : 1
                 }
-                style={{
-                  fontSize: head_size + "px",
-                  color: head_color,
-                  borderTop: `1px solid ${border_color}`,
-                  textAlign: "center",
-                }}
+                style={{ textAlign: "center" }}
                 key={index}
               >
                 {el.subject_name}
               </th>
             ))}
+            <th rowSpan="2">Total</th>
           </tr>
           <tr>
             {subject_cols.map((el, idx) =>
               el.structure != null ? (
                 JSON.parse(el.structure).map((element, index) => (
                   <th
-                    style={{
-                      textAlign: "center",
-                      fontSize: "7px",
-                      color: head_color,
-                      borderTop: `1px solid ${border_color}`,
-                    }}
+                    style={{ textAlign: "center", fontSize: "7px" }}
                     key={uuid()}
                   >
                     {element.mark_name}
@@ -114,17 +99,7 @@ export default function TabulationList(props) {
           ) : Object.values(student_list).length > 0 ? (
             Object.values(student_list).map((element, index) => {
               return (
-                <TableRow
-                  key={index}
-                  info={element}
-                  subjects={subject_cols}
-                  style={{
-                    fontSize: data_size + "px",
-                    color: data_color,
-                    borderTop: `1px solid ${border_color}`,
-                    textAlign: "center",
-                  }}
-                />
+                <TableRow key={index} info={element} subjects={subject_cols} />
               );
             })
           ) : (
