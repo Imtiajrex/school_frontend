@@ -24,7 +24,14 @@ export default function TabulationList(props) {
         [item[key]]: [...(result[item[key]] || []), item],
       };
     }, {});
+  const sortByRoll = (list) => {
+    let new_list = {};
 
+    Object.values(list).map(
+      (el) => (new_list[el[0].role + el[0].student_identifier] = el)
+    );
+    return new_list;
+  };
   React.useEffect(() => {
     let exam_id =
       query_tags.length > 0
@@ -37,6 +44,7 @@ export default function TabulationList(props) {
       })
         .then((res) => {
           let new_list = groupBy(list, "student_identifier");
+          new_list = sortByRoll(new_list);
           setStudentList(new_list);
           setSubjectCols(res);
         })
