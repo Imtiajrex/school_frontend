@@ -31,7 +31,7 @@ export default function Home({ data }) {
   } = data;
   return (
     <div className="probootstrap-page-wrapper">
-      <TopBar institute_info={school_info} />
+      {/* <TopBar institute_info={school_info} /> */}
       <NavBar
         pages={pages}
         sub_pages={sub_pages}

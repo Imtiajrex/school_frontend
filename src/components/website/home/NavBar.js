@@ -26,14 +26,13 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
     <>
       <Navbar light expand="md" className="probootstrap-navbar">
         <div className="container" style={{ alignItems: "normal" }}>
-          <div className="row">
-            <div className="col-md-12">
+          <div className="row" style={{ width: "100%" }}>
+            <div className="col-md-11 col-sm-12">
               <div
                 style={{
                   height: "auto",
                   display: "flex",
                   alignItems: "center",
-                  justifyContent: "center",
                 }}
               >
                 <RNavLink
@@ -53,11 +52,25 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
                     alt="Logo"
                     style={{ width: "80px", objectFit: "cover" }}
                   />
-                  <div className="ml-3" style={{ fontSize: "30px" }}>
+                  <div className="ml-3 institute_name">
                     {institute_info.institute_name}
                   </div>
                 </RNavLink>
               </div>
+            </div>
+            <div className="col-md-1 col-sm-12 nav-details">
+              <span>
+                <i className="icon-location2"></i>
+                {institute_info.institute_address}
+              </span>
+              <span>
+                <i className="icon-phone2"></i>
+                {institute_info.institute_phonenumbers}
+              </span>
+              <span>
+                <i className="icon-mail"></i>
+                {institute_info.institute_email}
+              </span>
             </div>
           </div>
         </div>
@@ -69,7 +82,15 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
         style={{ backgroundColor: "#49d292" }}
       >
         <div className="container" style={{ alignItems: "normal" }}>
-          <MenuBar pages={pages} sub_pages={sub_pages} />
+          <MenuBar
+            pages={pages}
+            sub_pages={sub_pages}
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            dropdownOpen={dropdownOpen}
+            toggleDropdown={toggleDropdown}
+            setDropdown={setDropdown}
+          />
           <div className="col-md-12">
             <NavbarToggler onClick={toggle} />
           </div>

@@ -9,14 +9,15 @@ import {
 } from "reactstrap";
 import { NavLink as RNavLink } from "react-router-dom";
 
-export default function MenuBar({ pages, sub_pages }) {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggle = () => setIsOpen(!isOpen);
-
-  const [dropdownOpen, setDropdown] = useState();
-
-  const toggleDropdown = () => setDropdown(!dropdownOpen);
+export default function MenuBar({
+  pages,
+  sub_pages,
+  toggle,
+  isOpen,
+  dropdownOpen,
+  toggleDropdown,
+  setDropdown,
+}) {
   return (
     <Collapse isOpen={isOpen} navbar>
       <i
@@ -68,9 +69,8 @@ export default function MenuBar({ pages, sub_pages }) {
             </NavItem>
           )
         )}
-
-        <NavItem className="d-md-none d-block">
-          <RNavLink className="nav-link" to={"/login"}>
+        <NavItem className="login">
+          <RNavLink className="nav-link login-button" to={"/login"}>
             Login
           </RNavLink>
         </NavItem>
