@@ -169,7 +169,9 @@ a {
 }
 .homepage .probootstrap-navbar .navbar-nav > li > a {
 	/* font-size: 12px; */
+	white-space: nowrap;
 }
+
 .nav-details {
 	display: flex;
 	flex-direction: column;

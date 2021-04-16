@@ -67,7 +67,12 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 				light
 				expand="md"
 				className="probootstrap-navbar"
-				style={{ backgroundColor: "#49d292" }}
+				style={{
+					backgroundColor: "#49d292",
+					justifyContent: "center",
+					paddingTop: 0,
+					paddingBottom: 0,
+				}}
 			>
 				<MenuBar
 					pages={pages}
