@@ -179,10 +179,13 @@ a {
 	justify-content: center;
 	text-align: right;
 }
+
 .nav-details span {
 	font-size: 13px;
 	white-space: nowrap;
-
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 	color: #49d292;
 }
 .login-button {

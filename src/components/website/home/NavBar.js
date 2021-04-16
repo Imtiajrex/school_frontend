@@ -49,16 +49,13 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 					</div>
 					<div className="col-md-1 col-sm-12 nav-details">
 						<span>
-							Address:
-							{institute_info.institute_address}
+							<a>Address:</a> {institute_info.institute_address}
 						</span>
 						<span>
-							Mobile:
-							{institute_info.institute_phonenumbers}
+							<a>Mobile:</a> {institute_info.institute_phonenumbers}
 						</span>
 						<span>
-							Email:
-							{institute_info.institute_email}
+							<a>Email:</a> {institute_info.institute_email}
 						</span>
 					</div>
 				</div>
