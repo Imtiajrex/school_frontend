@@ -16,7 +16,7 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 		<>
 			<Navbar light expand="md" className="probootstrap-navbar">
 				<div className="row" style={{ width: "100%" }}>
-					<div className="col-md-11 col-sm-12">
+					<div className="col-md-9 col-sm-12">
 						<div
 							style={{
 								height: "auto",
@@ -47,15 +47,15 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 							</RNavLink>
 						</div>
 					</div>
-					<div className="col-md-1 col-sm-12 nav-details">
+					<div className="col-md-3 col-sm-12 nav-details">
 						<span>
-							<a>Address:</a> {institute_info.institute_address}
+							<a>Address:</a> <a>{institute_info.institute_address}</a>
 						</span>
 						<span>
-							<a>Mobile:</a> {institute_info.institute_phonenumbers}
+							<a>Mobile:</a> <a>{institute_info.institute_phonenumbers}</a>
 						</span>
 						<span>
-							<a>Email:</a> {institute_info.institute_email}
+							<a>Email:</a> <a>{institute_info.institute_email}</a>
 						</span>
 					</div>
 				</div>
