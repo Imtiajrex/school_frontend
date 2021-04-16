@@ -1,16 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from "react";
-import {
-	Collapse,
-	Dropdown,
-	DropdownItem,
-	DropdownMenu,
-	DropdownToggle,
-	Nav,
-	Navbar,
-	NavbarToggler,
-	NavItem,
-} from "reactstrap";
+import { Navbar, NavbarToggler } from "reactstrap";
 import { NavLink as RNavLink } from "react-router-dom";
 import MenuBar from "./MenuBar";
 
@@ -59,15 +49,15 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 					</div>
 					<div className="col-md-1 col-sm-12 nav-details">
 						<span>
-							<i className="icon-location2"></i>
+							Address:
 							{institute_info.institute_address}
 						</span>
 						<span>
-							<i className="icon-phone2"></i>
+							Mobile:
 							{institute_info.institute_phonenumbers}
 						</span>
 						<span>
-							<i className="icon-mail"></i>
+							Email:
 							{institute_info.institute_email}
 						</span>
 					</div>
