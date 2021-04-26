@@ -43,6 +43,7 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 								/>
 								<div className="ml-3 institute_name">
 									<a>EDEN RESIDENTIAL SCHOOL & COLLEGE</a>
+									<br />
 									<a>{institute_info.institute_name}</a>
 								</div>
 							</RNavLink>
