@@ -42,7 +42,8 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 									style={{ width: "80px", objectFit: "cover" }}
 								/>
 								<div className="ml-3 institute_name">
-									{institute_info.institute_name}
+									<a>EDEN RESIDENTIAL SCHOOL & COLLEGE</a>
+									<a>{institute_info.institute_name}</a>
 								</div>
 							</RNavLink>
 						</div>
