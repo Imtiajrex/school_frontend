@@ -50,13 +50,13 @@ export default function NavBar({ pages, sub_pages, institute_info }) {
 						</div>
 					</div>
 					<div className="col-md-3 col-sm-12 nav-details">
-						<span>
+						<span style={{ width: "100%" }}>
 							<a>Address:</a> <a>{institute_info.institute_address}</a>
 						</span>
-						<span>
+						<span style={{ width: "100%" }}>
 							<a>Mobile:</a> <a>{institute_info.institute_phonenumbers}</a>
 						</span>
-						<span>
+						<span style={{ width: "100%" }}>
 							<a>Email:</a> <a>{institute_info.institute_email}</a>
 						</span>
 					</div>

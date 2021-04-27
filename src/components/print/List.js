@@ -12,7 +12,7 @@ export default function List(props) {
 	const [logo_dir, setLogoDir] = useState({ left: "0%" });
 	const [logo_size, setLogoSize] = useState(100);
 	const [school_name_size, setSchoolNameSize] = useState(25);
-	const [other_size, setOtherSize] = useState(12);
+	const [other_size, setOtherSize] = useState(14);
 	const [school_name_color, setSchoolNameColor] = useState("#00000");
 	const [other_color, setOtherColor] = useState("#000");
 	const [school_name, setSchoolName] = useState(true);
