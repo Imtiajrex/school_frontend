@@ -154,7 +154,14 @@ export default function ResultCard() {
 					setLine,
 				}}
 			/>
-			<div style={{ width: "100%", minHeight: "100vh", height: "auto" }}>
+			<div
+				style={{
+					width: "100%",
+					minHeight: "100vh",
+					height: "auto",
+					marginBottom: "1.5rem",
+				}}
+			>
 				{list.length > 0 &&
 				gpa_list.length > 0 &&
 				grade_list.length > 0 &&

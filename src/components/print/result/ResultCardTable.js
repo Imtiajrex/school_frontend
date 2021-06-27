@@ -27,14 +27,14 @@ export default function TabulationList(props) {
 		whiteSpace: "pre-wrap",
 		fontSize: data_size + "px",
 		color: head_color,
-		borderBottom: `1px solid ${border_color}`,
+		border: `1px solid ${border_color}`,
 		padding: "0.4rem",
 	};
 	const th_style = {
 		whiteSpace: "pre-wrap",
 		fontSize: data_size + "px",
 		color: data_color,
-		borderBottom: `1px solid ${border_color}`,
+		border: `1px solid ${border_color}`,
 		padding: "0.4rem",
 	};
 	React.useEffect(() => {
@@ -97,6 +97,7 @@ export default function TabulationList(props) {
 						top: "0%",
 						left: "0%",
 					}}
+					border={1}
 				>
 					<tbody>
 						<tr>
@@ -116,7 +117,7 @@ export default function TabulationList(props) {
 							<td style={td_style}>{list.department}</td>
 						</tr>
 						<tr>
-							<th style={th_style}>Role</th>
+							<th style={th_style}>Roll</th>
 							<td style={td_style}>{list.role}</td>
 						</tr>
 					</tbody>
@@ -164,7 +165,7 @@ export default function TabulationList(props) {
 							style={{
 								fontSize: head_size + "px",
 								color: head_color,
-								borderBottom: `1px solid ${border_color}`,
+								border: `1px solid ${border_color}`,
 							}}
 						>
 							Subjects
@@ -174,7 +175,7 @@ export default function TabulationList(props) {
 							style={{
 								fontSize: head_size + "px",
 								color: head_color,
-								borderBottom: `1px solid ${border_color}`,
+								border: `1px solid ${border_color}`,
 							}}
 						>
 							Full Marks
@@ -184,7 +185,7 @@ export default function TabulationList(props) {
 							style={{
 								fontSize: head_size + "px",
 								color: head_color,
-								borderBottom: `1px solid ${border_color}`,
+								border: `1px solid ${border_color}`,
 								textAlign: "center",
 							}}
 						>
@@ -195,7 +196,7 @@ export default function TabulationList(props) {
 							style={{
 								fontSize: head_size + "px",
 								color: head_color,
-								borderBottom: `1px solid ${border_color}`,
+								border: `1px solid ${border_color}`,
 								textAlign: "center",
 							}}
 						>
@@ -206,7 +207,7 @@ export default function TabulationList(props) {
 							style={{
 								fontSize: head_size + "px",
 								color: head_color,
-								borderBottom: `1px solid ${border_color}`,
+								border: `1px solid ${border_color}`,
 								textAlign: "center",
 							}}
 						>
@@ -217,7 +218,7 @@ export default function TabulationList(props) {
 							style={{
 								fontSize: head_size + "px",
 								color: head_color,
-								borderBottom: `1px solid ${border_color}`,
+								border: `1px solid ${border_color}`,
 								textAlign: "center",
 							}}
 						>
@@ -232,7 +233,7 @@ export default function TabulationList(props) {
 										style={{
 											fontSize: head_size + "px",
 											color: head_color,
-											borderBottom: `1px solid ${border_color}`,
+											border: `1px solid ${border_color}`,
 											textAlign: "center",
 											width: "120px",
 											whiteSpace: "normal",
@@ -293,7 +294,7 @@ export default function TabulationList(props) {
 			>
 				<div
 					style={{
-						borderBottom: "1px dotted " + head_color,
+						border: "1px dotted " + head_color,
 						padding: "0.2rem",
 					}}
 				>
@@ -301,7 +302,7 @@ export default function TabulationList(props) {
 				</div>
 				<div
 					style={{
-						borderBottom: "1px dotted " + head_color,
+						border: "1px dotted " + head_color,
 						padding: "0.2rem",
 					}}
 				>
