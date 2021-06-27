@@ -176,7 +176,7 @@ export default function ResultCard() {
 										inf,
 									}}
 								/>
-								<div style={{ width: "85%", margin: "auto" }}>
+								<div style={{ width: "90%", margin: "auto" }}>
 									<ResultCardTable
 										logo_size={logo_size}
 										gpa_list={gpa_list}
