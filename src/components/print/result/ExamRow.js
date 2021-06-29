@@ -48,7 +48,7 @@ export default function ExamRow(props) {
 		let g = gpa_list.filter(
 			(el) =>
 				(total * 100) / subject.percentaged_full_mark >= el.starting_number &&
-				total <= el.ending_number
+				(total * 100) / subject.percentaged_full_mark <= el.ending_number
 		)[0].gpa;
 		let grade = grade_list.filter(
 			(el) => g >= el.starting_gpa && g < el.ending_gpa
