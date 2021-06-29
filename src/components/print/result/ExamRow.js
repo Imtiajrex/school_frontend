@@ -46,7 +46,9 @@ export default function ExamRow(props) {
 				: null
 		);
 		let g = gpa_list.filter(
-			(el) => total >= el.starting_number && total <= el.ending_number
+			(el) =>
+				(total * 100) / subject.percentaged_full_mark >= el.starting_number &&
+				total <= el.ending_number
 		)[0].gpa;
 		let grade = grade_list.filter(
 			(el) => g >= el.starting_gpa && g < el.ending_gpa
@@ -72,7 +74,7 @@ export default function ExamRow(props) {
 					borderTop: `1px solid ${border_color}`,
 				}}
 			>
-				{subject.full_mark + " (" + subject.percentaged_full_mark + ")"}
+				{subject.percentaged_full_mark}
 			</td>
 			{exams.length > 0
 				? exams.map((e, idx) => (
@@ -86,10 +88,7 @@ export default function ExamRow(props) {
 							}}
 						>
 							{(marks != null && marks[idx] != null) || marks[idx] != null ? (
-								<>
-									{marks[idx]} (
-									{parseInt((marks[idx] * e.exam_percentage) / 100)})
-								</>
+								<>{parseInt((marks[idx] * e.exam_percentage) / 100)}</>
 							) : (
 								"A"
 							)}
