@@ -45,7 +45,7 @@ export default function TotalRow(props) {
 						cb +
 						gpa_list.filter(
 							(el) => val >= el.starting_number && val <= el.ending_number
-						)[0].gpa),
+						)[0]?.gpa),
 				0
 			) / subjects.length;
 		g = total.every(
