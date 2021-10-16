@@ -58,6 +58,7 @@ export default function TotalRow(props) {
 		)
 			? g
 			: 0;
+		g = g && 0;
 		let gr = grade_list.filter(
 			(el) => g >= el.starting_gpa && g < el.ending_gpa
 		)[0]?.grade;
