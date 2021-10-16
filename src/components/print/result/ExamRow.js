@@ -53,6 +53,8 @@ export default function ExamRow(props) {
 		let grade = grade_list.filter(
 			(el) => g >= el.starting_gpa && g < el.ending_gpa
 		)[0]?.grade;
+		console.log("gpa: ", g);
+		console.log("grade: ", grade);
 		setGrade(grade);
 		setGpa(g.toFixed(2));
 	}, [student_marks]);
