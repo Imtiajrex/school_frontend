@@ -48,6 +48,7 @@ export default function TotalRow(props) {
 						)[0]?.gpa),
 				0
 			) / subjects.length;
+		console.log("gpa:", g);
 		g = total.every(
 			(e) =>
 				e != 0 ||
@@ -60,6 +61,8 @@ export default function TotalRow(props) {
 		let gr = grade_list.filter(
 			(el) => g >= el.starting_gpa && g < el.ending_gpa
 		)[0]?.grade;
+		console.log("gpa:", g);
+		console.log("grade:", gr);
 		setGpa(g.toFixed(2));
 		setGrade(gr);
 		let r = "";
