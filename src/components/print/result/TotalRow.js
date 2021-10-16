@@ -49,7 +49,7 @@ export default function TotalRow(props) {
 				0
 			) / subjects.length;
 		console.log(
-			"gpa:",
+			"gpa qwoeruq:",
 			total.reduce(
 				(cb, val) =>
 					(cb =
