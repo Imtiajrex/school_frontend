@@ -48,7 +48,18 @@ export default function TotalRow(props) {
 						)[0]?.gpa),
 				0
 			) / subjects.length;
-		console.log("gpa:", g);
+		console.log(
+			"gpa:",
+			total.reduce(
+				(cb, val) =>
+					(cb =
+						cb +
+						gpa_list.filter(
+							(el) => val >= el.starting_number && val <= el.ending_number
+						)[0]?.gpa),
+				0
+			)
+		);
 		g = total.every(
 			(e) =>
 				e != 0 ||
