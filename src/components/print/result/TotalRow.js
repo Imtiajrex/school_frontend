@@ -17,25 +17,25 @@ export default function TotalRow(props) {
 	const [rank, setRank] = useState("");
 	React.useEffect(() => {
 		let all_mark = 0;
-		let total = subjects.map((el) =>
-			exams.reduce(
-				(ecb, evalue) =>
-					(ecb =
-						parseInt(ecb) +
-						parseInt(
-							student_marks.reduce((cb, val) => {
-								if (val.subject_id == el.id && val.exam_id == evalue.id) {
-									cb =
-										parseInt(cb) +
-										parseInt((val.total_mark * evalue.exam_percentage) / 100);
-									all_mark += cb;
-								}
-								return cb;
-							}, 0)
-						)),
-				0
-			)
-		);
+		let total = subjects.map((el) => {
+			return exams.reduce((ecb, evalue) => {
+				return (ecb =
+					parseInt(ecb) +
+					parseInt(
+						student_marks.reduce((cb, val) => {
+							if (val.subject_id == el.id && val.exam_id == evalue.id) {
+								console.log(val.total_mark);
+								cb =
+									parseInt(cb) +
+									parseInt((val.total_mark * evalue.exam_percentage) / 100);
+								all_mark += cb;
+							}
+							return cb;
+						}, 0)
+					));
+			}, 0);
+		});
+
 		let totalForGPA = subjects.map((el) =>
 			exams.reduce(
 				(ecb, evalue) =>
@@ -50,7 +50,6 @@ export default function TotalRow(props) {
 											(val.total_mark * evalue.exam_percentage) /
 												el.percentaged_full_mark
 										);
-									all_mark += cb;
 								}
 								return cb;
 							}, 0)
