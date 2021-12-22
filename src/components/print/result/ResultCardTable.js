@@ -157,7 +157,7 @@ export default function TabulationList(props) {
 					/>
 				</div>
 			</div>
-			<Table className="align-items-center" responsive border={1}>
+			<Table className="align-items-center" border={1}>
 				<thead>
 					<tr>
 						<th
@@ -178,7 +178,8 @@ export default function TabulationList(props) {
 								border: `1px solid ${border_color}`,
 							}}
 						>
-							Full Marks
+							Full <br />
+							Marks
 						</th>
 						<th
 							colSpan={exams.length}
@@ -200,7 +201,8 @@ export default function TabulationList(props) {
 								textAlign: "center",
 							}}
 						>
-							Total Marks
+							Total
+							<br /> Marks
 						</th>
 						<th
 							rowSpan="2"
@@ -227,21 +229,26 @@ export default function TabulationList(props) {
 					</tr>
 					<tr>
 						{exams.length > 0
-							? exams.map((el, idx) => (
-									<th
-										key={idx}
-										style={{
-											fontSize: head_size + "px",
-											color: head_color,
-											border: `1px solid ${border_color}`,
-											textAlign: "center",
-											width: "120px",
-											whiteSpace: "normal",
-										}}
-									>
-										{el.exam_name} ({el.exam_percentage}%)
-									</th>
-							  ))
+							? exams.map((el, idx) => {
+									let exam_name = el.exam_name.replace("Examination", "Exam");
+									exam_name.replace("Terminal", "Term");
+									exam_name.replace("Terminal", "Term");
+									return (
+										<th
+											key={idx}
+											style={{
+												fontSize: head_size - 4 + "px",
+												color: head_color,
+												border: `1px solid ${border_color}`,
+												textAlign: "center",
+												width: "75px",
+												whiteSpace: "normal",
+											}}
+										>
+											{exam_name} ({el.exam_percentage}%)
+										</th>
+									);
+							  })
 							: null}
 					</tr>
 				</thead>
