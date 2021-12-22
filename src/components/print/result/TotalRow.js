@@ -36,10 +36,32 @@ export default function TotalRow(props) {
 				0
 			)
 		);
+		let totalForGPA = subjects.map((el) =>
+			exams.reduce(
+				(ecb, evalue) =>
+					(ecb =
+						parseInt(ecb) +
+						parseInt(
+							student_marks.reduce((cb, val) => {
+								if (val.subject_id == el.id && val.exam_id == evalue.id) {
+									cb =
+										parseInt(cb) +
+										parseInt(
+											(val.total_mark * evalue.exam_percentage) /
+												el.percentaged_full_mark
+										);
+									all_mark += cb;
+								}
+								return cb;
+							}, 0)
+						)),
+				0
+			)
+		);
 		setTotalMark(all_mark);
 		let g = 0;
 		g =
-			total.reduce(
+			totalForGPA.reduce(
 				(cb, val) =>
 					(cb =
 						cb +
@@ -48,7 +70,7 @@ export default function TotalRow(props) {
 						)[0]?.gpa),
 				0
 			) / subjects.length;
-		g = total.every(
+		g = totalForGPA.every(
 			(e) =>
 				e != 0 ||
 				gpa_list.filter(
