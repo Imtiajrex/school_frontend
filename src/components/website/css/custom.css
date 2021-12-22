@@ -1,109 +1,211 @@
 /* Your custom css code goes here */
 a {
-  color: none !important;
+	color: none !important;
 }
 .probootstrap-page-wrapper {
-  font-family: Raleway;
-  font-weight: 100;
+	font-family: Raleway;
+	font-weight: 100;
 }
 @media screen and (max-width: 1500px) {
-  .probootstrap-page-wrapper {
-    max-width: 100% !important;
-  }
+	.probootstrap-page-wrapper {
+		max-width: 100% !important;
+	}
 }
 
 .owl-nav,
 .owl-dots {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
 }
 .owl-nav {
-  bottom: 50%;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
+	bottom: 50%;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
 }
 .owl-carousel .owl-nav button.owl-prev,
 .owl-carousel .owl-nav button.owl-next {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1rem !important;
-  color: white;
-  font-size: 1rem;
+	background: rgba(0, 0, 0, 0.3);
+	padding: 1rem !important;
+	color: white;
+	font-size: 1rem;
 }
 
 .owl-dots {
-  bottom: 0% !important;
+	bottom: 0% !important;
 }
 .owl-carousel {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .flexslider {
-  display: inline !important;
+	display: inline !important;
 }
 .slide-caption {
-  position: absolute;
-  top: 90%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.05);
-  padding: 1rem;
-  border-radius: 10px;
+	position: absolute;
+	top: 90%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: rgba(0, 0, 0, 0.05);
+	padding: 1rem;
+	border-radius: 10px;
 }
 .slide-caption p {
-  font-size: 1.9rem;
-  font-weight: 100;
+	font-size: 1.9rem;
+	font-weight: 100;
 }
 @media screen and (max-width: 650px) {
-  .slide-caption {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.05);
-    padding: 0.35rem;
-    border-radius: 10px;
-  }
-  .slide-caption p {
-    font-size: 0.9rem;
-  }
+	.slide-caption {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		background: rgba(0, 0, 0, 0.05);
+		padding: 0.35rem;
+		border-radius: 10px;
+	}
+	.slide-caption p {
+		font-size: 0.9rem;
+	}
 }
 
 .item-div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
 }
 .item-div .item {
-  max-width: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
+	max-width: 350px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 1rem;
 }
 .item-div .item img {
-  max-height: 250px;
-  width: 100%;
-  object-fit: cover;
+	max-height: 250px;
+	width: 100%;
+	object-fit: cover;
 }
 .albums {
-  max-width: 750px;
+	max-width: 750px;
 }
 .album {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  transition: 0.15s;
-  margin: 1rem;
-  transform: translateY(0%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	transition: 0.15s;
+	margin: 1rem;
+	transform: translateY(0%);
 }
 .album:hover {
-  transform: translateY(-10%);
+	transform: translateY(-10%);
 }
 
 .album img {
-  width: 200px !important;
-  height: 170px !important;
-  object-fit: cover !important;
+	width: 200px !important;
+	height: 170px !important;
+	object-fit: cover !important;
+}
+.articles-div {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+}
+.article {
+	width: 85%;
+	background: white !important;
+	filter: brightness(1);
+}
+.article-title {
+	width: 100%;
+	padding: 1rem 2rem;
+	font-size: 32px;
+	background: white !important;
+}
+.article-content {
+	width: 100%;
+	background: white !important;
+	padding: 1rem 2rem;
+}
+.notification-div {
+	width: 100%;
+	display: flex;
+	flex-wrap: nowrap;
+	background: rgb(11, 11, 11);
+}
+.notification-title {
+	flex: 0.15;
+	padding: 0.5rem 1rem;
+	color: white;
+}
+.notificaions {
+	flex: 0.85;
+	padding: 0.5rem 1rem;
+	color: white;
+}
+.notification {
+	margin: 0.1rem 5rem;
+	white-space: nowrap;
+	color: white !important;
+	text-decoration: none;
+}
+.overlay {
+	display: none !important;
+}
+@media screen and (max-width: 500px) {
+	.article {
+		width: 95%;
+	}
+	.notification-title {
+		font-size: 11px;
+	}
+	.notification {
+		font-size: 11px;
+	}
+}
+.homepage .probootstrap-navbar .navbar-nav > li > a {
+	/* font-size: 12px; */
+	white-space: nowrap;
+}
+
+.nav-details {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	justify-content: center;
+	text-align: right;
+}
+
+.nav-details span {
+	font-size: 13px;
+	white-space: nowrap;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	color: #49d292;
+}
+.login-button {
+	padding: 0.3rem 0.7rem !important;
+	background-color: white;
+	color: #49d292 !important;
+	font-size: 13px !important;
+	border-radius: 7px;
+	font-weight: bold;
+}
+.login {
+	display: flex !important;
+	align-items: center;
+	flex: 1;
+}
+.institute_name {
+	font-size: 30px;
+}
+@media screen and (max-width: 500px) {
+	.institute_name {
+		font-size: 18px;
+	}
 }

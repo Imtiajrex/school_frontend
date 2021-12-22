@@ -9,10 +9,17 @@ export default function SchoolInfo(props) {
     other_size,
     school_name_color,
     other_color,
+<<<<<<< HEAD
     school_name,
     other_info,
     logo,
     line,
+=======
+    school_name = false,
+    other_info = false,
+    logo = false,
+    line = false,
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
     inf,
   } = props.val;
 

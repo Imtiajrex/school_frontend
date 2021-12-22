@@ -52,7 +52,10 @@ export default function StudentList() {
           title="Students List"
           head={[
             "Roll",
+<<<<<<< HEAD
             "ID",
+=======
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
             "Student Name",
             "Mother Name",
             "Father Name",
@@ -62,7 +65,10 @@ export default function StudentList() {
           ]}
           val={[
             "role",
+<<<<<<< HEAD
             "student_identifier",
+=======
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
             "student_name",
             "mother_name",
             "father_name",

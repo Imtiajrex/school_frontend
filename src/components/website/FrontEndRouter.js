@@ -6,30 +6,34 @@ import Pages from "./Pages";
 import SubPages from "./SubPages";
 import Employees from "./Employees";
 import { Helmet } from "react-helmet";
+import Notifications from "./Notifications";
 
 export default function FrontEndRouter({ data }) {
-  return (
-    <>
-      <Helmet>
-        <title>{data.school_info.institute_name}</title>
-      </Helmet>
-      <Switch>
-        <Route exact path="/">
-          <Home data={data} />
-        </Route>
-        <Route exact path="/pages/:id">
-          <Pages data={data} />
-        </Route>
-        <Route exact path="/sub_pages/:id">
-          <SubPages data={data} />
-        </Route>
-        <Route exact path="/albums/:id">
-          <Albums data={data} />
-        </Route>
-        <Route exact path="/employees/:employee_type">
-          <Employees data={data} />
-        </Route>
-      </Switch>
-    </>
-  );
+	return (
+		<>
+			<Helmet>
+				<title>{data.school_info.institute_name}</title>
+			</Helmet>
+			<Switch>
+				<Route exact path="/">
+					<Home data={data} />
+				</Route>
+				<Route exact path="/pages/:id">
+					<Pages data={data} />
+				</Route>
+				<Route exact path="/sub_pages/:id">
+					<SubPages data={data} />
+				</Route>
+				<Route exact path="/notifications/:id">
+					<Notifications data={data} />
+				</Route>
+				<Route exact path="/albums/:id">
+					<Albums data={data} />
+				</Route>
+				<Route exact path="/employees/:employee_type">
+					<Employees data={data} />
+				</Route>
+			</Switch>
+		</>
+	);
 }

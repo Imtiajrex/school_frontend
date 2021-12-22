@@ -8,7 +8,11 @@ import { Call } from "services/API/Call";
 import TableRow from "./TableRow";
 
 export default function TabulationList(props) {
+<<<<<<< HEAD
   const { list = [], list_head, loading, indexed = true, query_tags } = props;
+=======
+  const { list = [], list_head, loading, indexed = true, exam_id } = props;
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
   const [open, setopen] = useState(false);
   const [data, setdata] = useState({});
   const [student_list, setStudentList] = useState([]);
@@ -33,10 +37,13 @@ export default function TabulationList(props) {
     return new_list;
   };
   React.useEffect(() => {
+<<<<<<< HEAD
     let exam_id =
       query_tags.length > 0
         ? query_tags.filter((el) => el.title == "Exams")[0]["id"]
         : null;
+=======
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
     if (exam_id != null)
       Call({
         method: "get",
@@ -49,11 +56,19 @@ export default function TabulationList(props) {
           setSubjectCols(res);
         })
         .catch((err) => console.log(err));
+<<<<<<< HEAD
   }, [query_tags, list]);
   return (
     <>
       <Table className="align-items-center table-dark table-flush" responsive>
         <thead className="thead-dark">
+=======
+  }, [exam_id, list]);
+  return (
+    <>
+      <Table className="align-items-center table-flush" responsive>
+        <thead className="thead-light">
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
           <tr>
             <th rowSpan="3">Roll</th>
             <th rowSpan="3">Student Name</th>

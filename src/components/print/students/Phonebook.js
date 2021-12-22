@@ -52,14 +52,25 @@ export default function Phonebook() {
           title="Students Phonebook"
           head={[
             "Roll",
+<<<<<<< HEAD
             "ID",
             "Student Name",
+=======
+            "Student Name",
+            "Mother",
+            "Father",
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
             "Primary Phone",
             "Secondary Phone",
           ]}
           val={[
             "role",
             "student_identifier",
+<<<<<<< HEAD
+=======
+            "mother_name",
+            "father_name",
+>>>>>>> b7d9d47251c840308e1551b3cf27b97f0db7d513
             "student_name",
             "primary_phone",
             "secondary_phone",
