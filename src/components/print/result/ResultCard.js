@@ -167,7 +167,14 @@ export default function ResultCard() {
 				grade_list.length > 0 &&
 				all_mark.length > 0
 					? list.map((el, idx) => (
-							<div key={idx} style={{ height: "100%", marginBottom: "5rem" }}>
+							<div
+								key={idx}
+								style={{
+									minHeight: "100vh",
+									height: "100%",
+									marginBottom: "5rem",
+								}}
+							>
 								<SchoolInfo
 									val={{
 										logo_dir,
