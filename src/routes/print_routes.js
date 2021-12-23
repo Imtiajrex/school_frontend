@@ -14,105 +14,111 @@ import Tabulation from "components/print/exam/Tabulation/Tabulation";
 import ResultCard from "components/print/result/ResultCard";
 import Admit from "components/print/docs/admit/Admit";
 import ID from "components/print/docs/idcard/ID";
+import ResultTabulation from "components/print/result_tabulation/ResultTabulation";
 
 var print_routes = [
-  {
-    path: "/students",
-    layout: "/print",
-    children: [
-      {
-        path: "/list",
-        name: "Students List",
-        component: StudentList,
-        layout: "/print/students",
-      },
-      {
-        path: "/phonebook",
-        name: "Students Phonebook",
-        component: Phonebook,
-        layout: "/print/students",
-      },
-      {
-        path: "/attendance",
-        name: "Students Attendance",
-        component: StudentsAttendance,
-        layout: "/print/students",
-      },
-      {
-        path: "/monthly_attendance",
-        name: "Students Attendance",
-        component: StudentsAttendanceMonth,
-        layout: "/print/students",
-      },
-    ],
-  },
-  {
-    path: "/employees",
-    layout: "/print",
-    children: [
-      {
-        path: "/list",
-        component: EmployeeList,
-        layout: "/print/employees",
-      },
-      {
-        path: "/phonebook",
-        component: EmployeePhonebook,
-        layout: "/print/employees",
-      },
-      {
-        path: "/attendance",
-        name: "Employee Attendance",
-        component: EmployeeAttendance,
-        layout: "/print/employees",
-      },
-      {
-        path: "/monthly_attendance",
-        name: "employee Attendance",
-        component: EmployeesAttendanceMonth,
-        layout: "/print/employees",
-      },
-    ],
-  },
-  {
-    path: "/list",
-    component: PaymentList,
-    layout: "/print/payments",
-  },
-  {
-    path: "/due_list",
-    component: DueList,
-    layout: "/print/payments",
-  },
-  {
-    path: "/receipt",
-    component: Receipt,
-    layout: "/print/payments",
-  },
-  {
-    path: "/tabulation",
-    component: Tabulation,
-    layout: "/print/exams",
-  },
-  {
-    path: "/result_card",
-    component: ResultCard,
-    layout: "/print/results",
-  },
-  {
-    path: "/admit",
-    component: Admit,
-    layout: "/print",
-  },
-  {
-    path: "/id",
-    component: ID,
-    layout: "/print",
-  },
-  {
-    path: "/report",
-    component: Accounts,
-    layout: "/print/accounts",
-  },
+	{
+		path: "/students",
+		layout: "/print",
+		children: [
+			{
+				path: "/list",
+				name: "Students List",
+				component: StudentList,
+				layout: "/print/students",
+			},
+			{
+				path: "/phonebook",
+				name: "Students Phonebook",
+				component: Phonebook,
+				layout: "/print/students",
+			},
+			{
+				path: "/attendance",
+				name: "Students Attendance",
+				component: StudentsAttendance,
+				layout: "/print/students",
+			},
+			{
+				path: "/monthly_attendance",
+				name: "Students Attendance",
+				component: StudentsAttendanceMonth,
+				layout: "/print/students",
+			},
+		],
+	},
+	{
+		path: "/employees",
+		layout: "/print",
+		children: [
+			{
+				path: "/list",
+				component: EmployeeList,
+				layout: "/print/employees",
+			},
+			{
+				path: "/phonebook",
+				component: EmployeePhonebook,
+				layout: "/print/employees",
+			},
+			{
+				path: "/attendance",
+				name: "Employee Attendance",
+				component: EmployeeAttendance,
+				layout: "/print/employees",
+			},
+			{
+				path: "/monthly_attendance",
+				name: "employee Attendance",
+				component: EmployeesAttendanceMonth,
+				layout: "/print/employees",
+			},
+		],
+	},
+	{
+		path: "/list",
+		component: PaymentList,
+		layout: "/print/payments",
+	},
+	{
+		path: "/due_list",
+		component: DueList,
+		layout: "/print/payments",
+	},
+	{
+		path: "/receipt",
+		component: Receipt,
+		layout: "/print/payments",
+	},
+	{
+		path: "/tabulation",
+		component: Tabulation,
+		layout: "/print/exams",
+	},
+	{
+		path: "/result_card",
+		component: ResultCard,
+		layout: "/print/results",
+	},
+	{
+		path: "/result_tabulation",
+		component: ResultTabulation,
+		layout: "/print/results",
+	},
+	{
+		path: "/admit",
+		component: Admit,
+		layout: "/print",
+	},
+	{
+		path: "/id",
+		component: ID,
+		layout: "/print",
+	},
+	{
+		path: "/report",
+		component: Accounts,
+		layout: "/print/accounts",
+	},
 ];
 export default print_routes;
