@@ -64,6 +64,7 @@ export default function ResultTabulation() {
 			console.log(e);
 		}
 	};
+	console.log(list);
 	React.useEffect(() => {
 		if (list.length > 0) {
 			let all_std_mark = {};
@@ -200,8 +201,19 @@ export default function ResultTabulation() {
 				/>
 				<div style={{ width: "95%", margin: "auto" }}>
 					<div
-						style={{ maxWidth: "300px", margin: "auto", textAlign: "center" }}
+						style={{ maxWidth: "350px", margin: "auto", textAlign: "center" }}
 					>
+						<b
+							style={{
+								textAlign: "center",
+								color: head_color,
+								fontSize: head_size + "px",
+							}}
+						>
+							Class: {list.length > 0 && list[0].class} - Department:{" "}
+							{list.length > 0 && list[0].department}
+						</b>
+						<br />
 						<b
 							style={{
 								textAlign: "center",

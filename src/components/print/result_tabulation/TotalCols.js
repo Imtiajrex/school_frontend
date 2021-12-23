@@ -24,7 +24,6 @@ export default function TotalCols(props) {
 					parseInt(
 						student_marks.reduce((cb, val) => {
 							if (val.subject_id == el.id && val.exam_id == evalue.id) {
-								console.log(val.total_mark);
 								cb =
 									parseInt(cb) +
 									parseInt((val.total_mark * evalue.exam_percentage) / 100);
