@@ -42,10 +42,12 @@ export default function TabulationList(props) {
 			setExams(list.exams);
 			setStudentMarks(list.student_marks);
 			let subs = [];
-			list.exams.map((e) =>
+			list.exams.map((e) => {
 				e.subjects.map((el) => {
 					let sub = subs.filter((element) => element.id == el.id);
-					if (sub.length == 0)
+
+					if (sub.length == 0) {
+						if (el.id == 17) console.log(el);
 						subs.push({
 							...el,
 							full_mark:
@@ -58,27 +60,34 @@ export default function TabulationList(props) {
 									  100
 									: 0,
 						});
-					else {
+					} else {
+						if (sub[0].id == 17) console.log(sub, el);
 						let s = subs.filter((element) => element.id != el.id);
+
 						subs = [
 							...s,
 							{
 								...el,
-								full_mark: el.marks_structure != null ? sub[0].full_mark : 0,
+								full_mark:
+									el.marks_structure != null
+										? sub[0].full_mark + el.marks_structure.total_exam_mark
+										: sub[0].full_mark,
 								percentaged_full_mark:
 									el.marks_structure != null
 										? sub[0].percentaged_full_mark +
 										  (el.marks_structure.total_exam_mark * e.exam_percentage) /
 												100
-										: 0,
+										: sub[0].percentaged_full_mark,
 							},
 						];
 					}
-				})
-			);
+				});
+			});
+			console.log(subs);
 			setSubjects(subs);
 		}
 	}, []);
+	console.log("+++++++++++++++++++++++++++++++++++");
 	return (
 		<>
 			<div

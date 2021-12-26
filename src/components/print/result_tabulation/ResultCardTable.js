@@ -53,13 +53,16 @@ export default function ResultTable(props) {
 							...s,
 							{
 								...el,
-								full_mark: el.marks_structure != null ? sub[0].full_mark : 0,
+								full_mark:
+									el.marks_structure != null
+										? sub[0].full_mark + el.marks_structure.total_exam_mark
+										: sub[0].full_mark,
 								percentaged_full_mark:
 									el.marks_structure != null
 										? sub[0].percentaged_full_mark +
 										  (el.marks_structure.total_exam_mark * e.exam_percentage) /
 												100
-										: 0,
+										: sub[0].percentaged_full_mark,
 							},
 						];
 					}
