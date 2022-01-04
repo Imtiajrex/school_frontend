@@ -7,6 +7,7 @@ import SubPages from "./SubPages";
 import Employees from "./Employees";
 import { Helmet } from "react-helmet";
 import Notifications from "./Notifications";
+import Prospectus from "./Prospectus";
 
 export default function FrontEndRouter({ data }) {
 	return (
@@ -17,6 +18,9 @@ export default function FrontEndRouter({ data }) {
 			<Switch>
 				<Route exact path="/">
 					<Home data={data} />
+				</Route>
+				<Route exact path="/prospectus">
+					<Prospectus />
 				</Route>
 				<Route exact path="/pages/:id">
 					<Pages data={data} />
