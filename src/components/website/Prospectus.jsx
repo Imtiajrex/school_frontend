@@ -14,6 +14,9 @@ export default function Prospectus() {
 			<img src={"/images/6.jpg"} style={style} />
 			<img src={"/images/7.jpg"} style={style} />
 			<img src={"/images/8.jpg"} style={style} />
+			<a href="/" style={{ textDecoration: "underline", color: "blue" }}>
+				School Website
+			</a>
 		</div>
 	);
 }
