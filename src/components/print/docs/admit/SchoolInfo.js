@@ -88,6 +88,7 @@ export default function SchoolInfo(props) {
 									fontSize: school_name_size + "px",
 									marginBottom: 0,
 									color: school_name_color,
+									textTransform: "uppercase",
 								}}
 							>
 								EDEN RESIDENTIAL SCHOOL & COLLEGE
@@ -97,6 +98,7 @@ export default function SchoolInfo(props) {
 									fontSize: school_name_size + "px",
 									marginBottom: 0,
 									color: school_name_color,
+									textTransform: "uppercase",
 								}}
 							>
 								{info.institute_name}
@@ -110,9 +112,10 @@ export default function SchoolInfo(props) {
 									fontSize: other_size + "px",
 									marginBottom: 0,
 									color: other_color,
+									textTransform: "uppercase",
 								}}
 							>
-								ADDRESS: {info.institute_address?.toUpperCase()}
+								ADDRESS: {info.institute_address}
 							</p>
 
 							<p
@@ -120,18 +123,20 @@ export default function SchoolInfo(props) {
 									fontSize: other_size + "px",
 									marginBottom: 0,
 									color: other_color,
+									textTransform: "uppercase",
 								}}
 							>
-								CONTACT: {info.institute_phonenumbers?.toUpperCase()}
+								CONTACT: {info.institute_phonenumbers}
 							</p>
 							<p
 								style={{
 									fontSize: other_size + "px",
 									marginBottom: 0,
 									color: other_color,
+									textTransform: "uppercase",
 								}}
 							>
-								EMAIL: {info.institute_email?.toUpperCase()}
+								EMAIL: {info.institute_email}
 							</p>
 						</>
 					) : null}
