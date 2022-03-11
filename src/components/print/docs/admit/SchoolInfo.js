@@ -112,7 +112,7 @@ export default function SchoolInfo(props) {
 									color: other_color,
 								}}
 							>
-								Address: {info.institute_address}
+								ADDRESS: {info.institute_address?.toUpperCase()}
 							</p>
 
 							<p
@@ -122,7 +122,7 @@ export default function SchoolInfo(props) {
 									color: other_color,
 								}}
 							>
-								Contact Numbers: {info.institute_phonenumbers}
+								CONTACT: {info.institute_phonenumbers?.toUpperCase()}
 							</p>
 							<p
 								style={{
@@ -131,7 +131,7 @@ export default function SchoolInfo(props) {
 									color: other_color,
 								}}
 							>
-								Institute Email: {info.institute_email}
+								EMAIL: {info.institute_email?.toUpperCase()}
 							</p>
 						</>
 					) : null}

@@ -10,12 +10,14 @@ export default function AdCard(props) {
 		color: head_color,
 		fontSize: head_size + "px",
 		borderTop: "1px solid " + border_color,
+		textTransform: "uppercase",
 	};
 	const td_style = {
 		padding: "0.4rem",
 		color: data_color,
 		fontSize: data_size + "px",
 		borderTop: "1px solid " + border_color,
+		textTransform: "uppercase",
 	};
 	return (
 		<div style={{ position: "relative" }}>
@@ -28,7 +30,7 @@ export default function AdCard(props) {
 						margin: "0.3rem",
 					}}
 				>
-					Admit Card
+					ADMIT CARD
 				</b>
 			</div>
 			<Table style={{ maxWidth: "65%", margin: "auto" }}>
