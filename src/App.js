@@ -5,15 +5,18 @@ import withClearCache from "./ClearCache";
 const ClearCacheComponent = withClearCache(MainApp);
 
 function App() {
-  return <ClearCacheComponent />;
+	return <ClearCacheComponent />;
 }
 
 function MainApp() {
-  return (
-    <div className="App">
-      <WebsiteRouter />
-    </div>
-  );
+	React.useEffect(() => {
+		document.body.style.overflow = "scroll";
+	}, []);
+	return (
+		<div className="App">
+			<WebsiteRouter />
+		</div>
+	);
 }
 
 export default MainApp;
