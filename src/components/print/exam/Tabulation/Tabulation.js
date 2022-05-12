@@ -82,6 +82,21 @@ export default function Tabulation() {
 				.catch((err) => console.log(err));
 		}
 	}, [class_list, department_list, session_list]);
+
+	const td_style = {
+		fontSize: data_size + "px",
+		color: data_color,
+		borderTop: `1px solid ${border_color}`,
+	};
+	const th_style = {
+		whiteSpace: "pre-wrap",
+		fontSize: data_size + "px",
+		color: data_color,
+		border: `1px solid ${border_color}`,
+		padding: "0.4rem",
+		textAlign: "center",
+	};
+
 	return (
 		<>
 			<Helmet>
@@ -208,6 +223,8 @@ export default function Tabulation() {
 					exam_id={query.get("exam_id")}
 					colors={{ data_color, head_color, border_color }}
 					size={{ data_size, head_size }}
+					td_style={td_style}
+					th_style={th_style}
 				/>
 			</div>
 		</>

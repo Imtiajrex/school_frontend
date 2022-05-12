@@ -8,7 +8,17 @@ import { Call } from "services/API/Call";
 import TableRow from "./TableRow";
 
 export default function TabulationList(props) {
-	const { list = [], list_head, loading, indexed = true, exam_id } = props;
+	const {
+		list = [],
+		list_head,
+		loading,
+		indexed = true,
+		exam_id,
+		td_style,
+		th_style,
+	} = props;
+	const { data_color, head_color, border_color } = props.colors;
+	const { data_size, head_size } = props.size;
 	const [open, setopen] = useState(false);
 	const [data, setdata] = useState({});
 	const [student_list, setStudentList] = useState([]);
@@ -51,8 +61,12 @@ export default function TabulationList(props) {
 			<Table className="align-items-center table-flush" responsive>
 				<thead className="thead-light">
 					<tr>
-						<th rowSpan="3">Roll</th>
-						<th rowSpan="3">Student Name</th>
+						<th rowSpan="3" style={th_style}>
+							Roll
+						</th>
+						<th rowSpan="3" style={th_style}>
+							Student Name
+						</th>
 					</tr>
 					<tr>
 						{subject_cols.map((el, index) => (
@@ -60,20 +74,26 @@ export default function TabulationList(props) {
 								colSpan={
 									el.structure != null ? JSON.parse(el.structure).length : 1
 								}
-								style={{ textAlign: "center" }}
+								style={{ textAlign: "center", ...th_style }}
 								key={index}
 							>
 								{el.subject_name}
 							</th>
 						))}
-						<th rowSpan="2">Total</th>
+						<th rowSpan="2" style={th_style}>
+							Total
+						</th>
 					</tr>
 					<tr>
 						{subject_cols.map((el, idx) =>
 							el.structure != null ? (
 								JSON.parse(el.structure).map((element, index) => (
 									<th
-										style={{ textAlign: "center", fontSize: "7px" }}
+										style={{
+											...th_style,
+											textAlign: "center",
+											fontSize: "7px",
+										}}
 										key={uuid()}
 									>
 										{element.mark_name}
@@ -88,19 +108,33 @@ export default function TabulationList(props) {
 				<tbody>
 					{loading ? (
 						<tr>
-							<td colSpan={subject_cols.length + 4} className="text-center">
+							<td
+								colSpan={subject_cols.length + 4}
+								className="text-center"
+								style={td_style}
+							>
 								<Spinner color="primary" />
 							</td>
 						</tr>
 					) : Object.values(student_list).length > 0 ? (
 						Object.values(student_list).map((element, index) => {
 							return (
-								<TableRow key={index} info={element} subjects={subject_cols} />
+								<TableRow
+									key={index}
+									info={element}
+									subjects={subject_cols}
+									td_style={td_style}
+									th_style={th_style}
+								/>
 							);
 						})
 					) : (
 						<tr>
-							<td colSpan={subject_cols.length + 4} className="text-center">
+							<td
+								colSpan={subject_cols.length + 4}
+								className="text-center"
+								style={td_style}
+							>
 								Found Nothing
 							</td>
 						</tr>
