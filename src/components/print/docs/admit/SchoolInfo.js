@@ -93,16 +93,6 @@ export default function SchoolInfo(props) {
 							>
 								EDEN RESIDENTIAL SCHOOL & COLLEGE
 							</p>
-							<p
-								style={{
-									fontSize: school_name_size + "px",
-									marginBottom: 0,
-									color: school_name_color,
-									textTransform: "uppercase",
-								}}
-							>
-								{info.institute_name}
-							</p>
 						</>
 					) : null}
 					{other_info ? (
