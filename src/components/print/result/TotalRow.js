@@ -46,8 +46,8 @@ export default function TotalRow(props) {
                 cb =
                   parseInt(cb) +
                   parseInt(
-                    (val.total_mark * evalue.exam_percentage) /
-                    el.percentaged_full_mark
+                    (val.total_mark * Number(evalue.exam_percentage)) /
+                    Number(el.percentaged_full_mark)
                   );
               }
               return cb;
@@ -56,6 +56,7 @@ export default function TotalRow(props) {
         0
       )
     );
+    console.log(totalForGPA);
     let gpaTotal = subjects.map((sub) => {
       const subjectTotal = exams.reduce(
         (ecb, evalue) => {
@@ -68,7 +69,6 @@ export default function TotalRow(props) {
                   cb =
                     parseInt(cb) +
                     parseInt((val.total_mark * evalue.exam_percentage) / 100);
-                  all_mark += cb;
                 }
                 return cb;
               }, 0)
