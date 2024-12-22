@@ -257,11 +257,19 @@ export default function MarkAssignment({ data }) {
                   new_data.map((el, idx) => {
                     el["marks"] = [
                       ...el["marks"],
-                      {
+                    ];
+                    if (mark_fields.length == el["marks"].length) {
+                      el["marks"].push(
+                        {
+                          title: "",
+                          value: "0",
+                        })
+                    } else {
+                      el['marks'][el["marks"].length > 0 ? el["marks"].length - 1 : 0] = {
                         title: "",
                         value: "0",
-                      },
-                    ];
+                      }
+                    }
                   });
                   setFormData(new_data);
                 }}
