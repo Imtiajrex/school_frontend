@@ -134,6 +134,7 @@ export default function MarkAssignment({ data }) {
                 el.marks == null
               ) {
                 structure.map((element) =>
+                  element.mark_name != "" &&
                   std_marks.push({ title: element.mark_name, value: "0" })
                 );
               }
